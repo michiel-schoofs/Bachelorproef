@@ -10,8 +10,8 @@ In het kader van de opleiding Toegepaste Informatica aan de [Hogeschool Gent](ht
 
 |                             Naam                             | Beschrijving                                                 |
 | :----------------------------------------------------------: | :----------------------------------------------------------- |
-| [Origineel Voorstel](Voorstel/PDF Versies/Schoofs_Michiel_Voorstel_Origineel.pdf) | Dit was de originele aanzet voor de bachelorproef.           |
-| [Herwerkt Voorstel](Voorstel/PDF Versies/Schoofs_Michiel_Voorstel_Herwerkt.pdf) | Een verbeterde versie van voorgaand voorstel op basis van feedback. |
+|   [Origineel Voorstel](Voorstel/PDF%20Versies/Schoofs_Michiel_Voorstel_Origineel.pdf) | Dit was de originele aanzet voor de bachelorproef.           |
+|   [Herwerkt Voorstel](Voorstel/PDF%20Versies/Schoofs_Michiel_Voorstel_Herwerkt.pdf) | Een verbeterde versie van voorgaand voorstel op basis van feedback. |
 |                         [Planning]()                         | Een overzicht van deadlines (zowel opgelegde deadlines als deliverables) en afspraken met de promoter en co-promoter. |
 |                    [Algemene werkwijze]()                    | Een schets van het verdere verloop.                          |
 
