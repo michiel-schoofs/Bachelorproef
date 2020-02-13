@@ -1,0 +1,97 @@
+%==============================================================================
+% Sjabloon onderzoeksvoorstel bachelorproef
+%==============================================================================
+% Gebaseerd op LaTeX-sjabloon ‘Stylish Article’ (zie voorstel.cls)
+% Auteur: Jens Buysse, Bert Van Vreckem
+%
+% Compileren in TeXstudio:
+%
+% - Zorg dat Biber de bibliografie compileert (en niet Biblatex)
+%   Options > Configure > Build > Default Bibliography Tool: "txs:///biber"
+% - F5 om te compileren en het resultaat te bekijken.
+% - Als de bibliografie niet zichtbaar is, probeer dan F5 - F8 - F5
+%   Met F8 compileer je de bibliografie apart.
+%
+% Als je JabRef gebruikt voor het bijhouden van de bibliografie, zorg dan
+% dat je in ``biblatex''-modus opslaat: File > Switch to BibLaTeX mode.
+
+\documentclass{../Algemeen/Template/voorstel}
+
+%------------------------------------------------------------------------------
+% Metadata over het voorstel
+%------------------------------------------------------------------------------
+
+%---------- Titel & auteur ----------------------------------------------------
+
+% TODO: geef werktitel van je eigen voorstel op
+\PaperTitle{Gedecentraliseerd en transparant versiebeheer aan de hand van blockchain principes en IPFS: een praktische toepassing voor open source bedrijven.}
+\PaperType{Onderzoeksvoorstel Bachelorproef 2019-2020} % Type document
+
+% TODO: vul je eigen naam in als auteur, geef ook je emailadres mee!
+\Authors{Michiel Schoofs\textsuperscript{1}} % Authors
+\CoPromotor{Maurice Dalderup\textsuperscript{2}}
+\affiliation{\textbf{Contact:}
+  \textsuperscript{1} \href{mailto:michiel.schoofs@student.hogent.be}{michiel.schoofs@student.hogent.be};
+   \textsuperscript{2} 
+   \href{mailto:maurice.dalderup@trase.be}{maurice.dalderup@trase.be};
+}
+
+%---------- Abstract ----------------------------------------------------------
+
+\Abstract{
+Versiebeheer is een inherent deel van het software ontwikkelingsproces. Toch wordt dit beheer vaak uitbesteed aan derde partijen waaronder Microsoft. Zeker voor de open source beweging is dit in strijd met hun ideologische principes.\\
+Er bestaan manieren om zelf aan versiebeheer te  doen die evenwel vaak omslachtig blijken en veel middelen vergen. In deze bachelorproef wordt door middel van Blockchain principes en IPFS aan versiebeheer gedaan zodat bedrijven met minimale overhead hun versie beheer kunnen decentraliseren.\\
+Er wordt vertrokken vanuit verschillende onderzoekspapers om de context en verschillende aspecten van blockchain en decentralisatie uit te leggen. Vervolgens zullen deze principes worden toegepast op een concreet software project dat uitmondt in een werkend gedecentraliseerd versiebeheer systeem. De bedoeling is om bedrijven aan te zetten en te motiveren om meer open source te gebruiken in hun software ontwikkelingsproces. 
+}
+
+%---------- Onderzoeksdomein en sleutelwoorden --------------------------------
+% TODO: Sleutelwoorden:
+%
+% Het eerste sleutelwoord beschrijft het onderzoeksdomein. Je kan kiezen uit
+% deze lijst:
+%
+% - Mobiele applicatieontwikkeling
+% - Webapplicatieontwikkeling
+% - Applicatieontwikkeling (andere)
+% - Systeembeheer
+% - Netwerkbeheer
+% - Mainframe
+% - E-business
+% - Databanken en big data
+% - Machineleertechnieken en kunstmatige intelligentie
+% - Andere (specifieer)
+%
+% De andere sleutelwoorden zijn vrij te kiezen
+
+\Keywords{Applicatieontwikkeling. blockchain --- versiebeheer --- P2P --- opensource} % Keywords
+\newcommand{\keywordname}{Sleutelwoorden} % Defines the keywords heading name
+
+%---------- Titel, inhoud -----------------------------------------------------
+
+\begin{document}
+
+\flushbottom % Makes all text pages the same height
+\maketitle % Print the title and abstract box
+\tableofcontents % Print the contents section
+\thispagestyle{empty} % Removes page numbering from the first page
+
+%------------------------------------------------------------------------------
+% Hoofdtekst
+%------------------------------------------------------------------------------
+
+% De hoofdtekst van het voorstel zit in een apart bestand, zodat het makkelijk
+% kan opgenomen worden in de bijlagen van de bachelorproef zelf.
+\input{voorstel-inhoud}
+
+%------------------------------------------------------------------------------
+% Referentielijst
+%------------------------------------------------------------------------------
+% TODO: de gerefereerde werken moeten in BibTeX-bestand ``voorstel.bib''
+% voorkomen. Gebruik JabRef om je bibliografie bij te houden en vergeet niet
+% om compatibiliteit met Biber/BibLaTeX aan te zetten (File > Switch to
+% BibLaTeX mode)
+
+\phantomsection
+\printbibliography[heading=bibintoc]
+
+\end{document}
