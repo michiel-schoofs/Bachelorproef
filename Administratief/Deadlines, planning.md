@@ -1,4 +1,4 @@
-# Verloop bachelorproef Michiel Schoofs (Draft)
+# Verloop bachelorproef Michiel Schoofs
 
 ## Deadlines
 
@@ -23,9 +23,21 @@
 | **15/05/2020** | Draft versie volledige bachelorproef doorsturen              | 5    |
 | **29/05/2020** | Afwerken van de bachelorproef en volledige testopstelling (Word document en web applicatie) afwerken. | 6    |
 
+## Tussentijdse verslagen indienen
+
+| **Nr. verslag** | **Datum**  | **Nr. Verslag** | Datum      |
+| :-------------: | ---------- | :-------------: | ---------- |
+|      **1**      | 01/03/2020 |      **5**      | 26/04/2020 |
+|      **2**      | 15/03/2020 |      **6**      | 10/05/2020 |
+|      **3**      | 29/03/2020 |      **7**      | 24/05/2020 |
+|      **4**      | 12/04/2020 |     **nvt**     | **nvt**    |
+
+
+
 ## Afspraken met promotor/co-promotor
 
 |   **Datum**    |    Uur    |       Afspraak       |                            Reden                             |
 | :------------: | :-------: | :------------------: | :----------------------------------------------------------: |
 | **14/02/2020** | **8:15**  |   **Mevr. Samyn**    | Bespreken finaal voorstel van bachelorproef, Bespreken van verder verloop en deliverables. |
 | **21/02/2020** | **13:00** | **Maurice Dalderup** | Eerste contact met co-promoter, bespreken van algemene zaken en eventuele vragen. |
+| **06/03/2020** | **8:15**  |   **Mevr. Samyn**    |              Bespreken van eerste deliverable.               |
