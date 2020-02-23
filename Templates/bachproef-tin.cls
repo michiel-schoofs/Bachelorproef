@@ -40,7 +40,7 @@
 \RequirePackage{listings}   % Broncode mooi opmaken
 
 \RequirePackage{graphicx}   % Invoegen van afbeeldingen
-\graphicspath{{img/}}       % Map met in te voegen afbeeldingen
+\graphicspath{{../Images/}}       % Map met in te voegen afbeeldingen
 \RequirePackage{tikz}       % Grafische taal voor maken van afbeeldingen
 
 %-------------------------------------------------------------------------------
@@ -603,8 +603,8 @@ extendedchars=\true
 \RequirePackage[style=apa,backend=biber]{biblatex}
 \RequirePackage{csquotes}
 \DeclareLanguageMapping{dutch}{dutch-apa}
-\addbibresource{bachproef-tin.bib} % BibTeX bibliography file
-\addbibresource{../voorstel/voorstel.bib}
+\addbibresource{../Bibliografie/bachproef-tin.bib} % BibTeX bibliography file
+\addbibresource{../Bibliografie/voorstel.bib}
 \defbibheading{bibempty}{}
 
 \RequirePackage{makeidx} % Required to make an index
