@@ -6,3 +6,10 @@
 *.fls
 *.out
 *.toc
+
+##Config files
+.bbl
+.bcf
+.blg
+.xml
+.gz
