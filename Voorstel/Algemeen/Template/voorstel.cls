@@ -244,6 +244,6 @@ justification=raggedright]{caption}
 
 \RequirePackage[backend=biber,style=apa]{biblatex}
 \DeclareLanguageMapping{dutch}{dutch-apa}
-\addbibresource{../Bibliografie/voorstel.bib}
+\addbibresource{../../Bibliografie/voorstel.bib}
 
 \endinput
