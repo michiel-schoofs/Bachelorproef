@@ -1,0 +1,21 @@
+## Core latex/pdflatex auxiliary files:
+*.aux
+*.lof
+*.log
+*.lot
+*.fls
+*.out
+*.toc
+*.idx
+
+##Config files
+*.bbl
+*.bcf
+*.blg
+*.xml
+*.gz
+
+##Pdf files, only look in specified folders
+*.pdf
+!Voorstel/PDF Versies/*.pdf
+!Bachelorproef/PDF Versies/*.pdf
