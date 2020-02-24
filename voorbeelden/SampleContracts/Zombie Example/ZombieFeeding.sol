@@ -5,7 +5,7 @@ import './ZombieFactory.sol';
 contract ZombieFeeding is ZombieFactory{
     KittyInterface kittyContract;
 
-    modifier ownerOf(uint _zombieId){
+    modifier onlyOwnerOf(uint _zombieId){
         require(msg.sender == zombieToOwner[_zombieId],"you don't own this zombie");
         _;
     }
@@ -28,7 +28,7 @@ contract ZombieFeeding is ZombieFactory{
         feedAndMultiply(_zombieId, kittyDna,"kitty");
     }
 
-    function feedAndMultiply(uint _zombieId, uint _targetDna, string memory _species) internal ownerOf(_zombieId){
+    function feedAndMultiply(uint _zombieId, uint _targetDna, string memory _species) internal onlyOwnerOf(_zombieId){
         Zombie storage myZombie = zombies[_zombieId];
 
         require(_isReady(myZombie),"This zombie isn't ready for feeding");
