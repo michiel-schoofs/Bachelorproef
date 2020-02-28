@@ -4,6 +4,9 @@ import "./ZombieAttack.sol";
 import "./ERC721.sol";
 import "./SafeMath.sol";
 
+/// @title A contract for Making our Zombies an ERC721 Token
+/// @author Michiel Schoofs
+/// @notice This contracts implements the ERC721 Standard, also included in this project. That way we can easily exchange zombies and be more compliant with standards.
 contract ZombieOwnable is ZombieAttack , ERC721 {
   using SafeMath for uint256;
   mapping (uint => address) zombieApprovals;
