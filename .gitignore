@@ -19,3 +19,7 @@
 *.pdf
 !Voorstel/PDF Versies/*.pdf
 !Bachelorproef/PDF Versies/*.pdf
+
+##Temp bib files
+*.bib.bak
+*.bib.sav

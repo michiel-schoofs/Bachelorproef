@@ -1,6 +1,6 @@
 \chapter{\IfLanguageName{dutch}{Stand van zaken}{State of the art}}
 \label{ch:stand-van-zaken}
-
+\graphicspath{{../../Images/}} 
 % Tip: Begin elk hoofdstuk met een paragraaf inleiding die beschrijft hoe
 % dit hoofdstuk past binnen het geheel van de bachelorproef. Geef in het
 % bijzonder aan wat de link is met het vorige en volgende hoofdstuk.
@@ -33,11 +33,39 @@ Door deze manier van werken is er een nieuw probleem. Alice kan een fout opslaan
 Versiebeheer is geen nieuw concept. Er zijn zoals eerder aangehaald verschillende Software suites. Toch zijn er volgens \textcite{Chacon2014} drie grote categorieën die we kunnen onderscheiden:
 
 \begin{itemize}
-	\item Lokale systemen: Hierbij gaan we de veranderingen van de bestanden lokaal gaan bijhouden in bijvoorbeeld een database -zie figuur-. Dit is een zeer eenvoudige manier om aan versiebeheer te gaan doen maar leent zich niet tot samenwerken en versies uitwisselen.
-	\item Client-Server Systemen: Hierbij 
-	\item Het noteren van alle veranderingen van het archief in een centraal logboek.
-\end{itemize}
+	\item Lokale versiebeheersystemen. De veranderingen in de bestanden die worden aangebracht worden lokaal op de computer bewaard in bijvoorbeeld een Database. Een gekend voorbeeld hiervan is RCS (Revision Control System). Dit is zeker een eenvoudige oplossing om verschillende versies te gaan bijhouden. Toch leent deze manier van werken zich niet voor bestanden te delen of samen te gaan werken aan een project.\\
+	
+\begin{figure}[h!]
+	\centering
+	\caption[Overzicht structuur Lokale VCS]{Overzicht van de structuur van een Lokale VCS.}
+	\label{fig:lvcs}
+	\includegraphics[scale=0.5]{LVCS.png}
+\end{figure}
+
+	\item CVCS: Om samen te kunnen werken aan dezelfde bestanden kan er geopteerd worden voor een CVCS (Centralised Version Control System). In plaats van de database lokaal bij te gaan houden maken we gebruik van een centrale server. Wil Bob bijvoorbeeld aan bestand A zal hij lokaal een kopie gaan maken van dit bestand en vervolgens de veranderingen doorsturen naar de centrale database. \\ 
+
+Een ander voordeel van deze manier van werken is dat men de centrale database kan gaan afschermen. Op deze manier krijgen mensen enkel toegang tot de bestanden die men nodig heeft.\\
 
 \begin{figure}[h!]
-  \includegraphics[scale=1.7]{birds.jpg}
+	\centering
+	\caption[Overzicht structuur CVCS]{Overzicht van de structuur van een CVCS.}
+	\label{fig:lvcs}
+	\includegraphics[scale=0.5]{CVCS.png}
 \end{figure}
+
+	\item DVCS: Een nadeel van alles centraal te gaan beheren is het zogenaamde \textit{single point of failure(SPOF)} probleem. Een SPOF is een onderdeel van een systeem dat mocht het uitvallen heel het systeem tot een halt roept. Er zijn drie types van SPOF: hardware, software en database. Een mogelijke oplossing voor dit probleem is redundantie, wat wilt zeggen het aanbieden van kopieën. \autocite{Sun2007} \\
+	
+Het is ook het principe van redundantie dat aan de basis ligt van een DVCS (Distributed version control System. Hierbij wordt er niet alleen een kopie van de bestanden genomen maar gaan we het gehele versiebeheer systeem gaan overnemen. Elke gebruiker heeft dus ten allen tijde een lokale kopie staan van zowel de bestanden als de wijzigingen en verschillende versies. Mocht door bijvoorbeeld een hardware probleem de centrale server onbruikbaar worden zal elke gebruiker in essentie een complete back-up hebben van het totale project.
+
+\begin{figure}[h!]
+	\centering
+	\caption[Overzicht structuur DVCS]{Overzicht van de structuur van een DVCS.}
+	\label{fig:lvcs}
+	\includegraphics[scale=0.5]{DVCS.png}
+\end{figure}
+
+\end{itemize}
+
+
+
+
