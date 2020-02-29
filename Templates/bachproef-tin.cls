@@ -602,6 +602,7 @@ extendedchars=\true
 
 \RequirePackage[style=apa,backend=biber]{biblatex}
 \RequirePackage{csquotes}
+\RequirePackage{wrapfig}
 \DeclareLanguageMapping{dutch}{dutch-apa}
 \addbibresource{../../Bibliografie/bachproef-tin.bib} % BibTeX bibliography file
 \addbibresource{../../Bibliografie/voorstel.bib}

@@ -49,7 +49,7 @@ Een ander voordeel van deze manier van werken is dat men de centrale database ka
 \begin{figure}[h!]
 	\centering
 	\caption[Overzicht structuur CVCS]{Overzicht van de structuur van een CVCS.}
-	\label{fig:lvcs}
+	\label{fig:cvcs}
 	\includegraphics[scale=0.5]{CVCS.png}
 \end{figure}
 
@@ -60,7 +60,7 @@ Het is ook het principe van redundantie dat aan de basis ligt van een DVCS (Dist
 \begin{figure}[h!]
 	\centering
 	\caption[Overzicht structuur DVCS]{Overzicht van de structuur van een DVCS.}
-	\label{fig:lvcs}
+	\label{fig:dvcs}
 	\includegraphics[scale=0.5]{DVCS.png}
 \end{figure}
 
@@ -70,4 +70,17 @@ Het is ook het principe van redundantie dat aan de basis ligt van een DVCS (Dist
 
 RCS is een klassiek voorbeeld van een lokale versiebeheer systeem. Het wordt geschreven en geformaliseerd door \textcite{Tichy85rcs} in een artikel gepubliceerd aan de universiteit van Purdue in de verenigde staten. GNU -een besturingssysteem dat zeer actief is op het gebied van vrije en democratische software- pikte het project op en voerde het in als een vervanging voor het toenmalige CSSC \autocite{GNUCSSC}. CSSC was een gratis verkrijgbare variant van het SCCS (Source code control system) dat eigendom was van Bell Labs. SCCS is een versiebeheer systeem geschreven door \textcite{Rochkind1975} voor Unix systemen. CSSC en SCCS waren echter niet de enige systemen voor RCS. Zo was er ook nog CA-Panvalet een gepatenteerde oplossing voor Mainframe computers en nog enkele andere.Toch is het interessant om stil te staan bij RCS ten opzichte van eerdere systemen. Veel van de concepten die het systeem omvatte zijn nog steeds terug te vinden in moderne versiebeheer systemen (zoals GIT). RCS kadert eveneens binnen de algemene tendens van deze bachelorproef zo is het volledig open source en kreeg nog een laatste update in 2015.\\
 
-Een eerste concept waar de software gebruik van maakt is het concept van een boomstructuur.
+Een eerste concept waar de software gebruik van maakt is het concept van een boomstructuur -Een mooi voorbeeld van dit soort structuur is een stamboom-.Voor volgende definities wordt gesteund op \textcite{Lievens2019}. Een boom structuur bevat een collectie van \textbf{toppen} (in het engels ook wel Nodes genoemd). Helemaal aan het begin van de boom ligt een top die we ook wel bestempelen als \textbf{wortel} (engels: Root node). Een andere speciale top is het \textbf{blad} (leaf node) dit is een top die geen kinderen heeft. Elke wortel heeft een arbitrair aantal kinderen (synoniem van opvolgers)die op hun beurt opnieuw een wortel zijn voor een deelboom. Tot slot speelt binnen RCS ook het concept van \textbf{diepte} een rol. De diepte van de wortel is nul ($d$=0) en elk kind heeft als diepte: 
+
+\begin{equation}
+	d_{kind} = d_{ouder} + 1
+\end{equation}
+
+Al deze concepten worden ook nog eens grafisch verduidelijkt in de grafiek \ref{fig:tree1}.
+
+\begin{figure}
+\centering
+  	\includegraphics[scale=0.5]{tree1.png}
+	\label{fig:tree1}
+\caption[Overzicht concepten boomstructuur]{Een overzicht van alle concepten binnen een boomstructuur waar RCS van gebruik maakt.}
+\end{figure}
