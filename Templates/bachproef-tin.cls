@@ -625,7 +625,11 @@ extendedchars=\true
 \usepackage{hyperref}
 %voor code formatting 
 \RequirePackage{fancyvrb}
+
+%figure packages
 %Voor subfigures
 \RequirePackage{subcaption}
+%Voor figuren waar text rond wrapt.
+\RequirePackage{wrapfig}
 
 \endinput
