@@ -16,58 +16,61 @@ Soms wil je de auteur niet expliciet vernoemen, dan gebruik je \texttt{$\backsla
 \newpage
 \section{Versiebeheer}
 \subsection{Inleiding}
-Versiebeheer is een zeer belangrijk gegeven binnen softwareontwikkeling. Zo waren er maar liefst in totaal een 100 miljoen projecten in 2018 op het populaire versiebeheer platform GitHub \autocite{Git2018}. GitHub is echter niet de enige speler op de markt. Er zijn nog tal van andere bedrijven actief binnen versiebeheer.Toch is het interessant om even stil te staan en de vraag te stellen: welke problemen lost versiebeheer effectief op?
+Versiebeheer is een belangrijk concept binnen softwareontwikkeling. Zo waren er in totaal 100 miljoen projecten op het populaire versiebeheer platform GitHub (in 2018) \autocite{Git2018}. GitHub (sinds 2018 overgenomen door Microsoft) is echter niet de enige speler op de markt. Zo is er ook nog Code Commit van Amazon en GitLab. Veel bedrijven en oplossingen spelen dus in op de behoefte voor een duidelijk en efficiënt versiebeheer systeem. Toch kan men stilstaan bij de vraag: Welke behoefte lossen deze systemen op?
 
-Stel volgende scenario: Alice en Bob zijn aangenomen om te werken voor Bedrijf X. Hun eerste taak is een website ontwikkelen voor een T-Shirt Webshop. Ze zetten samen hun project op, bespreken de verschillende technologieën en gaan zelfstandig aan de slag. Op het einde van de dag hebben ze elk een verschillende pagina gemaakt en deze willen ze graag met elkaar delen. Een naïeve oplossing zou om de bestanden met elkaar uit te wisselen via mail of fysieke hardware. Dit kost echter veel tijd en de code die geschreven wordt zit verspreid over twee personen. Mocht Bob de code kwijtraakt door een defect dan zal deze opnieuw moeten geschreven worden. Een betere oplossing zou zijn om het project op een centrale server te gaan opslaan. Bob en Alice passen dan bestanden aan op deze centrale  server en hebben op die manier ook altijd toegang tot elkaars werk.
+Stel volgende scenario voor: Alice en Bob zijn aangenomen om te werken voor Bedrijf X. Hun eerste taak is een website ontwikkelen. Ze leggen samen alle vereisten vast, bespreken de verschillende technologieën en gaan aan de slag. Op het einde van de eerste dag hebben ze elk een verschillende pagina gemaakt en deze willen ze graag met elkaar delen.Dit kan door bijvoorbeeld via mail de bestanden door te sturen. Een andere mogelijkheid is de bestanden via fysieke hardware zoals een USB-Stick aan elkaar te geven. Het nadeel is dat de code op twee verschillende plaatsen verspreid zit. Als Bob de code die hij heeft geschreven kwijt raken, dan zal deze opnieuw moet worden geschreven. Om dit probleem te voorkomen kan men het project op een centrale server gaan opslaan. Bob en Alice zullen hun veranderingen opslaan op deze centrale server. Zo hebben ze altijd toegang tot elkaars werk. 
 
-Door deze manier van werken is er een nieuw probleem. Alice kan een fout opslaan waardoor Bob zijn code niet meer werkt. Als deze fout vervolgens op de centrale server komt te staan werkt de gehele website niet meer. Om dit probleem te voorkomen wordt er gebruik gemaakt van het concept van \textbf{versies}. Elke aanpassing die er centraal gebeurd resulteert in een nieuwe versie van het project. Men kan altijd terugkeren naar een eerdere versie.
+Deze manier van werken heeft zijn eigen nadelen. Alice kan per ongeluk een bestand overschrijven of een stuk code verwijderen. Tenzij men back-ups heeft is het originele bestand verloren. Om dit probleem te omzeilen wordt er gebruik gemaakt van het concept van \textbf{versies}. Elke aanpassing die er gemaakt wordt resulteert in een nieuwe versie van het project. Men kan altijd terugkeren naar een eerdere versie. Als Alice dus het stukje code verwijdert in versie 15 kan men terug gaan naar versie 14.
 
-\textcite{Loeliger2009} stellen dan ook dat een versiebeheersysteem een middel is om verschillende versie van code te gaan beheren en bijhouden.De auteurs geven dan ook volgende drie eigenschappen waaraan elk systeem beantwoord:
+\textcite{Loeliger2009} stelt dat een versiebeheersysteem een middel is om verschillende versie van code te gaan beheren en bijhouden. De auteur onderscheid volgende drie eigenschappen waaraan dergelijke systemen voldoen:
 
 \begin{itemize}
-	\item Het bijhouden en ontwikkelen van een centraal archief
-	\item Het bijhouden en toegang verschaffen van oudere versies van dit archief
-	\item Het noteren van alle veranderingen van het archief in een centraal logboek.
+	\item Er wordt gebruik gemaakt van een centraal Archief. Binnen dit archief worden alle versies van het project bewaard en bijgewerkt.
+	\item Het centraal archief geeft toegang tot eerdere versies van het project.
+	\item Alle veranderingen die worden aangebracht aan het archief worden genoteerd in een centraal logboek.
 \end{itemize}
 
-Versiebeheer is geen nieuw concept. Er zijn zoals eerder aangehaald verschillende Software suites. Toch zijn er volgens \textcite{Chacon2014} drie grote categorieën die we kunnen onderscheiden:
+Versiebeheer is geen nieuw concept. Er zijn zoals eerder aangehaald verschillende software oplossingen beschikbaar. Toch zijn er volgens \textcite{Chacon2014} drie grote categorieën (zie \ref{fig:TypesVCS} voor een grafische weergave):
 
 \begin{itemize}
-	\item Lokale versiebeheersystemen. De veranderingen in de bestanden die worden aangebracht worden lokaal op de computer bewaard in bijvoorbeeld een Database. Een gekend voorbeeld hiervan is RCS (Revision Control System). Dit is zeker een eenvoudige oplossing om verschillende versies te gaan bijhouden. Toch leent deze manier van werken zich niet voor bestanden te delen of samen te gaan werken aan een project.\\
+	\item Lokale versiebeheersystemen: het centraal archief waar de veranderingen in worden bewaard staat op een lokale computer. Het grootste voordeel is dat een lokaal systeem zeer makkelijk te onderhouden is. Het is eveneens eenvoudig op te stellen. Toch is het niet geschikt om bestanden met elkaar te  delen of samen aan bestanden te werken. Een gekend voorbeeld is RCS (Revision Control System) - zie \ref{sec:RCS} -. \\
 	
-\begin{figure}[h!]
-	\centering
-	\caption[Overzicht structuur Lokale VCS]{Overzicht van de structuur van een Lokale VCS.}
-	\label{fig:lvcs}
-	\includegraphics[scale=0.5]{LVCS.png}
-\end{figure}
-
-	\item CVCS: Om samen te kunnen werken aan dezelfde bestanden kan er geopteerd worden voor een CVCS (Centralised Version Control System). In plaats van de database lokaal bij te gaan houden maken we gebruik van een centrale server. Wil Bob bijvoorbeeld aan bestand A zal hij lokaal een kopie gaan maken van dit bestand en vervolgens de veranderingen doorsturen naar de centrale database. \\ 
-
-Een ander voordeel van deze manier van werken is dat men de centrale database kan gaan afschermen. Op deze manier krijgen mensen enkel toegang tot de bestanden die men nodig heeft.\\
-
-\begin{figure}[h!]
-	\centering
-	\caption[Overzicht structuur CVCS]{Overzicht van de structuur van een CVCS.}
-	\label{fig:cvcs}
-	\includegraphics[scale=0.5]{CVCS.png}
-\end{figure}
-
-	\item DVCS: Een nadeel van alles centraal te gaan beheren is het zogenaamde \textit{single point of failure(SPOF)} probleem. Een SPOF is een onderdeel van een systeem dat mocht het uitvallen heel het systeem tot een halt roept. Er zijn drie types van SPOF: hardware, software en database. Een mogelijke oplossing voor dit probleem is redundantie, wat wilt zeggen het aanbieden van kopieën. \autocite{Sun2007} \\
+	\item CVCS: Om samen te kunnen werken aan dezelfde bestanden kan een CVCS (Centralised Version Control System) worden gebruikt. In plaats van het archief lokaal bij te houden wordt er gebruik gemaakt van een centrale server. Bestanden worden vervolgens lokaal gekopieerd. Als er veranderingen worden aangebracht zullen deze worden doorgestuurd naar de server.Doordat men verplicht is om de bestanden op een centrale plaats af te halen, kan men deze gaan afschermen. Zo kan men toegang beperken tot enkel de nodige bestanden per gebruiker. \\
 	
-Het is ook het principe van redundantie dat aan de basis ligt van een DVCS (Distributed version control System. Hierbij wordt er niet alleen een kopie van de bestanden genomen maar gaan we het gehele versiebeheer systeem gaan overnemen. Elke gebruiker heeft dus ten allen tijde een lokale kopie staan van zowel de bestanden als de wijzigingen en verschillende versies. Mocht door bijvoorbeeld een hardware probleem de centrale server onbruikbaar worden zal elke gebruiker in essentie een complete back-up hebben van het totale project.
+Een neveneffect van alles centraal te gaan beheren is het zogenaamde \textit{single point of failure(SPOF)} probleem. Een SPOF is een onderdeel van een systeem dat mocht het uitvallen heel het systeem tot een halt roept. Met andere woorden valt het centraal archief weg heeft niemand nog toegang tot het project. Een mogelijke oplossing voor dit probleem is redundantie. Dit betekent het aanbieden van kopieën. \autocite{Sun2007}\\
+
+	\item DVCS: Om het SPOF probleem te voorkomen kan men kopieën maken van het centraal archief. Deze kopieën kunnen vervolgens worden verspreid over verschillende computers. Dit is het uitgangspunt van DVCS (Distributed version control System). Elke gebruiker heeft een lokale kopie van de centrale server. De veranderingen aan de bestanden worden eerst aangebracht in het lokaal archief en vervolgens gesynchroniseerd met de centrale variant.\\
+
+Mocht het centraal aanspreekpunt niet beschikbaar zijn is dit geen probleem. Elke gebruiker heeft immers een volledige back-up van het volledige project. In theorie kan de gebruiker zelfs optreden als nieuwe centrale server.
+\end{itemize}
+
 
 \begin{figure}[h!]
 	\centering
+	\begin{subfigure}[b]{.5\textwidth}
+	\centering
+		\includegraphics[scale=.3]{LVCS.png}
+		\caption[Overzicht structuur Lokale VCS]{Overzicht van de structuur van een Lokale VCS.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.5\textwidth}
+	\centering
+		\includegraphics[scale=.3]{CVCS.png}
+			\caption[Overzicht structuur CVCS]{Overzicht van de structuur van een CVCS.}
+	\end{subfigure}%
+	\hfill
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[scale=0.3]{DVCS.png}
 	\caption[Overzicht structuur DVCS]{Overzicht van de structuur van een DVCS.}
-	\label{fig:dvcs}
-	\includegraphics[scale=0.5]{DVCS.png}
+	\end{subfigure}
+	
+	\caption[Overzicht types VCS]{Overzicht van de drie types van VCS zoals aangegeven door \textcite{Chacon2014}.}
+	\label{fig:TypesVCS}
 \end{figure}
 
-\end{itemize}
-
+	
 \subsection{RCS}
-
+\label{sec:RCS}
 RCS is een klassiek voorbeeld van een lokaal versiebeheer systeem. Het is geschreven en geformaliseerd door \textcite{Tichy85rcs} in een artikel gepubliceerd aan de universiteit van Purdue in de verenigde staten. GNU -een besturingssysteem dat zeer actief is op het gebied van vrije en democratische software- nam het project over als vervanging voor het toenmalige CSSC \autocite{GNUCSSC}. CSSC was een gratis verkrijgbare variant van het SCCS (Source code control system) dat eigendom was van Bell Labs. SCCS is een versiebeheer systeem geschreven door \textcite{Rochkind1975} voor Unix systemen. CSSC en SCCS waren echter niet de enige systemen voor RCS. Zo was er ook nog CA-Panvalet een gepatenteerde oplossing voor Mainframe computers en nog enkele andere.Toch is het interessant om stil te staan bij RCS ten opzichte van eerdere systemen. Dit is omdat veel van de concepten die waarvan het systeem gebruik maakt zijn nog steeds terug te vinden in moderne versiebeheer systemen (zoals GIT). RCS kadert eveneens binnen de algemene ideologie van deze bachelorproef zo is het volledig open source en wordt het nog steeds op vrijwillige basis onderhouden. Voor deze sectie wordt voornamelijk gesteund op de originele paper door \textcite{Tichy85rcs}.\\
 
 Een eerste concept waar de software gebruik van maakt is het concept van een boomstructuur . Een mooi voorbeeld van dit soort structuur is een stamboom. Voor onderstaande definities wordt gesteund op \textcite{Lievens2019}. Een boomstructuur bevat een collectie van \textbf{toppen} \textit{(in het engels ook wel Nodes genoemd)}. Helemaal aan het begin van de boom ligt een top die we ook wel bestempelen als \textbf{wortel} \textit{(Root)}. Een andere speciale top is het \textbf{blad} \textit{(leaf)} dit is een top die geen kinderen heeft. Alle tussenliggende toppen worden dan ook bestempeld als intermediair. Elke top heeft een arbitrair aantal kinderen (synoniem van opvolgers)die op hun beurt opnieuw een wortel zijn voor een deelboom. Tot slot speelt binnen RCS ook het concept van \textbf{diepte} een rol. De diepte van de wortel is nul ($d$=0) en elk kind heeft als diepte: 

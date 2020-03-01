@@ -625,6 +625,7 @@ extendedchars=\true
 \usepackage{hyperref}
 %voor code formatting 
 \RequirePackage{fancyvrb}
-
+%Voor subfigures
+\RequirePackage{subcaption}
 
 \endinput
