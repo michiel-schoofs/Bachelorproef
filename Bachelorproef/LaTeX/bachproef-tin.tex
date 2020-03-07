@@ -59,7 +59,7 @@
 \input{samenvatting}
 
 %---------- Inhoudstafel -------------------------------------------------------
-ple\pagestyle{empty} % Geen hoofding
+\pagestyle{empty} % Geen hoofding
 \tableofcontents  % Voeg de inhoudstafel toe
 \cleardoublepage  % Zorg dat volgende hoofstuk op een oneven pagina begint
 \pagestyle{fancy} % Zet hoofding opnieuw aan
@@ -112,17 +112,17 @@ ple\pagestyle{empty} % Geen hoofding
 
 %%---------- Onderzoeksvoorstel -----------------------------------------------
 
-\chapter{Onderzoeksvoorstel}
-
+\chapter{Appendix}
+{\Huge Appendix 1: Onderzoeksvoorstel}\\
 Het onderwerp van deze bachelorproef is gebaseerd op een onderzoeksvoorstel dat vooraf werd beoordeeld door de promotor. Dat voorstel is opgenomen in deze bijlage.
 
 % Verwijzing naar het bestand met de inhoud van het onderzoeksvoorstel
 \input{../../Voorstel/Herwerkt/voorstel-inhoud}
 
 %%---------- Andere bijlagen --------------------------------------------------
-% TODO: Voeg hier eventuele andere bijlagen toe
 %\input{...}
-
+{\Huge Appendix 2: Voorbeeld RCS}\\
+\input{./Appendix/Voorbeeld-RCS}
 %%---------- Referentielijst --------------------------------------------------
 
 \printbibliography[heading=bibintoc]
