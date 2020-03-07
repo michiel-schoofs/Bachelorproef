@@ -1,0 +1,36 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2020.03.07.15.13.18;	author bob;	state Exp;
+branches;
+next	;
+
+
+desc
+@Main website for our shop
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@<!doctype html>
+<html>
+	<head>
+		<title>My awesome cool shop</title>
+	</head>
+	<body>
+		<p>delete me</p>
+		<p>move me</p>
+		<p>Fix the typoooo</p>
+		<p> <!--A couple of paragraphs of lorem ipsum.--></p>
+	</body>
+</html>
+@

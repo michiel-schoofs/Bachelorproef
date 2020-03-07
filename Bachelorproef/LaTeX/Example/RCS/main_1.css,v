@@ -1,19 +1,18 @@
 head	1.1;
 access;
 symbols;
-locks
-	root:1.1; strict;
+locks; strict;
 comment	@# @;
 
 
 1.1
-date	2020.03.07.10.50.02;	author root;	state Exp;
+date	2020.03.07.15.43.49;	author bob;	state Exp;
 branches;
 next	;
 
 
 desc
-@Stylesheet for site.
+@Main stylesheet of the homepage
 @
 
 

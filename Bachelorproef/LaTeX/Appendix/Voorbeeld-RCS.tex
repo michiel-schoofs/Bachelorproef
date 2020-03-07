@@ -1,2 +1,42 @@
-\label{ch:voorbeeld-rcs}
-\graphicspath{{../../../Images/}} 
+\label{ch:voorbeeld-rcs} 
+\setcounter{section}{0}
+\section{Duiding}
+
+Dit is een voorbeeld van RCS. De meest gebruikte commando's worden gedemonstreerd (\verb+ci+, \verb+co+ ,\textit{branching},...). De inhoud van het centraal archief bestand \verb+homepage.html,v+ wordt ook besproken. In dit voorbeeld weken Alice en Bob samen aan twee bestanden: 
+
+\begin{itemize}
+	\item \verb+homepage.html+: Een simpele hoofdpagina met test-tekst.
+	\item \verb+main.css+: Een stijlblad met daarin de stijlen van de hoofdpagina.
+\end{itemize}
+
+\section{Opzet van het project}
+
+Alice en Bob hebben besproken dat ze RCS zullen gebruiken. Ze maken een gezamenlijke map aan.Bob gaat van start en maakt beide bestanden aan. Hiervoor schreef hij volgende code:
+
+\textbf{homepage.html:}
+\lstinputlisting[language=HTML]{Example/RCS/homepage_1.html}
+\textbf{main.css:}
+\lstinputlisting{Example/RCS/main_1.css}
+
+Bob gaat een volledig project uitwerken met meerdere bestanden. Er zijn er op dit moment al twee aanwezig. Daarom is het interessant om deze bestanden te gaan bundelen. RCS bundelt automatisch archief bestanden samen, als er een map met de naam \textit{RCS} bestaat. Bob maakt deze map aan door het commando \verb+mkdir RCS+. Vervolgens zal hij de initiële versie aanmaken van beide bestanden. Hiervoor wordt er gebruik gemaakt van volgende commando's: 
+\begin{lstlisting}[language=Bash]
+ci homepage.html
+ci -r1.1 -i -m "main stylesheet for the homepage" main.css
+\end{lstlisting}
+\footnote{De -i optie wordt gebruikt om duidelijk te maken dat het over een initiële eerste check in gaat. De -r optie wordt gebruikt om het versienummer te specificeren.}.Binnen de map zijn twee bestanden aangemaakt main.css,v en homepage.html,v. Beide bestanden zijn analoog aan elkaar. In tegenstelling tot git waar er per project een archief is heeft \textbf{elk bestand zijn eigen archief}. Wat zit er in zo een archief bestand?
+
+\textbf{main.css,v:}
+\lstinputlisting{Example/RCS/homepage_1.html,v}
+
+De verschillende eigenschappen zoals gedefinieerd door \textcite{Loeliger2009} -zie \ref{sec:vb_inleiding}- zijn aanwezig in dit bestand. Op het einde van het archief bestand staat de originele code. Er is ook een logboek met zowel een versie~ als globale beschrijving. Tot slot is er ook metadata aanwezig waaronder de datum en auteur.
+
+\section{Nieuwe versie van Alice}
+
+Alice wilt graag enkele aanpassingen maken in de bestanden van Bob. Hiervoor heeft ze de meest recente versie nodig. Het opvragen van de meest recente bestanden gebeurd bij het uitchecken. Zoals vermeld in sectie \ref{sec:RCS} speelt het concept van locks een belangrijke rol. Alice moet namelijk het bestand versleutelen als ze wijzigingen wilt aanbrengen. Hierdoor kan niemand anders het bestand aanpassen terwijl Alice haar wijzigingen nog niet heeft doorgevoerd. Het bestand versleutelen kan door de optie -l mee te geven bij het uitchecken. Alice opent een shell en navigeert naar de locatie van het project. Vervolgens vraagt ze een lokale kopie van de bestanden op via volgende commando's:
+
+\begin{lstlisting}[language=Bash]
+co -l homepage.html
+co -l -r1.1 main.css
+\end{lstlisting}
+
+In tegenstelling tot het inchecken worden de archief bestanden niet verwijderd. Alice heeft echter een specifieke versie versleuteld. Andere personen kunnen deze versie raadplegen maar geen wijzigingen doorvoeren. Enkel de persoon die de laatste versie heeft versleuteld kan immers een nieuwe versie inchecken.
