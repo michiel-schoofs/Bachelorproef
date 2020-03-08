@@ -1,0 +1,29 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	2020.03.07.15.43.49;	author bob;	state Exp;
+branches;
+next	;
+
+
+desc
+@Main stylesheet of the homepage
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@body{
+	height:100%;
+	width:100%;
+	background-color:black;
+}
+@
