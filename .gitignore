@@ -23,3 +23,8 @@
 ##Temp bib files
 *.bib.bak
 *.bib.sav
+
+##lock files of visual studio
+Demo/ipfs/IPFS test/.vs/*
+Demo/ipfs/IPFS test/bin/*
+Demo/ipfs/IPFS test/obj/*
