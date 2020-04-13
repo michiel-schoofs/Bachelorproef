@@ -172,6 +172,7 @@ Buiten de methodiek voorgesteld door \textcite{Bird2012} bestaat er ook GIT Flow
 %\label{sec:GIT}
 
 \subsection{Conclusie}
+\label{vb_conclusie}
 De verschillende types van versiebeheersystemen -zoals besproken in \ref{sec:vb_inleiding}- hebben een gemeenschappelijke eigenschap. De bestanden en in veel gevallen het archief staan integraal opgeslagen op computers. Bij lokale versiebeheersystemen en CVCS staat het zelfs op één centrale computer. Dit introduceert het probleem van een SPOF (Single point of failure).DVCS vermijdt dit probleem door gebruikers kopieën te geven van het archief. Valt de centrale computer weg dan heeft elke gebruiker een back-up. Veranderingen tussen lokale versies en die op de centrale computer moet manueel gesynchroniseerd worden. Hierdoor heeft men in grote mate controle over wat er centraal wordt opgenomen. Het nadeel is dat er veel lokale kopieën zijn en veranderingen niet altijd worden gesynchroniseerd. Op deze manier heeft niet iedereen toegang tot de laatste veranderingen. Het zou dus een verbetering zijn mocht er een systeem bestaan dat één centraal archief ondersteunt zonder SPOF. Dit lijkt op eerste zicht niet mogelijk, aangezien er één centraal aanspreekpunt moet zijn. Toch is dit probleem al eerder opgelost onder de vorm van peer-to-peer (afgekort tot p2p) netwerken.\\
 
 P2P is voornamelijk bekend onder de vorm van file-sharing netwerken zoals Napster. \textcite{Chawathe2003} stellen dat Napster één van de eerste systemen was die erin slaagde om een succesvol netwerk uit te bouwen. Bij dit netwerk worden files niet opgevraagd aan een centrale server. In plaats hiervan gebruikt men een netwerk van \textbf{peers}. Door de principes van dit type van netwerken toe te passen kan men een centraal archief op een gedistribueerde manier opslaan. Zo behoudt men het voordeel van CVCS zonder een SPOF. \\
@@ -203,3 +204,24 @@ De doelstelling van deze bachelorproef is om een werkend P2P versiebeheersysteem
 	\label{tbl_concepts}
 	\caption{Concepten binnen versiebeheer systemen.}
 \end{table}
+
+\section{IPFS}
+\label{IPFS}
+\subsection{Het belang van decentralisatie}
+De opzet van de bachelorproef is om een volwaardig gedecentraliseerd versie beheersysteem te bekomen. Om de opzet volledig duidelijk te maken moet het begrip van decentralisatie gekaderd worden. Stel onderstaand scenario:\\
+
+Bob is een liefhebber van Capybaras en wil informatie krijgen over de dieren. Hij surft bijgevolg naar de Wikipedia pagina. Achterliggend zal Bob een verzoek moeten sturen naar de server van Wikipedia. Hiervoor moet hij het publieke IP-Adres weten. Deze kan hij verkrijgen door het DNS protocol.  Bob stuurt zijn verzoek naar deze server en krijgt de nodige pagina terug. Dit is een voorbeeld van een gecentraliseerd systeem. Bob gaat immers opzoek naar één aanspreekpunt waar de informatie zich bevind. Aangezien alle informatie zich bevind op één plaats spreken we ook van een gecentraliseerd systeem.\\
+
+De manier van alle informatie op één punt te gaan bewaren is zeer effectief. Bob kan alle informatie snel en doeltreffend gaan opvragen. Wat zijn echter de nadelen van deze manier van werken?
+
+\begin{itemize}
+	\item Een nadeel van dit centraal punt is het zogenaamde SPOF probleem -zie \ref{vb_conclusie}-. Doordat alle informatie zich op één server bevind is er ook één kritieke plaats waar alles kan fout lopen. Is de server onbeschikbaar zijn alle diensten en informatie hierop dat ook. Om dit probleem op te lossen kan gebruik worden gemaakt van zogenaamde \textit{Mirror servers}. Deze servers zijn exacte kopieën
+	
+	\item Doordat al het verkeer moet verwerkt worden door dezelfde hardware kan dit leiden tot een hoge serverbelasting. Hierdoor kan het verwerken van deze verzoeken traag verlopen.
+	
+	\item Het uitbreiden van bestaand infrastructuur is niet evident. Het verspreiden van een database over verschillende computers is een omslachtige onderneming.
+		
+	\item Een minder voor de hand liggend nadeel is dat van censuur. In sommige landen waaronder bijvoorbeeld China wordt bepaalde informatie gefilterd. Dit is mogelijk doordat deze landen het verkeer kunnen herleiden naar hun eigen servers.
+\end{itemize}
+	
+ Dit lijkt in eerste instantie een contradictie. Zoals aangehaald binnen \ref{vb_inleiding} bestaat er reeds het concept van DVCS \textit{Distributed version control system}. Hierbij beschikt elke computer over een lokale kopie van het archief. Op het eerste zicht 
