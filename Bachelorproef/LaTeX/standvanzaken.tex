@@ -243,3 +243,12 @@ In \ref{ipfs_decent} worden decentralisatie en P2P kort toegelicht. In dit onder
 In eerste instantie lijken sommige versiebeheersystemen gedecentraliseerd. \textbf{DVCS} is hier een goed voorbeeld van. Dit is een versiebeheersysteem waarbij elke computer een lokale kopie heeft van het centraal archief. Wijzigingen aan bestanden worden dan ook lokaal opgenomen. Elk lokaal archief is instaat om de functies als centraal archief op zich te nemen. Hierbij lijkt elke computer instaat om de functie als Servlet te vervullen en vertoond dit type van archief veel gelijkenissen met een P2P netwerk. Toch is er een eigenschap waaraan niet wordt voldaan, elk archief is immers niet gelijkwaardig. Er is altijd een centrale plaats waarvan de andere archieven worden gekopieerd.\\
 
 DVCS heeft ook nog een aantal problemen die worden opgelost binnen een puur P2P netwerk. Er zijn verschillende lokale kopieën van een archief die niet noodzakelijk up-to-date zijn of waar de veranderingen niet zijn gesynchroniseerd. Als één van die computers wegvalt zijn alle wijzigingen aangebracht in het lokaal archief ook verloren. 
+
+%Hele stukken tekst moeten hier nog komen 
+
+\subsection{Hoe worden bestanden geïdentificeerd op het netwerk}
+Een probleem binnen file sharing is de wijze waarop men bestanden opvraagt. Dit kan het best worden geïllustreerd aan de hand van een voorbeeld.\\
+
+Alice wilt graag een afbeelding van de paashaas. Na het opzoek door middel van een zoek machine vind ze deze afbeeldingen op een gegeven URL. Deze URL is verbonden aan een server die op zijn beurt de afbeelding bevat. Alice kan dus eenvoudigweg de afbeelding daar opvragen. Op een gedecentraliseerd systeem is dit niet evident er is immers geen server waar bestanden ter beschikking staan. De bestanden zitten namelijk verspreid over verschillende computers. Toch moet het systeem instaat zijn om bestanden terug te vinden.\\
+
+Om dit probleem op te lossen wordt er niet naar een specifieke plaats genavigeerd zoals met een URL. Het netwerk wordt rechtstreeks bevraagd voor een bestand. De peers die dit bestand ter beschikking hebben zullen dit bestand doorsturen naar de peer die het heeft opgevraagd. Voor dit principe heeft elk bestand een uniek identificatie nummer nodig. Een bestandsnaam is immers niet uniek. Hiervoor kan men gebruik maken van \textbf{Hashfuncties}. Een hashfunctie is een wiskundige functie die aan een
