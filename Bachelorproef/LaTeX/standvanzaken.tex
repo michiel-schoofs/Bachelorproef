@@ -204,24 +204,38 @@ De doelstelling van deze bachelorproef is om een werkend P2P versiebeheersysteem
 	\label{tbl_concepts}
 	\caption{Concepten binnen versiebeheer systemen.}
 \end{table}
-
+\newpage
 \section{IPFS}
 \label{IPFS}
 \subsection{Het belang van decentralisatie}
-De opzet van de bachelorproef is om een volwaardig gedecentraliseerd versie beheersysteem te bekomen. Om de opzet volledig duidelijk te maken moet het begrip van decentralisatie gekaderd worden. Stel onderstaand scenario:\\
+De opzet van deze bachelorproef is om een volwaardig gedecentraliseerd versie beheersysteem te bekomen doormidden van P2P en blockchain technologie. Om de opzet volledig duidelijk te maken moet het begrip van decentralisatie gekaderd worden. Stel onderstaand scenario:\\
 
 Bob is een liefhebber van Capybaras en wil informatie krijgen over de dieren. Hij surft bijgevolg naar de Wikipedia pagina. Achterliggend zal Bob een verzoek moeten sturen naar de server van Wikipedia. Hiervoor moet hij het publieke IP-Adres weten. Deze kan hij verkrijgen door het DNS protocol.  Bob stuurt zijn verzoek naar deze server en krijgt de nodige pagina terug. Dit is een voorbeeld van een gecentraliseerd systeem. Bob gaat immers opzoek naar één aanspreekpunt waar de informatie zich bevind. Aangezien alle informatie zich bevind op één plaats spreken we ook van een gecentraliseerd systeem.\\
 
 De manier van alle informatie op één punt te gaan bewaren is zeer effectief. Bob kan alle informatie snel en doeltreffend gaan opvragen. Wat zijn echter de nadelen van deze manier van werken?
 
 \begin{itemize}
-	\item Een nadeel van dit centraal punt is het zogenaamde SPOF probleem -zie \ref{vb_conclusie}-. Doordat alle informatie zich op één server bevind is er ook één kritieke plaats waar alles kan fout lopen. Is de server onbeschikbaar zijn alle diensten en informatie hierop dat ook. Om dit probleem op te lossen kan gebruik worden gemaakt van zogenaamde \textit{Mirror servers}. Deze servers zijn exacte kopieën
+	\item Een nadeel van dit centraal punt is het zogenaamde SPOF probleem -zie \ref{vb_conclusie}-. Doordat alle informatie zich op één server bevind is er ook één kritieke plaats waar alles kan fout lopen. Is de server onbeschikbaar zijn alle diensten en informatie hierop dat ook.\\
 	
-	\item Doordat al het verkeer moet verwerkt worden door dezelfde hardware kan dit leiden tot een hoge serverbelasting. Hierdoor kan het verwerken van deze verzoeken traag verlopen.
+	\item Doordat al het verkeer moet verwerkt worden door dezelfde hardware kan dit leiden tot een hoge serverbelasting. Hierdoor kan het verwerken van deze verzoeken traag verlopen.Om dit probleem op te lossen kan gebruik worden gemaakt van zogenaamde \textit{Mirror servers}. Dit is een kopie van de originele server. Deze kopie kan op momenten van hoge belasting een deel van het verkeer op zich nemen. Op die manier wordt volgens \textcite{Webb2007} de beperkingen van bandbreedte die zich voordoen bij een klassiek server/client scenario geminimaliseerd. Toch is ook deze oplossing niet optimaal. Men heeft immers meerdere fysieke servers nodig en alle informatie is redundant. \\
 	
-	\item Het uitbreiden van bestaand infrastructuur is niet evident. Het verspreiden van een database over verschillende computers is een omslachtige onderneming.
+	\item Het uitbreiden van bestaand infrastructuur is niet evident. Het verspreiden van een database over verschillende computers is een omslachtige onderneming.\\
 		
 	\item Een minder voor de hand liggend nadeel is dat van censuur. In sommige landen waaronder bijvoorbeeld China wordt bepaalde informatie gefilterd. Dit is mogelijk doordat deze landen het verkeer kunnen herleiden naar hun eigen servers.
 \end{itemize}
+
+Dit zijn problemen die worden aangepakt binnen \textbf{Distributed Computing}. Dit begrip wordt verder uitgelegd door \textcite{Attiya2004}: Distributed computing is een collectie van individuele computers die verbonden zitten in een netwerk en met elkaar kunnen communiceren. Deze computers zijn instaat om samen computationele taken uit te voeren. \textbf{Peer-to-Peer}(afkort als P2P) is een principe dat kadert binnen dit begrip. Een gangbare definitie wordt gegeven door \textcite{Schollmeier2001}. Deze stelt dat Peer-to-peer een vorm is van distributed computing waarbinnen elke computer optreed als een Servent. Dit is een combinatie van het woord \textbf{ser}ver en cli\textbf{ent}. Elke computer op dit netwerk is aldus instaat om verzoeken te gaan behandelen en versturen. Dit staat haaks op de klassieke server client benadering. \\
+
+Peer-to-peer netwerken proberen om alle bovenstaande problemen met klassieke server-client netwerken systematisch op te lossen. Hoe doen ze dit exact?
+
+\begin{itemize}
+	\item Peer-to-peer netwerken zijn volstrekt gedecentraliseerd. Er is niet één computer die optreed als server. Elke deelnemer van het netwerk (ook wel \textbf{Peer} genoemd) treed op als server en client. Hierdoor is er geen SPOF.\\
 	
- Dit lijkt in eerste instantie een contradictie. Zoals aangehaald binnen \ref{vb_inleiding} bestaat er reeds het concept van DVCS \textit{Distributed version control system}. Hierbij beschikt elke computer over een lokale kopie van het archief. Op het eerste zicht 
+	\item Hetzelfde principe geld ook voor serverbelasting. Het gehele netwerk verwerkt immers verzoeken. Toch speelt data redundantie ook hier een rol. Een computer kan immers offline gaan en alle relevante informatie moet beschikbaar blijven.\\
+	
+	\item Een p2p netwerk is inherent goed uitbreidbaar. Op elk moment kunnen computers toetreden tot het netwerk of uittreden.
+\end{itemize}
+
+
+\section{Toepassing P2P op versiebeheer}
+\textcite{Schollmeier2001} onderscheid twee verschillende types van Peer-to-peer netwerken. Langs de ene kant hebben we de pure 
