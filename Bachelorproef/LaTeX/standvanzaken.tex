@@ -141,7 +141,7 @@ Door branches te gebruiken kan men ervoor zorgen dat er enkel werkende versie op
 \caption[Voorbeeld merge proces.]{Een voorbeeld van een merge proces. Eerst wordt er een branch aangemaakt die na drie versies terug in de master wordt gemerged. Grafiek gepubliceerd door \textcite{NobleDesktop2018}}\label{fig_merge}
 \end{wrapfigure}
 
-Door middel van vertakkingen kan code worden geschreven en de hoofdboom stabiel gehouden. Zelfs met veel ontwikkelaars en grote projecten kan men door deze manier van werken code conflicten vermijden. Eenmaal de code klaar is voor productie kan men deze gaan publiceren op de hoofdboom. Dit concept noemen we \textbf{mergen}. Dit principe wordt geïllustreerd door de figuur \ref{fig_merge}.
+Door middel van vertakkingen kan code worden geschreven en de hoofdboom stabiel gehouden. Zelfs met veel ontwikkelaars en grote projecten kan men door deze manier van werken code conflicten vermijden. Eenmaal de code klaar is voor productie kan men deze gaan publiceren op de hoofdboom. Dit concept wordt ook wel \textbf{mergen} genoemd. Dit principe wordt geïllustreerd door de figuur \ref{fig_merge}.
 
 %todo uitleg van RCS branching en forward deltas
 
@@ -193,7 +193,7 @@ De doelstelling van deze bachelorproef is om een werkend P2P versiebeheersysteem
  		\hline
 		\textbf{Logboek} & Een bestand waarin alle wijzigingen worden bijgehouden. Het logboek is ook onderdeel van het archief. \\
 		\hline
-		Pushing	& Het principe waarbij we wijzigingen die we lokaal aanbrengen synchroniseren met de centrale server.\\
+		Pushing	& Het principe waarbij wijzigingen die lokaal worden aangebracht worden gesynchroniseerd met de centrale server.\\
 		\hline
 		Pulling & Het binnenhalen van veranderingen aangebracht op het centraal archief naar een lokale kopie.\\
 		\hline
@@ -207,10 +207,11 @@ De doelstelling van deze bachelorproef is om een werkend P2P versiebeheersysteem
 \newpage
 \section{IPFS}
 \label{IPFS}
-\subsection{Het belang van decentralisatie}
+\subsection{Het begrip decentralisatie}
+\label{ipfs_decent}
 De opzet van deze bachelorproef is om een volwaardig gedecentraliseerd versie beheersysteem te bekomen doormidden van P2P en blockchain technologie. Om de opzet volledig duidelijk te maken moet het begrip van decentralisatie gekaderd worden. Stel onderstaand scenario:\\
 
-Bob is een liefhebber van Capybaras en wil informatie krijgen over de dieren. Hij surft bijgevolg naar de Wikipedia pagina. Achterliggend zal Bob een verzoek moeten sturen naar de server van Wikipedia. Hiervoor moet hij het publieke IP-Adres weten. Deze kan hij verkrijgen door het DNS protocol.  Bob stuurt zijn verzoek naar deze server en krijgt de nodige pagina terug. Dit is een voorbeeld van een gecentraliseerd systeem. Bob gaat immers opzoek naar één aanspreekpunt waar de informatie zich bevind. Aangezien alle informatie zich bevind op één plaats spreken we ook van een gecentraliseerd systeem.\\
+Bob is een liefhebber van Capybaras en wil informatie krijgen over de dieren. Hij surft bijgevolg naar de Wikipedia pagina. Achterliggend zal Bob een verzoek moeten sturen naar de server van Wikipedia. Hiervoor moet hij het publieke IP-Adres weten. Deze kan hij verkrijgen door het DNS protocol.  Bob stuurt zijn verzoek naar deze server en krijgt de nodige pagina terug. Dit is een voorbeeld van een gecentraliseerd systeem. Bob gaat immers opzoek naar één aanspreekpunt waar de informatie zich bevind. Aangezien alle informatie zich bevind op één plaats spreken kan er worden gesproken van een gecentraliseerd systeem.\\
 
 De manier van alle informatie op één punt te gaan bewaren is zeer effectief. Bob kan alle informatie snel en doeltreffend gaan opvragen. Wat zijn echter de nadelen van deze manier van werken?
 
@@ -224,18 +225,19 @@ De manier van alle informatie op één punt te gaan bewaren is zeer effectief. B
 	\item Een minder voor de hand liggend nadeel is dat van censuur. In sommige landen waaronder bijvoorbeeld China wordt bepaalde informatie gefilterd. Dit is mogelijk doordat deze landen het verkeer kunnen herleiden naar hun eigen servers.
 \end{itemize}
 
-Dit zijn problemen die worden aangepakt binnen \textbf{Distributed Computing}. Dit begrip wordt verder uitgelegd door \textcite{Attiya2004}: Distributed computing is een collectie van individuele computers die verbonden zitten in een netwerk en met elkaar kunnen communiceren. Deze computers zijn instaat om samen computationele taken uit te voeren. \textbf{Peer-to-Peer}(afkort als P2P) is een principe dat kadert binnen dit begrip. Een gangbare definitie wordt gegeven door \textcite{Schollmeier2001}. Deze stelt dat Peer-to-peer een vorm is van distributed computing waarbinnen elke computer optreed als een Servent. Dit is een combinatie van het woord \textbf{ser}ver en cli\textbf{ent}. Elke computer op dit netwerk is aldus instaat om verzoeken te gaan behandelen en versturen. Dit staat haaks op de klassieke server client benadering. \\
+Dit zijn problemen die worden aangepakt binnen \textbf{Distributed Computing}. Dit begrip wordt verder uitgelegd door \textcite{Attiya2004}: Distributed computing is een collectie van individuele computers die verbonden zitten in een netwerk en met elkaar kunnen communiceren. Deze computers zijn instaat om samen computermatige taken uit te voeren. \textbf{Peer-to-Peer}(afkort als P2P) is een principe dat kadert binnen dit begrip. Een gangbare definitie wordt gegeven door \textcite{Schollmeier2001}. Deze stelt dat Peer-to-peer een vorm is van distributed computing waarbinnen elke computer optreed als een Servent. Dit is een combinatie van het woord \textbf{ser}ver en cli\textbf{ent}. Elke computer op dit netwerk is aldus instaat om verzoeken te gaan behandelen en versturen. Dit staat haaks op de klassieke server client benadering. \\
 
 Peer-to-peer netwerken proberen om alle bovenstaande problemen met klassieke server-client netwerken systematisch op te lossen. Hoe doen ze dit exact?
 
 \begin{itemize}
 	\item Peer-to-peer netwerken zijn volstrekt gedecentraliseerd. Er is niet één computer die optreed als server. Elke deelnemer van het netwerk (ook wel \textbf{Peer} genoemd) treed op als server en client. Hierdoor is er geen SPOF.\\
-	
 	\item Hetzelfde principe geld ook voor serverbelasting. Het gehele netwerk verwerkt immers verzoeken. Toch speelt data redundantie ook hier een rol. Een computer kan immers offline gaan en alle relevante informatie moet beschikbaar blijven.\\
-	
 	\item Een p2p netwerk is inherent goed uitbreidbaar. Op elk moment kunnen computers toetreden tot het netwerk of uittreden.
 \end{itemize}
 
+Tot slot is het belangrijk om te kaderen dat er volgens \textcite{Schollmeier2001} twee verschillende categorieën zijn. De zogenaamde \textbf{pure netwerken} hierbij is elke computer gelijkwaardig. Met andere woorden men kan willekeurig welke deelnemer(Peer) uitschakelen en het netwerk zal nog op dezelfde manier functioneren. Een netwerk waarbinnen er één centrale computer of een groep van computers zonder wie het netwerk niet functioneert wordt er gesproken van een \textbf{Hybride netwerk}.
 
-\section{Toepassing P2P op versiebeheer}
-\textcite{Schollmeier2001} onderscheid twee verschillende types van Peer-to-peer netwerken. Langs de ene kant hebben we de pure 
+\subsection{De meerwaarde van decentralisatie binnen versiebeheer}
+In \ref{ipfs_decent} worden decentralisatie en P2P kort toegelicht. In dit onderdeel ligt de focus op hoe deze principes kunnen worden toegepast binnen versiebeheersystemen.\\
+
+In eerste instantie lijken sommige versiebeheer systemen gedecentraliseerd. \textbf{DVCS} is hier een goed voorbeeld van. Dit is een versiebeheersysteem waarbij elke computer een lokale kopie heeft van het centraal archief. Wijzigingen aan bestanden worden dan ook lokaal opgenomen en kunnen op elk moment worden gesynchroniseerd met de centrale server. 
