@@ -235,7 +235,8 @@ Peer-to-peer netwerken proberen om alle bovenstaande problemen met klassieke ser
 	\item Een p2p netwerk is inherent goed uitbreidbaar. Op elk moment kunnen computers toetreden tot het netwerk of uittreden.
 \end{itemize}
 
-Tot slot is het belangrijk om te kaderen dat er volgens \textcite{Schollmeier2001} twee verschillende categorieën zijn. De zogenaamde \textbf{pure netwerken} hierbij is elke computer gelijkwaardig. Met andere woorden men kan willekeurig welke deelnemer(Peer) uitschakelen en het netwerk zal nog op dezelfde manier functioneren. Een netwerk waarbinnen er één centrale computer of een groep van computers zonder wie het netwerk niet functioneert wordt er gesproken van een \textbf{Hybride netwerk}.
+Tot slot is het belangrijk om te kaderen dat er volgens \textcite{Schollmeier2001} twee verschillende categorieën zijn. De zogenaamde \textbf{pure netwerken} hierbij is elke computer gelijkwaardig. Met andere woorden men kan willekeurig welke deelnemer(Peer) uitschakelen en het netwerk zal nog op dezelfde manier functioneren. Een netwerk waarbinnen er één centrale computer of een groep van computers zonder wie het netwerk niet functioneert wordt er gesproken van een \textbf{Hybride netwerk}.\\
+
 
 \subsection{De meerwaarde van decentralisatie binnen versiebeheer}
 In \ref{ipfs_decent} worden decentralisatie en P2P kort toegelicht. In dit onderdeel ligt de focus op hoe deze principes kunnen worden toegepast binnen versiebeheersystemen.\\
@@ -244,11 +245,60 @@ In eerste instantie lijken sommige versiebeheersystemen gedecentraliseerd. \text
 
 DVCS heeft ook nog een aantal problemen die worden opgelost binnen een puur P2P netwerk. Er zijn verschillende lokale kopieën van een archief die niet noodzakelijk up-to-date zijn of waar de veranderingen niet zijn gesynchroniseerd. Als één van die computers wegvalt zijn alle wijzigingen aangebracht in het lokaal archief ook verloren. 
 
-%Hele stukken tekst moeten hier nog komen 
+Het begrip van een peer-to-peer netwerk is essentieel voor het maken van een gedecentraliseerd versiebeheersysteem. Binnen deze bachelorproef wordt er gebruik gemaakt van zo een netwerk voor twee verschillende doeleinden:
+
+\begin{itemize}
+\item Het opslaan van bestanden: De uiteindelijke doelstelling van een versiebeheersysteem is uiteraard om een archief te voorzien voor het behouden van wijzigingen aan bestanden. Deze bestanden moeten echter ergens worden bewaard. Mochten deze bestanden enkel lokaal worden opgeslagen dan is er het risico dat deze verloren gaan groot. Om dit tegen te gaan moet er een manier voorzien worden om bestanden op te slaan op een netwerk. Het meest bekende protocol voor gedecentraliseerde opslag is het torrenting protocol -voor meer informatie over een recente versie van dit protocol zie \autocite{Cohen2008}-. Torrenting maakt echter gebruik van een hybride netwerk. Er zijn verschillende protocollen die gebruik maken van compleet P2P. Een gekend voorbeeld hiervan is Gnutella -zie \autocite{Klingberg2002}-. Dit protocol is echter verouderd en wordt niet meer onderhouden. Een modern alternatief is \textbf{IPFS}.\\
+
+\item Het opslaan van transacties: Indien Alice een nieuwe versie van een bestand wilt publiceren moet Bob hiervan op de hoogte zijn. Er moet dus een manier zijn om informatie te gaan overbrengen naar elkaar. Hiervoor wordt er gebruik gemaakt van een blockchain. Een blockchain bied een manier om informatie overdracht mogelijk te maken op een P2P netwerk waarbij data integriteit wordt gewaarborgd. 
+\end{itemize}
+
+Het is ook belangrijk om kort te vermelden dat file-sharing controversieel is. Zo is de gekende Torrent indexering website \textit{"The Pirate Bay"} sinds 2011 verboden in België. Dit verbod is er gekomen aangezien file-sharing ook wordt gebruik voor het verspreiden van auteursrechtelijk beschermd materiaal. Niet alleen het Torrent protocol is hiervoor onder vuur komen te staan. Limewire een muziek deel platform gemaakt bovenop Gnutella werd in 2010 verplicht om te sluiten. Het probleem met deze maatregelen is dat ze niet kunnen worden doorgevoerd. Men kan individuele sites namelijk gaan blokkeren maar doordat de protocollen bovenop P2P netwerken zijn gebouwd is het niet mogelijk ze compleet onbeschikbaar te maken. Er zijn verschillende kopieën van de piratebay nog steeds toegankelijk in België en alternatieve versies van Limewire zijn eveneens beschikbaar. Het is hierbij belangrijk om te onthouden dat de principes en protocollen niet illegaal zijn maar het verspreiden van auteursrechtelijk beschermd materiaal is dat wel.\\
+
+\subsubsection{Gnutella en Torrents}
+Voor de bestandsopslag zal gebruik worden gemaakt van IPFS. Doorheen dit stuk wordt een antwoord voorzien op twee verschillende vragen: Waarom wordt er gebruik gemaakt van een Protocol ten opzichte van een eigen implementatie? Waarom specifiek IPFS ten opzichte van ouder en meer getest protocol? Om de laatste vraag te beantwoorden worden de limitaties en nadelen van de twee andere protocollen (BitTorrent en Gnutella) kort besproken.\\
+
+Er wordt gebruik gemaakt van een reeds bestaand protocol aangezien P2P netwerken één grote limitering kent: er is een groot aantal deelnemers nodig om het netwerk betrouwbaar te laten functioneren. Stel dat er slecht vijf computers in een netwerk zitten dan is het niet onmogelijk dat al deze computers offline gaan. Hierdoor is het netwerk onbereikbaar. Een ander probleem binnen file-sharing netwerken is het principe van \textbf{ratio}. Binnen file-sharing Torrent protocollen kent men het onderscheid tussen een \textbf{Leecher} en een \textbf{Seeder}. Een node die een bestand download wordt ook wel een Leecher genoemd en een node die een bestand beschikbaar stelt voor deze Leechers noemen we een Seeder. De ratio is bijgevolg het aantal seeders ten opzichte van het aantal leechers. Bij veel niet gesuperviseerd netwerken is dit ratio eerder laag -sommige netwerken legen namelijk verplichtingen op aan deelnemers zodat bestanden vlot toegankelijk blijven-. Veel leechers kiezen er namelijk voor om enkel bestanden te downloaden. Indien er geen Seeders meer zijn voor een bestand is dit in essentie ontoegankelijk geworden. Deze problemen kunnen worden vermeden door een voldoende groot netwerk te gaan kiezen. Dit probleem doet zich echter ook voor bij protocollen zoals Gnutella en IPFS. Er is namelijk geen verplichting om bestanden beschikbaar te stellen. Eenmaal de peer de gewenste bestanden heeft binnen gehaald is er geen stimulans meer deze te delen. Het is dan ook aangewezen om een groot aantal deelnemers te hebben. Hoe meer Peers binnen een netwerk hoe meer toegankelijk het wordt en hoe meer kans dat deze peers ook effectief bestanden gaan beschikbaar stellen. Vandaar dat het aangewezen is om een reeds bestaand netwerk te gaan gebruiken ten opzichte van een eigen implementatie.\\
+
+Voor de werking en nadelen van de verschillende protocollen kunnen worden uitgelegd is het belangrijk om even stil te staan bij het concept van een hash. Deze functie ligt aan de basis van het verifiëren van de data integriteit bij bestanden. Het concept speelt ook een grote rol binnen IPFS en Blockchain. Het is immers belangrijk om te kunnen nagaan of het bestand of data dat verkregen is hetzelfde is als wat verwacht wordt. Op deze manier kan er worden nagegaan of de data eventueel beschadigd is door de overdracht. Een ander probleem dat kan worden tegen gegaan is dat een peer probeert om kwadaardige bestanden te verspreiden waaronder malware. Een \textit{goede} hashfunctie zou moeten voldoen aan volgende eigenschappen (\autocite{Anderson93}):
+
+\begin{itemize}
+\item One-way functie: het is relatief eenvoudig om voor een gegeven dataset $x$ een resultaat te vinden $f(x)$. Het is echter onwaarschijnlijk om voor een gegeven resultaat $f(x)$ de originele dataset $x$ te vinden. Op deze manier is het makkelijk om een dataset te valideren indien de hashfunctie waarde gegeven.\\
+\item Collision free: Het moet niet mogelijk zijn dat twee verschillende datasets (bijvoorbeeld: $x$ en $y$) dezelfde hashfunctie waarde hebben. Wiskundig kan dit worden voorgesteld door volgende notatie:Stel een functie $f:A->B$. Deze functie is collision free indien $\forall \{x,y\}|\{x,y\} \subseteq A | f(x) \neq f(y)$
+\item Gelijke verdeling: Een kleine verandering aan de dataset leid tot een volledig verschillende hashwaarde. Zo is hashwaarde voor 123 en 124 sterk verschillend. Op deze manier kan er geen informatie worden afgeleid uit de hashwaarde zelf.
+\end{itemize}
+ 
+BitTorrent en andere Torrent protocollen zijn wijd verspreid. Een studie door \textcite{Wang2013} stelt dat het dagelijks aantal van BitTorrent gebruikers tussen de 15-27 miljoen zit. Volgens de makers is de opzet om een gangbaar alternatief te voorzien voor FTP. De uitleg van het protocol is gebaseerd op de tekst door \textcite{Fonseca2005}.
+
+\begin{figure}[h!]
+	\centering
+	\begin{subfigure}[b]{.5\textwidth}
+	\centering
+		\includegraphics[scale=.3]{THP-1.png}
+		\caption[THP Peer verzoekt informatie]{De peer verzoekt de tracker voor metainformatie zodat deze in de swarm kan connecteren.}
+	\end{subfigure}%
+	\begin{subfigure}[b]{.5\textwidth}
+	\centering
+		\includegraphics[scale=.3]{THP-2.png}
+			\caption[Overzicht structuur CVCS]{Overzicht van de structuur van een CVCS.}
+	\end{subfigure}%
+	\hfill
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[scale=0.3]{PWP-1.png}
+	\caption[Overzicht structuur DVCS]{Overzicht van de structuur van een DVCS.}
+	\end{subfigure}
+	
+	\caption[Overzicht types VCS]{Overzicht van de drie types van VCS zoals aangegeven door \textcite{Chacon2014}.}\label{fig_types_cvs}
+\end{figure}
+\newpage
+%vermeld dat bittorrent seed terwijl de download bezig is
 
 \subsection{Hoe worden bestanden geïdentificeerd op het netwerk}
 Een probleem binnen file sharing is de wijze waarop men bestanden opvraagt. Dit kan het best worden geïllustreerd aan de hand van een voorbeeld.\\
 
 Alice wilt graag een afbeelding van de paashaas. Na het opzoek door middel van een zoek machine vind ze deze afbeeldingen op een gegeven URL. Deze URL is verbonden aan een server die op zijn beurt de afbeelding bevat. Alice kan dus eenvoudigweg de afbeelding daar opvragen. Op een gedecentraliseerd systeem is dit niet evident er is immers geen server waar bestanden ter beschikking staan. De bestanden zitten namelijk verspreid over verschillende computers. Toch moet het systeem instaat zijn om bestanden terug te vinden.\\
 
-Om dit probleem op te lossen wordt er niet naar een specifieke plaats genavigeerd zoals met een URL. Het netwerk wordt rechtstreeks bevraagd voor een bestand. De peers die dit bestand ter beschikking hebben zullen dit bestand doorsturen naar de peer die het heeft opgevraagd. Voor dit principe heeft elk bestand een uniek identificatie nummer nodig. Een bestandsnaam is immers niet uniek. Hiervoor kan men gebruik maken van \textbf{Hashfuncties}. Een hashfunctie is een wiskundige functie die aan een
+Om dit probleem op te lossen wordt er niet naar een specifieke plaats genavigeerd zoals met een URL. Het netwerk wordt rechtstreeks bevraagd voor een bestand. De peers die dit bestand ter beschikking hebben zullen dit bestand doorsturen naar de peer die het heeft opgevraagd. Voor dit principe heeft elk bestand een uniek identificatie nummer nodig. Een bestandsnaam is immers niet uniek.\\
+
+Hiervoor kan men gebruik maken van \textbf{Hashfuncties}. Een hashfunctie is een wiskundige functie die aan een
