@@ -266,8 +266,8 @@ Voor de werking en nadelen van de verschillende protocollen kunnen worden uitgel
 
 \begin{itemize}
 \item One-way functie: het is relatief eenvoudig om voor een gegeven dataset $x$ een resultaat te vinden $f(x)$. Het is echter onwaarschijnlijk om voor een gegeven resultaat $f(x)$ de originele dataset $x$ te vinden. Op deze manier is het makkelijk om een dataset te valideren indien de hashfunctie waarde gegeven.\\
-\item Collision free: Het moet niet mogelijk zijn dat twee verschillende datasets (bijvoorbeeld: $x$ en $y$) dezelfde hashfunctie waarde hebben. Wiskundig kan dit worden voorgesteld door volgende notatie:Stel een functie $f:A->B$. Deze functie is collision free indien $\forall \{x,y\}|\{x,y\} \subseteq A | f(x) \neq f(y)$
-\item Gelijke verdeling: Een kleine verandering aan de dataset leid tot een volledig verschillende hashwaarde. Zo is hashwaarde voor 123 en 124 sterk verschillend. Op deze manier kan er geen informatie worden afgeleid uit de hashwaarde zelf.
+\item Collision free: Het moet niet mogelijk zijn dat twee verschillende datasets (bijvoorbeeld: $x$ en $y$) dezelfde hashfunctie waarde hebben. Wiskundig kan dit worden voorgesteld door volgende notatie:Stel een functie $f:A->B$. Deze functie is collision free indien $\forall \{x,y\}|\{x,y\} \subseteq A | f(x) \neq f(y)$\\
+\item Gelijke verdeling: Een kleine verandering aan de dataset leid tot een volledig verschillende hashwaarde. Zo is hashwaarde voor 123 en 124 sterk verschillend. Op deze manier kan er geen informatie worden afgeleid uit de hashwaarde zelf.\\
 \item Vaste grote: ongeacht hoe groot de ingegeven dataset het resultaat van de lengte van de hash-functie is constant. Zo zal een MD5 Hash altijd 128 bit lang zijn ongeacht of de ingegeven data 1 bit of 10000 bits beslaat.
 \end{itemize}
  
@@ -290,19 +290,20 @@ De computer heeft nu een lijst van verschillende Peers binnen een specifieke swa
 	\centering
 	\begin{subfigure}[b]{1\textwidth}
 	\centering
-		\includegraphics[scale=.5]{THP-1.png}
-		\caption[THP Peer verzoekt informatie]{De peer verzoekt de tracker voor metainformatie zodat deze in de swarm kan connecteren.}
+		\includegraphics[scale=.4]{torrent-1.png}
+		\caption[Peer metainformatie stap]{De peer maakt een verzoek aan een opslagplaats voor een metainformatie bestand.}
 	\end{subfigure}%
+	\hfill
 	\begin{subfigure}[b]{1\textwidth}
 	\centering
-		\includegraphics[scale=.5]{THP-2.png}
-			\caption[THP Peer stuurt occasionele updates]{De peer verstuurt informatie naar de tracker over de status en krijgt een update van de peer lijst terug}
+		\includegraphics[scale=.4]{torrent-2.png}
+			\caption[THP stap]{De peer doet een verzoek voor de peerlijst aan de tracker doormiddel van informatie uit het metainformatie bestand.}
 	\end{subfigure}%
 	\hfill
 	\begin{subfigure}{1\textwidth}
 		\centering
-		\includegraphics[scale=0.5]{PWP-1.png}
-	\caption[Overzicht structuur DVCS]{Overzicht van de structuur van een DVCS.}
+		\includegraphics[scale=0.6]{torrent-3.png}
+	\caption[PWP stap]{De peer verzoekt andere peers voor stukken data en download op die manier de Torrent bestanden.}
 	\end{subfigure}
 	
 	\caption[Overzicht Torrent Protocol]{Schematisch overzicht van de verschillende stappen binnen het Torrent Protocol}\label{fig_types_cvs}
