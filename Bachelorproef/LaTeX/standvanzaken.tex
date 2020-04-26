@@ -283,12 +283,35 @@ Vóór de werking en nadelen van de verschillende protocollen kunnen worden uitg
  \subsubsection{Torrenting}
 Het BitTorrent protocol is wijd verspreid. Een studie door \textcite{Wang2013} stelt dat het dagelijks aantal van BitTorrent gebruikers tussen de 15-27 miljoen zit. Volgens de makers is de opzet ervan om een gangbaar alternatief te voorzien voor FTP. De uitleg van het protocol is gebaseerd op de tekst door \textcite{Fonseca2005}.\\ 
 
-%%grafiek mag hier al worden toegvoegd
-Het Torrent protocol bestaat uit drie delen. Het eerste deel is het verkrijgen van een \textbf{metainfo} bestand. Dit metainfo bestand wordt over het algemeen afgehaald van een website of een ftp server. Een gekend voorbeeld van een website die metainfo bestanden ter beschikking stelt is \textit{The pirate bay}. Dit bestand bevat essentiële informatie om de rest van het protocol te faciliteren. Het bevat de namen en bestandsstructuur van de verschillende bestanden binnen deze Torrent. Voor elk van deze bestanden is ook een MD5-Hashwaarde voorzien zodat eenmaal het bestand gedownload is de gebruiker kan controleren of het niet beschadigd is geraakt bij het download proces. Er wordt ook een zogenaamde infowaarde en stuklengte voorzien. Deze komen later aanbod. Het belangrijkste element in het metainfo bestand is echter het IP-adres van de \textbf{Tracker}. Deze Tracker is een computer die de andere delen van het protocol gaat overzien en aansturen. Aangezien er één centrale computer nodig is om dit protocol in goede banen te leiden is er dan ook sprake van een hybride netwerk. Om deze stap te verduidelijken kan er gebruik worden gemaakt van volgend voorbeeld:\\
+Het Torrent protocol bestaat uit drie delen. Het eerste deel is het verkrijgen van een \textbf{metainfo} bestand.\\
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.4]{torrent-1.png}
+\caption[Peer metainformatie stap  - Torrenting 1]{De peer maakt een verzoek aan een opslagplaats voor een metainformatie bestand.}
+\end{figure}
+
+Dit metainfo bestand wordt over het algemeen afgehaald van een website of een ftp server. Een gekend voorbeeld van een website die metainfo bestanden ter beschikking stelt is \textit{The pirate bay}. Dit bestand bevat essentiële informatie om de rest van het protocol te faciliteren. Het bevat de namen en bestandsstructuur van de verschillende bestanden binnen deze Torrent. Voor elk van deze bestanden is ook een MD5-Hashwaarde voorzien zodat eenmaal het bestand gedownload is de gebruiker kan controleren of het niet beschadigd is geraakt bij het download proces. Er wordt ook een zogenaamde infowaarde en stuklengte voorzien. Deze komen later aanbod. Het belangrijkste element in het metainfo bestand is echter het IP-adres van de \textbf{Tracker}. Deze Tracker is een computer die de andere delen van het protocol gaat overzien en aansturen. Aangezien er één centrale computer nodig is om dit protocol in goede banen te leiden is er dan ook sprake van een hybride netwerk.\\
+
+\begin{figure}[h!]
+	\centering
+		\includegraphics[scale=.4]{torrent-2.png}
+			\caption[THP stap - Torrenting 2]{De peer doet een verzoek voor de peerlijst aan de tracker doormiddel van informatie uit het metainformatie bestand.}
+\end{figure}
+\newpage
+Om deze stap te verduidelijken kan er gebruik worden gemaakt van volgend voorbeeld:\\
 
 Bob en Alice maken een Torrent van hun website. Hun website bevat verschillende pagina's en afbeeldingen die zich in een media folder bevinden. Ze stellen een lijst op van deze verschillende bestanden en berekenen voor elk van deze bestanden een MD5-Hash waarde. Bobs computer zal de rest van het protocol coördineren en aldus functioneren als Tracker. Er wordt tot slot een unieke infosleutel voorzien en stuklengte (het is aangeraden deze stuklengte rond 70kb in te stellen). Op basis van deze informatie wordt een metainfo bestand aangemaakt dat wordt beschikbaar gesteld aan de buitenwereld.\\
 
-In de volgende stap wilt men toegang verkrijgen tot andere peers die dit bestand bezitten. Men heeft immers andere computers nodig vanwaar men het bestand kan downloaden. De verzameling van computers die een torrent toegankelijk stellen voor het netwerk wordt ook wel een \textbf{swarm} genoemd. Men kan een swarm dan ook zien als een klein netwerk met als functie toegang te verlenen tot een specifieke collectie van bestanden. De functie van de Tracker is om toegang te verschaffen aan deze Swarm en ook informatie hierover bij te houden. Het principe van toegang verschaffen en informatie bijhouden wordt ook wel \textit{THP}(Tracker HTTP protocol) genoemd. De locatie van deze tracker staat vermeld in het metainfo bestand. Om een lijst van peers te krijgen die in een swarm zit, stuurt de computer een HTTP-GET verzoek naar de tracker. In dit verzoek moeten een aantal zaken worden meegestuurd waaronder het IP-adres van de computer, de infosleutel en de poort waarop de communicatie met andere peers kan gebeuren. De Tracker zal vervolgens aan de hand van de infosleutel een lijst van peers terugsturen die de gegeven bestanden ter beschikking stellen. Om dit principe te verduidelijken wordt verder gebouwd op bovenstaand voorbeeld:\\
+In de volgende stap wilt men toegang verkrijgen tot andere peers die dit bestand bezitten. Men heeft immers andere computers nodig vanwaar men het bestand kan downloaden. De verzameling van computers die een torrent toegankelijk stellen voor het netwerk wordt ook wel een \textbf{swarm} genoemd. Men kan een swarm dan ook zien als een klein netwerk met als functie toegang te verlenen tot een specifieke collectie van bestanden. De functie van de Tracker is om toegang te verschaffen aan deze Swarm en ook informatie hierover bij te houden. Het principe van toegang verschaffen en informatie bijhouden wordt ook wel \textit{THP}(Tracker HTTP protocol) genoemd. De locatie van deze tracker staat vermeld in het metainfo bestand. Om een lijst van peers te krijgen die in een swarm zit, stuurt de computer een HTTP-GET verzoek naar de tracker. In dit verzoek moeten een aantal zaken worden meegestuurd waaronder het IP-adres van de computer, de infosleutel en de poort waarop de communicatie met andere peers kan gebeuren. De Tracker zal vervolgens aan de hand van de infosleutel een lijst van peers terugsturen die de gegeven bestanden ter beschikking stellen.\\
+
+\begin{figure}[h!]
+	\centering
+		\includegraphics[scale=0.6]{torrent-3.png}
+	\caption[PWP stap - Torrenting 3]{De peer verzoekt andere peers voor stukken data en downloadt op die manier de Torrent bestanden.}
+\end{figure}
+\newpage
+Om dit principe te verduidelijken wordt verder gebouwd op bovenstaand voorbeeld:\\
 
 Charlie wil de website van Bob en Alice. Hij heeft van Alice het metainfo bestand ontvangen. Aangezien dit bestand het IP-adres van Bobs computer als Tracker bestempelt wordt er naar deze computer een HTTP-GET verzoek verstuurd. Bob en Alice hebben beiden deze bestanden lokaal staan en vormen aldus samen een swarm. Charlie zal hun IP-adres en poort waarop het verkeer kan verlopen doorgestuurd krijgen en gaat rechtstreeks met beide computers communiceren om de bestanden te downloaden.\\
 
@@ -296,29 +319,6 @@ Opmerking: netwerken en bestanden zijn erg veranderlijk, een computer kan elk mo
 
 De computer heeft nu een lijst van verschillende Peers binnen een specifieke swarm. De laatste stap van het protocol is het effectief verkrijgen van de bestanden. De communicatie loopt uitsluitend tussen de verschillende peers zelf. Deze stap wordt ook wel aangeduid als het \textit{PWP} protocol (Peer Wire Message). Bandbreedte en andere beperkingen spelen een grote rol binnen netwerkverkeer. Men wil een peer zo weinig mogelijk belasten. Op die manier stimuleert men de peer om zolang mogelijk op het netwerk te blijven. Het is aldus niet praktisch om volledige bestanden op te vragen van één peer. Stel dat het bestand bijvoorbeeld verschillende gigabytes groot is. Hierdoor zal men het bestand opdelen in verschillende kleine stukken. Deze stukken kunnen individueel worden opgevraagd aan verschillende computers. Op deze manier kan men een bestand van verschillende gigabytes in duizend keer opvragen bij verschillende peers die elk enkele mb doorsturen. De grootte van elk stuk wordt bepaald in het metainfo bestand en staat vastgelegd in de zogenaamde stuklengte. Een ander voordeel van deze fragmentering is dat men individuele stukken kan verifiëren. Elk van deze stukken heeft namelijk zijn eigen SHA-1 hashwaarde. Op die manier kan men gedurende de overdracht van een stuk onmiddellijk nagaan of dit goed is toegekomen en indien er fouten zijn dit klein stuk opnieuw opvragen. Het PWP protocol komt neer op het opvragen en valideren van individuele stukken aan verschillende peers.\footnote{De manier waarop deze stukken worden opgevraagd, ligt buiten de scope van deze bachelorproef. Een goed overzicht wordt gegeven in de tekst van \textcite{Fonseca2005}.} Eenmaal alle stukken zijn gedownload, worden deze samengenomen tot het origineel bestand dat opzijn beurt kan worden gevalideerd aan de hand van MD5.
 
-\begin{figure}[h!]
-	\centering
-	\begin{subfigure}[b]{1\textwidth}
-	\centering
-		\includegraphics[scale=.4]{torrent-1.png}
-		\caption[Peer metainformatie stap]{De peer maakt een verzoek aan een opslagplaats voor een metainformatie bestand.}
-	\end{subfigure}%
-	\hfill
-	\begin{subfigure}[b]{1\textwidth}
-	\centering
-		\includegraphics[scale=.4]{torrent-2.png}
-			\caption[THP stap]{De peer doet een verzoek voor de peerlijst aan de tracker doormiddel van informatie uit het metainformatie bestand.}
-	\end{subfigure}%
-	\hfill
-	\begin{subfigure}{1\textwidth}
-		\centering
-		\includegraphics[scale=0.6]{torrent-3.png}
-	\caption[PWP stap]{De peer verzoekt andere peers voor stukken data en downloadt op die manier de Torrent bestanden.}
-	\end{subfigure}
-	
-	\caption[Overzicht Torrent Protocol]{Schematisch overzicht van de verschillende stappen binnen het Torrent Protocol}\label{fig_types_cvs}
-\end{figure}
-\newpage
 %vermeld dat bittorrent seed terwijl de download bezig is
 
 \subsection{Hoe worden bestanden geïdentificeerd op het netwerk}
