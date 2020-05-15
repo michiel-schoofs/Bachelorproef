@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import logo from '../logo.png';
 import './App.css';
+import ipfsClient from 'ipfs-http-client';
+
+//Connect to a public node we use infura
+const ipfs = ipfsClient({
+  host: 'ipfs.infura.io',port:5001, protocol:'https'
+})
 
 class App extends Component {
   constructor(props){
@@ -26,9 +32,18 @@ class App extends Component {
     }
   }
 
+  //example hash: "QmPQZN62smuRxRACH8LGYHrNXQAKPbCEj8ciyagzYXmghR"
   onSubmit = (event) => {
     event.preventDefault();
-    console.log("submitting file");
+    console.log("setting to ipfs")
+    //Add data to node, second argument is a callback function
+    ipfs.add(this.state.buffer,(error,result)=>{
+      console.log('IPFS result',result);
+      if(error){
+        console.log('error',error)
+        return;
+      }
+    })
   }
 
   render() {
