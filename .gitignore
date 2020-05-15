@@ -32,3 +32,4 @@ Demo/ipfs/IPFS test/obj/*
 ##IPFS example project, ignore node-modules
 Demo/Example app with ipfs/Image-of-the-day/node_modules
 Demo/Example app with ipfs/Image-of-the-day/package-lock.json
+Demo/Example app with ipfs/Image-of-the-day/src/abis/*
