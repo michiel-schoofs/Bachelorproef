@@ -10,6 +10,11 @@ contract Token {
     //So we can look up the balance of a specific address
     mapping(address=>uint256) public balanceOf;
 
+    //Name of our token
+    string public name = 'Yellow Existential Crisis coin';
+    string public symbol = 'YEC';
+    string public standard = 'v1.0';
+
     //Constructor
     //Set tokens-total
     constructor(uint256 _initialSupply) public {
@@ -17,4 +22,6 @@ contract Token {
         //Allocate initial supply so that's the person creating the smart contract
         balanceOf[msg.sender] = _initialSupply;
     }
+
+    //Transfer
 }
