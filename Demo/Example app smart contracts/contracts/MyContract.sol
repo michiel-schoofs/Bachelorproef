@@ -50,6 +50,12 @@ contract Concepts {
         return ContractStatus.Closed;
     }
 
+    modifier ContractIsOpen() {
+        //We can evaluate enumerations in this way
+        require(getStatus() == ContractStatus.Open,"the contract is not opened");
+        _;
+    }
+
     // A way to represent custom datastructors
     struct People{
         string _firstname;
@@ -78,6 +84,7 @@ contract Concepts {
         //set state variable
         name = _name;
         owner = msg.sender;
+        openingtime = now;
     }
 
 }
