@@ -9,5 +9,5 @@ const Token = artifacts.require("./Token.sol");
 //supply.toNumber();
 //Every write function cost gas because of the nature of transactions
 module.exports= function(deployer) {
-  deployer.deploy(Token);
+  deployer.deploy(Token,1000000);
 };

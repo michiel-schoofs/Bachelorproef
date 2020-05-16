@@ -6,9 +6,15 @@ contract Token {
     //Already contains a getter
     uint256 public totalSupply;
 
+    //Map the token balance
+    //So we can look up the balance of a specific address
+    mapping(address=>uint256) public balanceOf;
+
     //Constructor
     //Set tokens-total
-    constructor() public {
-        totalSupply = 1000000;
+    constructor(uint256 _initialSupply) public {
+        totalSupply = _initialSupply;
+        //Allocate initial supply so that's the person creating the smart contract
+        balanceOf[msg.sender] = _initialSupply;
     }
 }
