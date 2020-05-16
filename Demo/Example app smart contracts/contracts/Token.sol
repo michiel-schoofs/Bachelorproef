@@ -24,4 +24,13 @@ contract Token {
     }
 
     //Transfer
+    function transfer(address _to, uint256 _value) public  returns (bool success) {
+        //Trigger transfer event
+        //Trigger exception if the account doesn't have enough
+        //Return boolean
+        require(balanceOf[msg.sender] >= _value,"Reverting transaction");
+        balanceOf[msg.sender] -= _value;
+        balanceOf[_to] += _value;
+        return true;
+    }
 }

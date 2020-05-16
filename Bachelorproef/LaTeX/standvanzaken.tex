@@ -281,6 +281,7 @@ Vóór de werking en nadelen van de verschillende protocollen kunnen worden uitg
 \end{itemize}
  
  \subsubsection{Torrenting}
+ \label{torrenting}
 Het BitTorrent protocol is wijd verspreid. Een studie door \textcite{Wang2013} stelt dat het dagelijks aantal van BitTorrent gebruikers tussen de 15-27 miljoen zit. Volgens de makers is de opzet ervan om een gangbaar alternatief te voorzien voor FTP. De uitleg van het protocol is gebaseerd op de tekst door \textcite{Fonseca2005}.\\ 
 
 Het Torrent protocol bestaat uit drie delen. Het eerste deel is het verkrijgen van een \textbf{metainfo} bestand.\\
@@ -340,6 +341,19 @@ Toch zijn er ook veel technische nadelen verbonden aan het Torrent protocol\foot
 Vele van deze problemen stellen zich ook in het klassieke Client-Server model.
 
 \subsubsection{Gnutella}
+Zoals uitgelegd in \ref{torrenting} is het Bit-Torrent protocol niet volstrekt gedecentraliseerd. Er is immers een centraal component (de Tracker) noodzakelijk om de verbinding tot het netwerk van peers tot stand te brengen. Indien deze centrale component onbereikbaar is kan er geen verbinding tot stand worden gebracht. Om dit probleem te omzeilen moet er aldus een manier zijn om in een volstrekt gedecentraliseerde manier bestanden te gaan delen met elkaar. Hiervoor kan men gebruik maken van Gnutella.\\
+
+Gnutella is een protocol met als doelstelling het verspreiden en toegankelijk stellen van bestanden in een volledig gedecentraliseerd netwerk. Het protocol bereikt dit door het versturen van verschillende types van berichten over een TCP/IP connectie. De uitleg over dit protocol is gebaseerd op de \textit{draft RFC} die wordt onderhouden door \textcite{Klingberg2002}. Om het protocol te kunnen gebruiken zijn er aantal stappen die een peer moet overlopen:
+
+\begin{itemize}
+\item De peer ($p_1$) zoekt toegang tot het netwerk doormidden van een connectie aan te gaan met een peer die reeds met netwerk verboden is. Voor de duidelijkheid wordt deze initiële peer bestempelt met het symbool $p_0$ doorheen deze tekst.\\
+\item De peer ($p_1$) verkrijgt meer informatie over het netwerk door berichten te versturen aan deze peer ($p_0$).\\
+\item De peer $p_1$ gaat connecties aan met andere peers. Vervolgens kan $p_1$ bestanden gaan delen of opvragen aan het netwerk.\\
+\item De peer $p_1$ is nu een volwaardig lid van het netwerk en kan andere peers toegang verschaffen. $p_1$ kan aldus de rol van initiële peer $p_0$ op zich nemen.
+\end{itemize}
+
+\subsubsection{Verbinden op het netwerk}
+Zoals eerder aangehaald moet een peer zich verbinden op het Gnutella netwerk om bestanden te kunnen opvragen. Een peer kan toe treden door 
 
 \subsection{Hoe worden bestanden geïdentificeerd op het netwerk}
 Een probleem binnen file sharing is de wijze waarop men bestanden opvraagt. Dit kan het best worden geïllustreerd aan de hand van een voorbeeld.\\
