@@ -13,6 +13,7 @@ contract Concepts {
     uint internal openingtime;
 
     //Modifiers are a way of limiting when a function can execute
+    //Note overloaded Modifiers is not a thing that exists currently in solidity
     modifier onlyOwner(){
         //If the expression evaluates to false then throw exception
         //msg is metadata that gets added to every call, so we verify that the person calling this function is the owner
@@ -22,6 +23,7 @@ contract Concepts {
     }
 
     //Allow the owner to change control
+    //Note: You cannot add optional parameters however there is PR to add it.
     function changeOwner(address _newOwner) public onlyOwner {
         owner = _newOwner;
     }
@@ -80,6 +82,7 @@ contract Concepts {
     }
 
     //Gets called when the contract is first deployed
+    //Prevent using times because of an exploit
     constructor(string memory _name) public {
         //set state variable
         name = _name;
@@ -87,4 +90,13 @@ contract Concepts {
         openingtime = now;
     }
 
+    //Used to demo that function overloading is a thing that exists
+    function functionToOverload(uint8 blabla) public pure returns(uint8) {
+        return blabla;
+    }
+
+    //Parameters just need to be different types, uint8 and uint256 is in fact another type cool huh :)
+    function functionToOverload(uint256 blabla) public pure returns(uint256) {
+        return blabla;
+    }
 }
