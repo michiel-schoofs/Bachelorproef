@@ -229,7 +229,6 @@ Volgens \textcite{Schollmeier2001} zijn er  twee verschillende categorieën van 
 
 \begin{itemize}
 \item Pure netwerken: Hierbij is elke peer gelijkwaardig. Dat wilt zeggen dat iedere individuele deelnemer evenveel privileges en taken heeft. Kortom is één van die deelnemers niet meer bereikbaar dan kan elke andere peer zijn rol op zich nemen. Een voorbeeld van zo een netwerk is Gnutella.\\
-
 \item Hybride netwerk: Er is één centraal component aanwezig die een bepaalde taak op zich neemt. Bijvoorbeeld bij het Bit-Torrent protocol is er een centrale component nodig om toe te treden tot het netwerk. Als deze centrale component onbereikbaar is functioneert het netwerk niet.\\
 \end{itemize}
 
@@ -254,7 +253,7 @@ Volgens \textcite{Schollmeier2001} zijn er  twee verschillende categorieën van 
 	\label{tbl_concepts}
 	\caption{Vergelijking tussen gecentraliseerd - gedecentraliseerd systeem}
 \end{table}
-
+\newpage
 \subsubsection{Hashing}
 Hash functies is een begrip dat veel aanbod komt in de verschillende protocollen.  Zeker binnen IPFS speelt hashing een grote rol. Daarom is het noodzakelijk dat het begrip toch kort wordt toegelicht.\\
 
@@ -268,15 +267,9 @@ Hashfuncties liggen aan de basis van het verifiëren van de dataintegriteit bij 
 \end{itemize}
 
 
-\subsection{bestandsopslag}
-Voor de bestandsopslag zal gebruik worden gemaakt van IPFS. Dit deel wil een antwoord bieden op drie verschillende vragen:\\
-Waarom wordt er gebruik gemaakt van een Protocol ten opzichte van een eigen implementatie?\\
-Waarom worden BitTorrent en Gnutella besproken? 
-\\Waarom de keuze voor IPFS ten opzichte van een ouder en meer getest protocol? Om de laatste vraag te beantwoorden worden de beperkingen en nadelen van de twee andere protocollen kort besproken.\\
-
-Er wordt gebruik gemaakt van een reeds bestaand protocol aangezien P2P netwerken één grote beperking kennen: er is een groot aantal deelnemers nodig om het netwerk betrouwbaar te laten functioneren. Stel dat er slecht vijf computers in een netwerk zitten, dan is het niet onmogelijk dat al deze computers offline gaan. Hierdoor is het netwerk onbereikbaar. Een ander probleem binnen file-sharing netwerken is het principe van \textbf{ratio}. Binnen file-sharing Torrent protocollen kent men het onderscheid tussen een \textbf{Leecher} en een \textbf{Seeder}. Een peer die een bestand download wordt ook wel een Leecher genoemd en een node die een bestand beschikbaar stelt voor deze Leechers noemen we een Seeder. De ratio is bijgevolg het aantal seeders ten opzichte van het aantal leechers. Bij veel niet gesuperviseerde netwerken is dit ratio eerder laag -sommige netwerken legen namelijk verplichtingen op aan deelnemers zodat bestanden vlot toegankelijk blijven-. Veel leechers kiezen er namelijk voor om enkel bestanden te downloaden. Indien er geen Seeders meer zijn voor een bestand is dit in essentie ontoegankelijk geworden. Deze problemen kunnen worden vermeden door een voldoende groot netwerk te kiezen. Dit probleem doet zich echter ook voor bij protocollen zoals Gnutella en IPFS. Er is namelijk geen verplichting om bestanden beschikbaar te stellen. Eenmaal de peer de gewenste bestanden heeft binnen gehaald is er geen stimulans meer deze te delen. Het is dan ook aangewezen om een groot aantal deelnemers te hebben. Hoe meer Peers binnen een netwerk hoe meer toegankelijk het wordt en hoe meer kans dat deze peers ook effectief bestanden zullen beschikbaar stellen. Vandaar dat het aangewezen is om een reeds bestaand netwerk te gebruiken ten opzichte van een eigen implementatie.\\
-
+\subsection{Bit-Torrent en Gnutella}
 Dit gedeelte biedt een korte inleiding over Gnutella en BitTorrent. Deze twee protocollen zijn interessant aangezien ze beide file-sharing binnen een P2P netwerk als einddoel, maar een volledig andere benadering hebben. Veel van de elementen en problemen die deze protocollen aanpakken,komen ook aan bod binnen IPFS. De vergelijking tussen BitTorrent en Gnutella biedt een meerwaarde aangezien het type netwerk dat elk gebruikt, verschilt. Zo kent men binnen BitTorrent het concept van Trackers. Dit is een centraal element waardoor men dus spreekt van een hybride netwerk. Gnutella heeft geen centraal element. Hier kan dus worden gesproken van een puur P2P netwerk.\\
+
  
  \subsubsection{Torrenting}
  \label{torrenting}
@@ -351,17 +344,31 @@ Gnutella is een protocol met als doelstelling het verspreiden en toegankelijk st
 \item De peer $p_1$ is nu een volwaardig lid van het netwerk en kan andere peers toegang verschaffen. $p_1$ kan aldus de rol van initiële peer $p_0$ op zich nemen.
 \end{itemize}
 
-\subsubsection{Verbinden op het netwerk}
+
+\textbf{Verbinden op het netwerk}\\
+
 Zoals eerder aangehaald moet een peer zich verbinden op het Gnutella netwerk om bestanden te kunnen opvragen. Een peer kan toe treden door contact te gaan leggen met een peer die al reeds verbonden is op het netwerk. Wil bijvoorbeeld Bob bestanden gaan delen op het netwerk zal hij Alice moeten contacteren die al reeds verbonden is. Voor leesgemak wordt doorheen deze tekst het begrip \textbf{verzoeker} gebruikt als er wordt verwezen naar de peer die toegang wilt tot het netwerk. De peer die toegang verschaft wordt bestempeld als \textbf{aanbieder}.\\
 
 
-\section{IPFS}
+\subsection{IPFS}
+%todo bronnen aanvullen
+\subsubsection{Inleiding}
+IPFS is een modern file-sharing protocol dat veel van de tekortkomingen van Bit-Torrent en Gnutella oplost -zie \ref{vergelijking-FS}. Het is ook het protocol dat gaat worden gebruikt in het opstellen van de POC. De uitleg in dit hoofdstuk is afkomstig van de officiële documentatie \autocite{}, Github Repository \autocite{} en video's(\autocite{} , \autocite{}).\\
 
-IPFS is een modern file-sharing protocol dat steunt op principes van Bit-Torrent maar volledig gedecentraliseerd is zoals Gnutella. De opzet van het protocol is echter niet om bestanden te gaan delen met elkaar maar om een gangbaar alternatief aan te bieden voor het HTTP protocol. 
+Allereerst wordt het concept van een \textbf{CID} en \textbf{Content based addressing} toegelicht. Dit concept wordt namelijk gebruikt om bestanden te gaan identificeren binnen de POC. Vervolgens wordt IPNS besproken. Dit begrip is noodzakelijk om enkele tekortkomingen van content based adressing op te vangen -zie \ref{ipns}-.
 
-\subsection{Hoe worden bestanden geïdentificeerd op het netwerk}
-Er is een probleem binnen file-sharing dat we nog niet eerder hebben besproken en dat is het probleem van hoe bestanden worden geadresseerd. Om dit probleem concreet voor te stellen kunnen we gebruik maken van volgend voorbeeld:
+\subsubsection{Content Based Adressing}
+\label{CBA}
+ De opzet van het protocol beperkt zich niet louter tot bestandsoverdracht. Ze beschrijven zichzelf als een gedistribueerd bestandssysteem dat een alternatief bied voor de manier waarop we naar het internet kijken. Wat wordt daar echter mee bedoeld?\\
 
+IPFS heeft als doelstelling om alle bestanden op het netwerk te gaan verspreiden over verschillende peers. Deze bestanden kunnen vervolgens eenvoudig worden opgevraagd en weergegeven in een webbrowser. Een peer kan vervolgens rechtstreeks aan het netwerk deze bestanden gaan opvragen. In tegenstelling tot Bit-Torrent is er aldus geen sprake van Trackers of Swarms. Gnutella heeft echter dezelfde benadering. Dus wat maakt IPFS uniek?\\
 
+Volgens IPFS is er een probleem met de manier waarop er klassiek wordt gezocht naar bestanden. Er wordt namelijk altijd een derde partij vertrouwd om het juist bestand aan te leveren. Stel bijvoorbeeld onderstaand 
 
-Hiervoor kan men gebruik maken van \textbf{Hashfuncties}. Een hashfunctie is een wiskundige functie die aan een
+\subsubsection{IPNS}
+\label{ipns}
+
+\section{vergelijking van de verschillende file-sharing protocollen}
+\label{vergelijking-FS}
+%parafraseer
+Er wordt gebruik gemaakt van een reeds bestaand protocol aangezien P2P netwerken één grote beperking kennen: er is een groot aantal deelnemers nodig om het netwerk betrouwbaar te laten functioneren. Stel dat er slecht vijf computers in een netwerk zitten, dan is het niet onmogelijk dat al deze computers offline gaan. Hierdoor is het netwerk onbereikbaar. Een ander probleem binnen file-sharing netwerken is het principe van \textbf{ratio}. Binnen file-sharing Torrent protocollen kent men het onderscheid tussen een \textbf{Leecher} en een \textbf{Seeder}. Een peer die een bestand download wordt ook wel een Leecher genoemd en een node die een bestand beschikbaar stelt voor deze Leechers noemen we een Seeder. De ratio is bijgevolg het aantal seeders ten opzichte van het aantal leechers. Bij veel niet gesuperviseerde netwerken is dit ratio eerder laag -sommige netwerken legen namelijk verplichtingen op aan deelnemers zodat bestanden vlot toegankelijk blijven-. Veel leechers kiezen er namelijk voor om enkel bestanden te downloaden. Indien er geen Seeders meer zijn voor een bestand is dit in essentie ontoegankelijk geworden. Deze problemen kunnen worden vermeden door een voldoende groot netwerk te kiezen. Dit probleem doet zich echter ook voor bij protocollen zoals Gnutella en IPFS. Er is namelijk geen verplichting om bestanden beschikbaar te stellen. Eenmaal de peer de gewenste bestanden heeft binnen gehaald is er geen stimulans meer deze te delen. Het is dan ook aangewezen om een groot aantal deelnemers te hebben. Hoe meer Peers binnen een netwerk hoe meer toegankelijk het wordt en hoe meer kans dat deze peers ook effectief bestanden zullen beschikbaar stellen. Vandaar dat het aangewezen is om een reeds bestaand netwerk te gebruiken ten opzichte van een eigen implementatie.\\
