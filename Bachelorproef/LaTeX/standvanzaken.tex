@@ -359,16 +359,44 @@ Allereerst wordt het concept van een \textbf{CID} en \textbf{Content based addre
 
 \subsubsection{Content Based Adressing}
 \label{CBA}
- De opzet van het protocol beperkt zich niet louter tot bestandsoverdracht. Ze beschrijven zichzelf als een gedistribueerd bestandssysteem dat een alternatief bied voor de manier waarop we naar het internet kijken. Wat wordt daar echter mee bedoeld?\\
+ De opzet van het protocol beperkt zich niet louter tot bestandsoverdracht. Ze beschrijven zichzelf als een gedistribueerd bestandssysteem dat een alternatief biedt voor de manier waarop er op het internet informatie wordt opgevraagd. Wat wordt daar echter mee bedoeld?\\
 
 IPFS heeft als doelstelling om alle bestanden op het netwerk te gaan verspreiden over verschillende peers. Deze bestanden kunnen vervolgens eenvoudig worden opgevraagd en weergegeven in een webbrowser. Een peer kan vervolgens rechtstreeks aan het netwerk deze bestanden gaan opvragen. In tegenstelling tot Bit-Torrent is er aldus geen sprake van Trackers of Swarms. Gnutella heeft echter dezelfde benadering. Dus wat maakt IPFS uniek?\\
 
-Volgens IPFS is er een probleem met de manier waarop er klassiek wordt gezocht naar bestanden. Er wordt namelijk altijd een derde partij vertrouwd om het juist bestand aan te leveren. Stel bijvoorbeeld onderstaand 
+Volgens IPFS is er een probleem met de manier waarop er klassiek wordt gezocht naar bestanden. Stel bijvoorbeeld onderstaand scenario:\\
+
+Bob wilt graag een nieuwe achtergrond en gaat opzoek naar een afbeelding van een Capybara. Hij vindt twee afbeelding op google van een mooie Capybara en slaat vervolgens de links op. Drie dagen erna bezoekt hij nog eens de links, één van deze links lijdt naar een 404 pagina. De afbeelding is immers verwijderd. De andere link lijdt tot zijn verbazing tot een afbeelding van een Tapir.\\
+
+Dit is eveneens een voorbeeld van \textbf{Location based addressing}. Location based addressing(=lba) is het principe dat men een bestand gaat opvragen aan de hand van waar dit bestand bevind. Zo gaat de link abc.com/cat.jpg het bestand cat.jpg gaan opvragen aan de server van abc.com. Bovenstaand voorbeeld illustreert ook onmiddellijk drie problemen met lba:
+
+\begin{enumerate}
+\item Informatie kan gemakkelijk offline worden gehaald. Er is geen enkele garantie dat afbeeldingen, websites en andere bestanden beschikbaar blijven.\\
+\item Er wordt veel vertrouwen gesteld in servers dat de informatie die men opvraagt correct is. Omdat een bestand een bepaalde naam heeft wilt dat niet noodzakelijk iets zeggen over de inhoud ervan.\\
+\item Informatie kan eenvoudig worden gewijzigd. De afbeelding die gisteren nog een capybara was kan veranderd zijn in een afbeelding van een Kat.\\
+\end{enumerate}
+
+Het zijn deze problemen die worden aangepakt met Content Based Adressing (=CBA),IPFS en het concept van een CID. Binnen CBA worden bestanden opgevraagd aan de hand van hun inhoud. Bij een klassieke url moet immers zowel de naam van de server (of het ip-address) alsook de naam van het bestand in kwestie gekend zijn. CBA vervangt dan ook het concept van een URL door een uniek identificatie nummer dat gebaseerd is op de inhoud van het bestand. Dit uniek identificatie nummer wordt een CID genoemd. Het is belangrijk dat de verschillende elementen van een CID worden besproken. Op die manier kan er worden geïllustreerd wat de verschillende eigenschappen zijn van CBA en hoe deze kunnen worden toegepast binnen IPFS.\\
+
+Om het principe van een CID te kunnen uitleggen kan er worden gekeken wat er exact
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{3cm}|p{6cm}|p{6cm}|}
+		\hline
+		\multicolumn{3}{|c|}{Vergelijking Content based addressing - location based addressing}\\
+		\hline
+		\textbf{Probleem}&\textbf{LBA}&\textbf{CBA}\\
+		\hline
+		\textbf{Verifiëren van de inhoud}&Er is geen manier om de inhoud van een bestand te gaan verifiëren op basis van een URL.&De inhoud van het bestand hangt rechtstreeks vast aan de manier waarop we ze opvragen. Zijn er aldus meerdere peers met hetzelfde bestand kunnen we zeker zijn dat de inhoud hetzelfde is op basis van de CID.
+		
+	\end{tabular}
+	\caption{Vergelijking Content based addressing - location based addressing}
+\end{table}
 
 \subsubsection{IPNS}
 \label{ipns}
 
+\subsubsection{Het probleem van altruïsme}
+Een groot probleem binnen file-sharing protocollen is het probleem van de Ratio. Binnen file-sharing Torrent protocollen kent men het onderscheid tussen een \textbf{Leecher} en een \textbf{Seeder}. Een peer die een bestand download wordt ook wel een Leecher genoemd en een node die een bestand beschikbaar stelt voor deze Leechers noemen we een Seeder. De ratio is bijgevolg het aantal seeders ten opzichte van het aantal leechers. Bij veel niet gesuperviseerde netwerken is dit ratio eerder laag -sommige netwerken legen namelijk verplichtingen op aan deelnemers zodat bestanden vlot toegankelijk blijven-. Veel leechers kiezen er namelijk voor om enkel bestanden te downloaden. Indien er geen Seeders meer zijn voor een bestand is dit in essentie ontoegankelijk geworden. Deze problemen kunnen worden vermeden door een voldoende groot netwerk te kiezen. Dit probleem doet zich echter ook voor bij protocollen zoals Gnutella en IPFS. Er is namelijk geen verplichting om bestanden beschikbaar te stellen. Eenmaal de peer de gewenste bestanden heeft binnen gehaald is er geen stimulans meer deze te delen. Het is dan ook aangewezen om een groot aantal deelnemers te hebben. Hoe meer Peers binnen een netwerk hoe meer toegankelijk het wordt en hoe meer kans dat deze peers ook effectief bestanden zullen beschikbaar stellen. Vandaar dat het aangewezen is om een reeds bestaand netwerk te gebruiken ten opzichte van een eigen implementatie.\\
 \section{vergelijking van de verschillende file-sharing protocollen}
 \label{vergelijking-FS}
-%parafraseer
-Er wordt gebruik gemaakt van een reeds bestaand protocol aangezien P2P netwerken één grote beperking kennen: er is een groot aantal deelnemers nodig om het netwerk betrouwbaar te laten functioneren. Stel dat er slecht vijf computers in een netwerk zitten, dan is het niet onmogelijk dat al deze computers offline gaan. Hierdoor is het netwerk onbereikbaar. Een ander probleem binnen file-sharing netwerken is het principe van \textbf{ratio}. Binnen file-sharing Torrent protocollen kent men het onderscheid tussen een \textbf{Leecher} en een \textbf{Seeder}. Een peer die een bestand download wordt ook wel een Leecher genoemd en een node die een bestand beschikbaar stelt voor deze Leechers noemen we een Seeder. De ratio is bijgevolg het aantal seeders ten opzichte van het aantal leechers. Bij veel niet gesuperviseerde netwerken is dit ratio eerder laag -sommige netwerken legen namelijk verplichtingen op aan deelnemers zodat bestanden vlot toegankelijk blijven-. Veel leechers kiezen er namelijk voor om enkel bestanden te downloaden. Indien er geen Seeders meer zijn voor een bestand is dit in essentie ontoegankelijk geworden. Deze problemen kunnen worden vermeden door een voldoende groot netwerk te kiezen. Dit probleem doet zich echter ook voor bij protocollen zoals Gnutella en IPFS. Er is namelijk geen verplichting om bestanden beschikbaar te stellen. Eenmaal de peer de gewenste bestanden heeft binnen gehaald is er geen stimulans meer deze te delen. Het is dan ook aangewezen om een groot aantal deelnemers te hebben. Hoe meer Peers binnen een netwerk hoe meer toegankelijk het wordt en hoe meer kans dat deze peers ook effectief bestanden zullen beschikbaar stellen. Vandaar dat het aangewezen is om een reeds bestaand netwerk te gebruiken ten opzichte van een eigen implementatie.\\
