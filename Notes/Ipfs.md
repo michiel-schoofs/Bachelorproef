@@ -1,9 +1,9 @@
 # Ipfs
 
 - To initiliase a node we use the command `peer init` -> We get a unique peer id also initialises a directory
--  IPFS  supports versioning on a P2P network.
+-  IPFS  supports versioning on a P2P network. We can get the content from anyone who has the content.
 
-- Content adressing as opposed to location based addressing
+- Content addressing as opposed to location based addressing. The advantage is that location addressing doesn't verify that the content we request is not gonna change http://sjqlkfsjdf.com/poodl.jpg is subject to change. Content adressing is immutable. We also have no more caching issues since the content is inherently immutable. 
 - When storing an image: image -> Raw -> Hashfunction like Sha2-256 -> digest -> self describing hashing (CID) to future proof the hash function.
 - CID : hashing algorithm code + length of digest + digest
 - To add to ipfs we can use `ipfs add -r test` (-r = recursive) If it's a directory we see that we get two hashes the hashes of the directory itself and the files contained within
@@ -27,6 +27,38 @@
 - To identify a node ipfs also uses multibased adressing: /ipformat/ip/protocol/port/ipfs/CID
 
 - Sensitive text document: We use private, public key encryption. Use PGP
+
+## CID 
+
+There are many hashing algorithms, we use sha2-256 in IPFS by default. Algorithms can break so a CID makes sure we can change the algorithm. That's why we use a self describing hash also called a multihash. Basic Multihash:
+
+<algorithm number><hash-length><hash>
+
+For version 0 the string representation is just a <IPLD -> dag-pb>base58btc(<multihash>)
+
+However there are many ways to encode a file for example CBOR or JSON. To avoid these problems we  also include the encoding type in the CID. IPLD codex:
+
+<dag-pb><algorithm number><hash-length><hash>
+
+This leads to two versions of CID:
+
+<version-number-cid><dag-pb><algorithm number><hash-length><hash>
+
+However using a binary encoding to display the CID leads to a giant string of binary numbers so we need to encode the CID to a string but what encoding do we use to do that?
+
+Multibase so the first symbol is the identifier for the encoding:
+
+b... -> base 32 encoded
+
+So to wrap it together:
+
+<cid-version><ipld-format><multihash>
+
+string representation:
+
+<base>base =( <cid-version><ipld-format><multihash> )
+
+
 
 ## Commands
 

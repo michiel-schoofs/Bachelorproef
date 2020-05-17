@@ -205,52 +205,66 @@ De doelstelling van deze bachelorproef is om een werkend P2P versiebeheersysteem
 	\caption{Concepten binnen versiebeheersystemen.}
 \end{table}
 \newpage
-\section{IPFS}
+\section{Het omspringen met bestanden in een gedecentraliseerd systeem}
 \label{IPFS}
 \subsection{Duiding van dit hoofdstuk}
-De doelstelling van deze bachelorproef is om een volledig gedecentraliseerd versiebeheer systeem te bekomen. Zoals in de vorige sectie reeds werd uitgelegd is een versiebeheersysteem een verzameling van bestanden en een logboek waarin alle veranderingen worden bijgehouden. Dit logboek is in essentie niets meer of minder dan een collectie van metadata en kunnen we bijgevolg gaan decentraliseren aan de hand van een blockchain (hier wordt verder op ingegaan in hoofdstuk 3). \textbf{Maar dan blijft de vraag nog steeds waar kunnen de bestanden worden bewaard?}\\
+De doelstelling van deze bachelorproef is om een volledig gedecentraliseerd versiebeheersysteem uit te werken. Zoals in de vorige sectie reeds werd uitgelegd is een versiebeheersysteem een verzameling van bestanden en een logboek waarin alle veranderingen aan deze bestanden worden bijgehouden. Dit logboek is aldus een collectie van data. Hierdoor kan een logboek eenvoudig worden gedecentraliseerd aan de hand van een blockchain. \textbf{Maar dan blijft de vraag nog steeds waar kunnen de bestanden worden bewaard?}\\
 
-In eerste instantie zou men kunnen denken dat deze simpelweg ook op de blockchain kunnen worden gezet maar dit is niet mogelijk. In tweede instantie zou er eventueel kunnen worden aangenomen dat deze bestanden gewoonweg kunnen worden verstuurd tussen bob en alice. Ook deze oplossing is niet ideaal aangezien Bob en Alice dan in het klassieke server-client scenario terecht komen. Er is dus een nood aan een manier om op een gedecentraliseerde manier bestanden te gaan delen met elkaar. Dit principe wordt ook wel \textbf{gedecentraliseerde file-sharing} genoemd.\\
+In eerste instantie lijkt het eenvoudig om deze bestanden ook gewoon op een blockchain te zetten. Dit is echter niet mogelijk (hier wordt verder op ingegaan in hoofdstuk 3). Een andere eenvoudige oplossing zou zijn dat Bob gewoon rechtstreeks de bestanden deelt met Alice. Dit kan doormidden van een FTP connectie of andere oplossingen. Hierdoor komen Bob en Alice echter in een klassiek server-client model terecht. De nadelen van dit model worden uitvoerig besproken in \ref{ipfs_decent}. Er is dus een manier nodig om bestanden te gaan delen zonder dat men daarbij gebruik moet maken van een server. Dit principe wordt ook wel \textbf{gedecentraliseerde file-sharing} genoemd.\\
 
-Er bestaan verschillende protocollen die deze doelstelling voor ogen hebben.  Eerst volgt een algemene uitleg van verschillende begrippen om voldoende achtergrond informatie te geven om deze protocollen te begrijpen. Vervolgens wordt een overzicht gegeven van drie verschillende protocollen: Bit-Torrent, Gnutella en IPFS.\\
+Dit probleem is niet nieuw. Er bestaan al reeds sinds de vroege jaren 2000 verschillende protocollen die dit probleem proberen oplossen. Doorheen dit hoofdstuk worden drie van deze protocollen besproken: Bit-Torrent, Gnutella en IPFS. Waarom wordt er juist geopteerd voor deze drie protocollen? Bit-Torrent en Gnutella zijn een mooi voorbeeld van twee verschillende types van protocollen. Bij Bit-Torrent is er namelijk nog spraken van een zekere mate van centralisatie -zie \ref{torrenting}-. Gnutella is volledig gedecentraliseerd maar heeft ook een aantal beperkingen -zie \ref{Gnutella}. Tot slot komen we tot een meer recent protocol dat veel van de beperkingen van de vorige twee protocollen gaat opvangen. Dit protocol wordt IPFS genoemd en is het protocol dat wordt gebruikt in de POC. Deze protocollen vereisen wel enige voorkennis om te begrijpen. Er volgt allereerst nog een algemene uitleg waarin enkele begrippen worden geïntroduceerd. \\
 
-Waarom wordt er juist geopteerd voor deze drie protocollen? Bit-Torrent en Gnutella zijn een mooi voorbeeld van twee verschillende types van protocollen. Bij Bit-Torrent is er namelijk nog spraken van een zekere mate van centralisatie -zie \ref{torrenting}-. Gnutella is volledig gedecentraliseerd maar heeft ook een aantal beperkingen -zie \ref{Gnutella}. Tot slot komen we tot een meer recent protocol dat veel van de beperkingen van de vorige twee protocollen gaat opvangen. Dit protocol wordt IPFS genoemd en is het protocol dat wordt gebruikt in de POC.\\
-\subsection{Het begrip decentralisatie}
+\subsection{Algemene begrippen en concepten}
 \label{ipfs_decent}
-De opzet van deze bachelorproef is om een volwaardig gedecentraliseerd versiebeheersysteem te bekomen door middel van P2P en blockchain technologie. Om de opzet volledig duidelijk te maken, moet het begrip \textit{"decentralisatie"} gekaderd worden. Stel onderstaand scenario:\\
 
-Bob is een liefhebber van Capybaras en wil informatie krijgen over de dieren. Hij surft bijgevolg naar de Wikipedia pagina. Bob zal een verzoek moeten sturen naar de server van Wikipedia. Hiervoor moet hij het publieke IP-Adres kennen. Dit kan hij verkrijgen door het DNS protocol. Bob stuurt zijn verzoek naar deze server en krijgt de gezochte pagina terug. Dit is een voorbeeld van een gecentraliseerd systeem. Bob gaat immers op zoek naar één aanspreekpunt waar de informatie zich bevindt. Aangezien alle informatie zich bevindt op één plaats kan er worden gesproken van een gecentraliseerd systeem.\\
+\subsubsection{Decentraliseren en P2P}
+Zoals in de vorige sectie uitgelegd willen we onze bestanden gaan opslaan op een gedecentraliseerde systeem. \textbf{Wat betekend het om iets te gaan decentraliseren?} Kort gesteld is een gedecentraliseerd systeem een systeem waar geen centrale component aanwezig is. Een gekend voorbeeld van een gecentraliseerd systeem is de manier waarop mensen surfen op het internet. Stel onderstaand scenario:\\
 
-De manier van alle informatie op één punt te bewaren is effectief. Bob kan alle informatie snel en doeltreffend opvragen. Wat zijn echter de nadelen van deze manier van werken?
+Bob is een liefhebber van Capybaras en wil informatie krijgen over de dieren. Hij surft bijgevolg naar de Wikipedia pagina. Bob zal een verzoek moeten sturen naar de server van Wikipedia. Hiervoor moet hij het publieke IP-Adres kennen. Dit kan hij verkrijgen door het DNS protocol. Bob stuurt zijn verzoek naar deze server en krijgt de gezochte pagina terug. Aangezien alle informatie zich bevindt op één plaats kan er worden gesproken van een gecentraliseerd systeem. Dit specifiek type van een centraal systeem wordt ook wel een \textbf{client-server} systeem genoemd.\\
 
-\begin{itemize}
-	\item Een nadeel van dit centraal punt is het zogenaamde SPOF probleem -zie \ref{vb_conclusie}-. Doordat alle informatie zich op één server bevindt is er ook één kritieke plaats waar alles kan fout lopen. Is de server onbeschikbaar zijn alle diensten en informatie hierop dat ook.\\
-	
-	\item Doordat al het verkeer moet verwerkt worden door dezelfde hardware kan dit leiden tot een hoge serverbelasting. Hierdoor kan het verwerken van deze verzoeken traag verlopen.Om dit probleem op te lossen kan gebruik worden gemaakt van zogenaamde \textit{Mirror servers}. Dit is een kopie van de originele server. Deze kopie kan op momenten van hoge belasting een deel van het verkeer op zich nemen. Op die manier worden volgens \textcite{Webb2007} de beperkingen van bandbreedte die zich voordoen bij een klassiek server/client scenario geminimaliseerd. Toch is ook deze oplossing niet optimaal. Men heeft immers meerdere fysieke servers nodig en alle informatie is redundant. \\
-	
-	\item Het uitbreiden van bestaande infrastructuur is niet evident. Het verspreiden van een database over verschillende computers is een omslachtige onderneming.\\
-		
-	\item Een minder voor de hand liggend nadeel is dat van censuur. In sommige landen waaronder bijvoorbeeld China wordt bepaalde informatie gefilterd. Dit is mogelijk doordat deze landen het verkeer kunnen herleiden naar hun eigen servers.
-\end{itemize}
-
-De bovenstaande problemen worden aangepakt binnen het domein van \textbf{Distributed Computing}. Dit begrip wordt verder uitgelegd door \textcite{Attiya2004}: Distributed computing is een collectie van individuele computers die verbonden zitten in een netwerk en met elkaar kunnen communiceren. Deze computers zijn in staat om samen computermatige taken uit te voeren. \textbf{Peer-to-Peer}(afkort als P2P) is een principe dat kadert binnen dit begrip. Een gangbare definitie wordt gegeven door \textcite{Schollmeier2001}. Hij stelt dat Peer-to-peer een vorm is van distributed computing waarbinnen elke computer optreedt als een Servent. Dit is een combinatie van het woord \textbf{ser}ver en cli\textbf{ent}. Elke computer op dit netwerk is aldus in staat om verzoeken te behandelen en versturen. Dit staat haaks op de klassieke server-client benadering. \\
-
-Peer-to-peer netwerken proberen om alle bovenstaande problemen met klassieke server-client netwerken systematisch op te lossen. Hoe doen ze dit exact?
+Binnen een gedecentraliseerd systeem is er geen spraken meer van een centrale server die alles ter beschikking stelt. Alle computers zijn onderling met elkaar verbonden en wisselen bestanden en gegevens met elkaar uit. Dit wordt ook wel bestempeld als \textbf{Peer-to-Peer}(afkort als P2P). Peer-to-peer een vorm van distributed computing\footnote{\textbf{Distributed Computing}: een collectie van individuele computers die verbonden zitten in een netwerk en met elkaar kunnen communiceren. Deze computers zijn in staat om samen computermatige taken uit te voeren. (\autocite{Attiya2004})} waarbinnen elke computer optreedt als een Servent. Dit is een combinatie van het woord \textbf{ser}ver en cli\textbf{ent}. Elke computer op dit netwerk is aldus in staat om verzoeken te behandelen en versturen. Het bied met andere woorden een gangbaar alternatief voor het client-server model. \\
+ 
+Volgens \textcite{Schollmeier2001} zijn er  twee verschillende categorieën van Peer-to-peer netwerken:
 
 \begin{itemize}
-	\item Peer-to-peer netwerken zijn volstrekt gedecentraliseerd. Er is niet één computer die optreedt als server. Elke deelnemer van het netwerk (ook wel \textbf{Peer} genoemd) treedt op als server en client. Hierdoor is er geen SPOF.\\
-	\item Hetzelfde principe geldt ook voor serverbelasting. Het gehele netwerk verwerkt immers verzoeken. Toch speelt data redundantie ook hier een rol. Een computer kan immers offline gaan en alle relevante informatie moet beschikbaar blijven.\\
-	\item Een p2p netwerk is goed uitbreidbaar. Op elk moment kunnen computers toetreden tot het netwerk of uittreden.
+\item Pure netwerken: Hierbij is elke peer gelijkwaardig. Dat wilt zeggen dat iedere individuele deelnemer evenveel privileges en taken heeft. Kortom is één van die deelnemers niet meer bereikbaar dan kan elke andere peer zijn rol op zich nemen. Een voorbeeld van zo een netwerk is Gnutella.\\
+
+\item Hybride netwerk: Er is één centraal component aanwezig die een bepaalde taak op zich neemt. Bijvoorbeeld bij het Bit-Torrent protocol is er een centrale component nodig om toe te treden tot het netwerk. Als deze centrale component onbereikbaar is functioneert het netwerk niet.\\
 \end{itemize}
 
-Tot slot is het belangrijk om te vermelden dat er volgens \textcite{Schollmeier2001} twee verschillende categorieën zijn:
+
+\textbf{Waarom zouden we dus kiezen voor een gedecentraliseerd systeem?}. Om dit duidelijk te maken kunnen de voor~ en nadelen worden samengevat in onderstaande tabel:\\
+
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{3cm}|p{6cm}|p{6cm}|}
+		\hline
+		\multicolumn{3}{|c|}{Vergelijking Gecentraliseerd en Gedecentraliseerd systeem}\\
+		\hline
+		\textbf{Probleem}&\textbf{Client-Server}&\textbf{P2P}\\
+		\hline
+		\textbf{SPOF}&Doordat alle informatie zich op één server bevindt is er ook één kritieke plaats waar alles kan fout lopen. Is de server onbeschikbaar zijn alle diensten en informatie hierop dat ook.& Er is niet één computer die optreedt als server. Elke deelnemer van het netwerk (ook wel \textbf{Peer} genoemd) treedt op als server en client. Waardoor er geen kritiek punt waarop het kan fout lopen is.\footnote{Zoals hierboven vermeld geld dit enkel voor een puur netwerk. Een hybride netwerk heeft nog steeds het probleem van SPOF.}\\
+		\hline
+		\textbf{Netwerkbelasting}&Doordat al het verkeer moet verwerkt worden door dezelfde hardware kan dit leiden tot een hoge serverbelasting. Hierdoor kan het verwerken van deze verzoeken traag verlopen.&Het hele netwerk verwerkt onderling verzoeken waardoor de individuele belasting op één peer eerder laag blijft. Hierdoor is het netwerk instaat om op een efficiënte manier verzoeken te verwerken.\\
+		\hline
+		\textbf{Uitbreidbaarheid}&Het uitbreiden van bestaande infrastructuur is niet evident en vereist vaak grote kosten voor een bedrijf.&Een p2p netwerk is goed uitbreidbaar. Op elk moment kunnen computers toetreden tot het netwerk of uittreden.\\
+		\hline
+	\end{tabular}
+	\label{tbl_concepts}
+	\caption{Vergelijking tussen gecentraliseerd - gedecentraliseerd systeem}
+\end{table}
+
+\subsubsection{Hashing}
+Hash functies is een begrip dat veel aanbod komt in de verschillende protocollen.  Zeker binnen IPFS speelt hashing een grote rol. Daarom is het noodzakelijk dat het begrip toch kort wordt toegelicht.\\
+
+Hashfuncties liggen aan de basis van het verifiëren van de dataintegriteit bij bestanden. Het is immers belangrijk om te kunnen nagaan of het bestand of data dat verkregen is hetzelfde is als wat verwacht wordt. Op deze manier kan er worden nagegaan of de data eventueel beschadigd is door de overdracht. Een \textit{goede} hashfunctie zou moeten voldoen aan volgende eigenschappen (\autocite{Anderson93}):
 
 \begin{itemize}
-\item De zogenaamde \textbf{pure netwerken} hierbij is elke computer gelijkwaardig. Met andere woorden men kan willekeurig welke deelnemer(Peer) uitschakelen en het netwerk zal nog op dezelfde manier functioneren.\\
-
-\item Een netwerk waarbinnen er één centrale computer of een groep van computers zonder wie het netwerk niet functioneert wordt er gesproken van een \textbf{Hybride netwerk}
+\item One-way functie: het is relatief eenvoudig om voor een gegeven dataset $x$ een resultaat te vinden $f(x)$. Het is echter onwaarschijnlijk om voor een gegeven resultaat $f(x)$ de originele dataset $x$ te vinden. Op deze manier is het makkelijk om een dataset te valideren indien de hashfunctie waarde gegeven.\\
+\item Collision free: het moet niet mogelijk zijn dat twee verschillende datasets (bijvoorbeeld: $x$ en $y$) dezelfde hashfunctie waarde hebben. Wiskundig kan dit worden voorgesteld door volgende notatie:Stel een functie $f:A->B$. Deze functie is collision free indien $\forall \{x,y\}|\{x,y\} \subseteq A | f(x) \neq f(y)$\\
+\item Gelijke verdeling: een kleine verandering aan de dataset leid tot een volledig verschillende hashwaarde. Zo is hashwaarde voor 123 en 124 sterk verschillend. Op deze manier kan er geen informatie worden afgeleid uit de hashwaarde zelf.\\
+\item Vaste grootte: ongeacht de grootte van de ingegeven dataset, het resultaat van de lengte van de hash-functie is constant. Zo zal een MD5 Hash altijd 128 bit lang zijn ongeacht of de ingegeven data 1 bit of 10000 bits beslaat.
 \end{itemize}
-
 
 \subsection{De meerwaarde van decentralisatie binnen versiebeheer}
 In \ref{ipfs_decent} worden decentralisatie en P2P kort toegelicht. In dit onderdeel ligt de focus op hoe deze principes kunnen worden toegepast binnen versiebeheersystemen.\\
@@ -278,15 +292,6 @@ Waarom worden BitTorrent en Gnutella besproken?
 Er wordt gebruik gemaakt van een reeds bestaand protocol aangezien P2P netwerken één grote beperking kennen: er is een groot aantal deelnemers nodig om het netwerk betrouwbaar te laten functioneren. Stel dat er slecht vijf computers in een netwerk zitten, dan is het niet onmogelijk dat al deze computers offline gaan. Hierdoor is het netwerk onbereikbaar. Een ander probleem binnen file-sharing netwerken is het principe van \textbf{ratio}. Binnen file-sharing Torrent protocollen kent men het onderscheid tussen een \textbf{Leecher} en een \textbf{Seeder}. Een peer die een bestand download wordt ook wel een Leecher genoemd en een node die een bestand beschikbaar stelt voor deze Leechers noemen we een Seeder. De ratio is bijgevolg het aantal seeders ten opzichte van het aantal leechers. Bij veel niet gesuperviseerde netwerken is dit ratio eerder laag -sommige netwerken legen namelijk verplichtingen op aan deelnemers zodat bestanden vlot toegankelijk blijven-. Veel leechers kiezen er namelijk voor om enkel bestanden te downloaden. Indien er geen Seeders meer zijn voor een bestand is dit in essentie ontoegankelijk geworden. Deze problemen kunnen worden vermeden door een voldoende groot netwerk te kiezen. Dit probleem doet zich echter ook voor bij protocollen zoals Gnutella en IPFS. Er is namelijk geen verplichting om bestanden beschikbaar te stellen. Eenmaal de peer de gewenste bestanden heeft binnen gehaald is er geen stimulans meer deze te delen. Het is dan ook aangewezen om een groot aantal deelnemers te hebben. Hoe meer Peers binnen een netwerk hoe meer toegankelijk het wordt en hoe meer kans dat deze peers ook effectief bestanden zullen beschikbaar stellen. Vandaar dat het aangewezen is om een reeds bestaand netwerk te gebruiken ten opzichte van een eigen implementatie.\\
 
 Dit gedeelte biedt een korte inleiding over Gnutella en BitTorrent. Deze twee protocollen zijn interessant aangezien ze beide file-sharing binnen een P2P netwerk als einddoel, maar een volledig andere benadering hebben. Veel van de elementen en problemen die deze protocollen aanpakken,komen ook aan bod binnen IPFS. De vergelijking tussen BitTorrent en Gnutella biedt een meerwaarde aangezien het type netwerk dat elk gebruikt, verschilt. Zo kent men binnen BitTorrent het concept van Trackers. Dit is een centraal element waardoor men dus spreekt van een hybride netwerk. Gnutella heeft geen centraal element. Hier kan dus worden gesproken van een puur P2P netwerk.\\
-
-Vóór de werking en nadelen van de verschillende protocollen kunnen worden uitgelegd is het belangrijk om even stil te staan bij het concept van een hash. Deze functie ligt aan de basis van het verifiëren van de dataintegriteit bij bestanden. Het concept speelt ook een grote rol binnen IPFS en Blockchain. Het is immers belangrijk om te kunnen nagaan of het bestand of data dat verkregen is hetzelfde is als wat verwacht wordt. Op deze manier kan er worden nagegaan of de data eventueel beschadigd zijn door de overdracht. Een ander probleem dat kan worden tegengegaan, is dat een peer probeert om kwadaardige bestanden te verspreiden waaronder malware. Een \textit{goede} hashfunctie zou moeten voldoen aan volgende eigenschappen (\autocite{Anderson93}):
-
-\begin{itemize}
-\item One-way functie: het is relatief eenvoudig om voor een gegeven dataset $x$ een resultaat te vinden $f(x)$. Het is echter onwaarschijnlijk om voor een gegeven resultaat $f(x)$ de originele dataset $x$ te vinden. Op deze manier is het makkelijk om een dataset te valideren indien de hashfunctie waarde gegeven.\\
-\item Collision free: het moet niet mogelijk zijn dat twee verschillende datasets (bijvoorbeeld: $x$ en $y$) dezelfde hashfunctie waarde hebben. Wiskundig kan dit worden voorgesteld door volgende notatie:Stel een functie $f:A->B$. Deze functie is collision free indien $\forall \{x,y\}|\{x,y\} \subseteq A | f(x) \neq f(y)$\\
-\item Gelijke verdeling: een kleine verandering aan de dataset leid tot een volledig verschillende hashwaarde. Zo is hashwaarde voor 123 en 124 sterk verschillend. Op deze manier kan er geen informatie worden afgeleid uit de hashwaarde zelf.\\
-\item Vaste grootte: ongeacht de grootte van de ingegeven dataset, het resultaat van de lengte van de hash-functie is constant. Zo zal een MD5 Hash altijd 128 bit lang zijn ongeacht of de ingegeven data 1 bit of 10000 bits beslaat.
-\end{itemize}
  
  \subsubsection{Torrenting}
  \label{torrenting}
@@ -368,11 +373,10 @@ Zoals eerder aangehaald moet een peer zich verbinden op het Gnutella netwerk om 
 \section{IPFS}
 
 IPFS is een modern file-sharing protocol dat steunt op principes van Bit-Torrent maar volledig gedecentraliseerd is zoals Gnutella. De opzet van het protocol is echter niet om bestanden te gaan delen met elkaar maar om een gangbaar alternatief aan te bieden voor het HTTP protocol. 
+
 \subsection{Hoe worden bestanden geïdentificeerd op het netwerk}
-Een probleem binnen file sharing is de wijze waarop men bestanden opvraagt. Dit kan het best worden geïllustreerd aan de hand van een voorbeeld.\\
+Er is een probleem binnen file-sharing dat we nog niet eerder hebben besproken en dat is het probleem van hoe bestanden worden geadresseerd. Om dit probleem concreet voor te stellen kunnen we gebruik maken van volgend voorbeeld:
 
-Alice wilt graag een afbeelding van de paashaas. Na het opzoek door middel van een zoek machine vind ze deze afbeeldingen op een gegeven URL. Deze URL is verbonden aan een server die op zijn beurt de afbeelding bevat. Alice kan dus eenvoudigweg de afbeelding daar opvragen. Op een gedecentraliseerd systeem is dit niet evident er is immers geen server waar bestanden ter beschikking staan. De bestanden zitten namelijk verspreid over verschillende computers. Toch moet het systeem instaat zijn om bestanden terug te vinden.\\
 
-Om dit probleem op te lossen wordt er niet naar een specifieke plaats genavigeerd zoals met een URL. Het netwerk wordt rechtstreeks bevraagd voor een bestand. De peers die dit bestand ter beschikking hebben zullen dit bestand doorsturen naar de peer die het heeft opgevraagd. Voor dit principe heeft elk bestand een uniek identificatie nummer nodig. Een bestandsnaam is immers niet uniek.\\
 
 Hiervoor kan men gebruik maken van \textbf{Hashfuncties}. Een hashfunctie is een wiskundige functie die aan een
