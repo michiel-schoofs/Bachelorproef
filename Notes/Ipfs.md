@@ -45,7 +45,9 @@
 This associates a name with a specific piece of content. If the content gets changed over time people don't need to know the new CID of that content and can just do a lookup for the name you've provided using IPNS. 
 
 - We can view all the files we've associated a name with the command `ipfs key list`
-- 
+- We can generate a new key using `ipfs key gen --type=rsa test ` this makes a new key with the name test
+- Next up we can publish a specific piece of content with a name attached to it. First we add it to the ipfs node: ipfs add capybara.jpg
+- We associate a node with ipns by running the command `ipfs name publish --key=test QmUDxwFAhN9KLqjnLzkaXsDGASYVqGWvUwCV6Q9Y8wgvDE`
 
 ## Conclusion 
 
