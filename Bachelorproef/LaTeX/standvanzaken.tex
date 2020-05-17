@@ -207,6 +207,14 @@ De doelstelling van deze bachelorproef is om een werkend P2P versiebeheersysteem
 \newpage
 \section{IPFS}
 \label{IPFS}
+\subsection{Duiding van dit hoofdstuk}
+De doelstelling van deze bachelorproef is om een volledig gedecentraliseerd versiebeheer systeem te bekomen. Zoals in de vorige sectie reeds werd uitgelegd is een versiebeheersysteem een verzameling van bestanden en een logboek waarin alle veranderingen worden bijgehouden. Dit logboek is in essentie niets meer of minder dan een collectie van metadata en kunnen we bijgevolg gaan decentraliseren aan de hand van een blockchain (hier wordt verder op ingegaan in hoofdstuk 3). \textbf{Maar dan blijft de vraag nog steeds waar kunnen de bestanden worden bewaard?}\\
+
+In eerste instantie zou men kunnen denken dat deze simpelweg ook op de blockchain kunnen worden gezet maar dit is niet mogelijk. In tweede instantie zou er eventueel kunnen worden aangenomen dat deze bestanden gewoonweg kunnen worden verstuurd tussen bob en alice. Ook deze oplossing is niet ideaal aangezien Bob en Alice dan in het klassieke server-client scenario terecht komen. Er is dus een nood aan een manier om op een gedecentraliseerde manier bestanden te gaan delen met elkaar. Dit principe wordt ook wel \textbf{gedecentraliseerde file-sharing} genoemd.\\
+
+Er bestaan verschillende protocollen die deze doelstelling voor ogen hebben.  Eerst volgt een algemene uitleg van verschillende begrippen om voldoende achtergrond informatie te geven om deze protocollen te begrijpen. Vervolgens wordt een overzicht gegeven van drie verschillende protocollen: Bit-Torrent, Gnutella en IPFS.\\
+
+Waarom wordt er juist geopteerd voor deze drie protocollen? Bit-Torrent en Gnutella zijn een mooi voorbeeld van twee verschillende types van protocollen. Bij Bit-Torrent is er namelijk nog spraken van een zekere mate van centralisatie -zie \ref{torrenting}-. Gnutella is volledig gedecentraliseerd maar heeft ook een aantal beperkingen -zie \ref{Gnutella}. Tot slot komen we tot een meer recent protocol dat veel van de beperkingen van de vorige twee protocollen gaat opvangen. Dit protocol wordt IPFS genoemd en is het protocol dat wordt gebruikt in de POC.\\
 \subsection{Het begrip decentralisatie}
 \label{ipfs_decent}
 De opzet van deze bachelorproef is om een volwaardig gedecentraliseerd versiebeheersysteem te bekomen door middel van P2P en blockchain technologie. Om de opzet volledig duidelijk te maken, moet het begrip \textit{"decentralisatie"} gekaderd worden. Stel onderstaand scenario:\\
@@ -341,6 +349,7 @@ Toch zijn er ook veel technische nadelen verbonden aan het Torrent protocol\foot
 Vele van deze problemen stellen zich ook in het klassieke Client-Server model.
 
 \subsubsection{Gnutella}
+\label{Gnutella}
 Zoals uitgelegd in \ref{torrenting} is het Bit-Torrent protocol niet volstrekt gedecentraliseerd. Er is immers een centraal component (de Tracker) noodzakelijk om de verbinding tot het netwerk van peers tot stand te brengen. Indien deze centrale component onbereikbaar is kan er geen verbinding tot stand worden gebracht. Om dit probleem te omzeilen moet er aldus een manier zijn om in een volstrekt gedecentraliseerde manier bestanden te gaan delen met elkaar. Hiervoor kan men gebruik maken van Gnutella.\\
 
 Gnutella is een protocol met als doelstelling het verspreiden en toegankelijk stellen van bestanden in een volledig gedecentraliseerd netwerk. Het protocol bereikt dit door het versturen van verschillende types van berichten over een TCP/IP connectie. De uitleg over dit protocol is gebaseerd op de \textit{draft RFC} die wordt onderhouden door \textcite{Klingberg2002}. Om het protocol te kunnen gebruiken zijn er aantal stappen die een peer moet overlopen:
@@ -356,7 +365,9 @@ Gnutella is een protocol met als doelstelling het verspreiden en toegankelijk st
 Zoals eerder aangehaald moet een peer zich verbinden op het Gnutella netwerk om bestanden te kunnen opvragen. Een peer kan toe treden door contact te gaan leggen met een peer die al reeds verbonden is op het netwerk. Wil bijvoorbeeld Bob bestanden gaan delen op het netwerk zal hij Alice moeten contacteren die al reeds verbonden is. Voor leesgemak wordt doorheen deze tekst het begrip \textbf{verzoeker} gebruikt als er wordt verwezen naar de peer die toegang wilt tot het netwerk. De peer die toegang verschaft wordt bestempeld als \textbf{aanbieder}.\\
 
 
+\section{IPFS}
 
+IPFS is een modern file-sharing protocol dat steunt op principes van Bit-Torrent maar volledig gedecentraliseerd is zoals Gnutella. De opzet van het protocol is echter niet om bestanden te gaan delen met elkaar maar om een gangbaar alternatief aan te bieden voor het HTTP protocol. 
 \subsection{Hoe worden bestanden geïdentificeerd op het netwerk}
 Een probleem binnen file sharing is de wijze waarop men bestanden opvraagt. Dit kan het best worden geïllustreerd aan de hand van een voorbeeld.\\
 
