@@ -110,4 +110,24 @@ contract('UserService',(accounts)=>{
             contract.removeUser(username, {from:account2})
         );
     })
+
+    it('User has no account should throw exception if getUsername is called', async()=>{
+        await truffleAssert.reverts(
+            contract.GetUsernameFromUser({from:account})
+        );
+    })
+
+    it('User has account getUsername should return username', async()=>{
+        await truffleAssert.passes(contract.addUser(username, {from:account}));
+        var result = await contract.GetUsernameFromUser({from:account});
+        assert.strictEqual(result,username);
+    })
+
+    it('User deletes account getUsername should throw exception again', async() => {
+        await truffleAssert.passes(contract.addUser(username, {from:account}));
+        await truffleAssert.passes( await contract.removeUser(username));
+        await truffleAssert.reverts(
+            contract.GetUsernameFromUser({from:account})
+        );
+    });
 });

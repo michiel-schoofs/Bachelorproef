@@ -11,6 +11,8 @@ contract UserService {
     }
 
     mapping(string => User) usernameToUser;
+    mapping(address => string) addressToUsername;
+
     EnumerableSet.AddressSet users;
 
     event NewUserAdded(string _username);
@@ -18,6 +20,11 @@ contract UserService {
 
     function usernameExists(string memory _username) public view returns(bool) {
         return usernameToUser[_username]._address != address(0);
+    }
+
+    function GetUsernameFromUser() public view returns(string memory) {
+        require(userHasAccount(),"This user has no account");
+        return addressToUsername[msg.sender];
     }
 
     function userHasAccount() public view returns(bool){
@@ -29,6 +36,7 @@ contract UserService {
         require(!users.contains(msg.sender),"This user already has an account");
 
         usernameToUser[_username]._address = msg.sender;
+        addressToUsername[msg.sender] = _username;
         users.add(msg.sender);
 
         emit NewUserAdded(_username);
@@ -51,6 +59,7 @@ contract UserService {
 
         users.remove(msg.sender);
         usernameToUser[_username]._address = address(0);
+        addressToUsername[msg.sender] = "";
 
         emit UserDeleted(_username);
     }
