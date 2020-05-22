@@ -33,3 +33,6 @@ Demo/ipfs/IPFS test/obj/*
 Demo/Example app with ipfs/Image-of-the-day/node_modules
 Demo/Example app with ipfs/Image-of-the-day/package-lock.json
 Demo/Example app with ipfs/Image-of-the-day/src/abis/*
+/Demo/Demo/Console Application/.vs/Console Application/v16
+/Demo/Demo/Console Application/bin/Debug/netcoreapp3.1
+/Demo/Demo/Console Application/obj
