@@ -14,6 +14,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging.Configuration;
 using Console_Application.Services.LoginService;
 using Figgle;
+using Console_Application.Services.ContractService;
 
 namespace Console_Application {
     public class Program {
@@ -28,7 +29,6 @@ namespace Console_Application {
             IAccount account = loginService.login();
 
             Web3 web3 = new Web3(account, url: "http://127.0.0.1:7545");
-            string[] accounts = web3.Eth.Accounts.SendRequestAsync().Result;
         }
 
         public static ServiceProvider BuildProvider() {
@@ -36,6 +36,7 @@ namespace Console_Application {
                 .AddSingleton<IKeyStoreService, KeyStoreService>()
                 .AddSingleton<IUserService, UserService>()
                 .AddSingleton<ILoginService,LoginService>()
+                .AddSingleton<IContractService>(new ContractService())
                 .AddLogging(opt => {
                     opt.AddConsole(c => {
                         c.DisableColors = false;
