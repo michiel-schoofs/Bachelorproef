@@ -12,22 +12,22 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Console;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging.Configuration;
+using Console_Application.Services.LoginService;
+using Figgle;
 
 namespace Console_Application {
     public class Program {
         static void Main(string[] args) {
+            Console.WriteLine(FiggleFonts.Isometric1.Render("Git Eth"));
+
             ServiceProvider provider = BuildProvider();
             ILogger logger = GetLogger(provider);
             logger.LogInformation("Application started...");
 
+            ILoginService loginService = provider.GetService<ILoginService>();
+            IAccount account = loginService.login();
 
-            IUserService userService = provider.GetService<IUserService>();
-
-            //Provider
-            string pk = "d509ef39a41e683071069605bc6116572c27a2bb0b2748030578a72627f5d513";
-            IAccount account = new Account(pk);
             Web3 web3 = new Web3(account, url: "http://127.0.0.1:7545");
-
             string[] accounts = web3.Eth.Accounts.SendRequestAsync().Result;
         }
 
@@ -35,6 +35,7 @@ namespace Console_Application {
             return new ServiceCollection()
                 .AddSingleton<IKeyStoreService, KeyStoreService>()
                 .AddSingleton<IUserService, UserService>()
+                .AddSingleton<ILoginService,LoginService>()
                 .AddLogging(opt => {
                     opt.AddConsole(c => {
                         c.DisableColors = false;
