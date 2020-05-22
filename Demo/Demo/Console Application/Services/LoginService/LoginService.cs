@@ -1,7 +1,9 @@
 ﻿using Console_Application.Services.Interfaces;
 using Microsoft.Extensions.Logging;
 using Nethereum.RPC.Accounts;
+using Nethereum.Web3;
 using System;
+using System.Threading.Tasks;
 
 namespace Console_Application.Services.LoginService {
     public class LoginService : ILoginService {
@@ -13,14 +15,20 @@ namespace Console_Application.Services.LoginService {
             _logger = logger;
         }
 
-        public IAccount login() {
+        public Web3 Login() {
             if (!_userService.HasAccount()) {
                 Console.WriteLine("We could't find a keyfile for your account");
-                IAccount account = _userService.RegisterAccount();
+                Web3 account = _userService.RegisterAccount();
                 return account;
             }
 
             return _userService.GetUser();
+        }
+
+        public async Task SayGreeting() {
+            if (!(await _userService.HasUsername())){ 
+                
+            }
         }
     }
 }

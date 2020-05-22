@@ -4,28 +4,35 @@ using Nethereum.RPC.Accounts;
 using System;
 using Console_Application.Extension;
 using System.Linq;
-using Nethereum.Model;
-using Nethereum.Web3.Accounts;
-using Account = Nethereum.Web3.Accounts.Account;
 using Nethereum.KeyStore.Crypto;
+using System.Threading.Tasks;
+using Nethereum.Web3;
+using Nethereum.RPC.Eth.Exceptions;
+using Console_Application.Contracts.Contract;
 
 namespace Console_Application.Services.UserService {
     public class UserService : IUserService {
         private readonly IKeyStoreService _keyStoreService;
         private readonly ILogger<Program> _logger;
+        private static Web3 _web3;
+        private readonly IContractService _contractService;
 
-        public UserService(IKeyStoreService keyStore, ILogger<Program> logger) {
+        public UserService(IKeyStoreService keyStore, ILogger<Program> logger,IContractService contractService) {
             _keyStoreService = keyStore;
             _logger = logger;
+            _contractService = contractService;
             _logger.LogInformation("User Service initialized");
         }
 
-        public IAccount GetUser() {
+        public Web3 GetUser() {
             Console.Write("Provide the password of your keystore: ");
             string password = Console.ReadLine();
 
+            if (_web3 != null)
+                return _web3;
+
             try {
-                return _keyStoreService.GetAccount(password);
+                return new Web3(_keyStoreService.GetAccount(password), url: "http://127.0.0.1:7545");
             } catch (DecryptionException) {
 
                 Console.WriteLine("Invalid password");
@@ -47,7 +54,7 @@ namespace Console_Application.Services.UserService {
             return hasKeys;
         }
 
-        public IAccount RegisterAccount() {
+        public Web3 RegisterAccount() {
             Console.Write("Please provide a password for future use: ");
             string password = Console.ReadLine();
             byte[] pk;
@@ -72,11 +79,35 @@ namespace Console_Application.Services.UserService {
             string address = Console.ReadLine();
 
             _keyStoreService.GenerateKeyStore(password, pk, address);
-            return _keyStoreService.GetAccount(password);
+            _web3 = new Web3(_keyStoreService.GetAccount(password), url: "http://127.0.0.1:7545");
+            return _web3;
         }
 
-        public IAccount RegisterUsername() {
-            throw new System.NotImplementedException();
+        public async Task<bool> HasUsername() {
+            if (!_contractService.ContractDeployed("UserService"))
+                throw new Exception("The contract is not deployed");
+
+            UserHasAccountFunction function = new UserHasAccountFunction();
+            var functionHandler = _web3.Eth.GetContractQueryHandler<UserHasAccountFunction>();
+            return await functionHandler.QueryAsync<bool>(
+                _contractService.GetAddressDeployedContract("UserService"), function
+            );
+        }
+
+        public async Task GetUsername() {
+            try {
+                bool b = await HasUsername();
+                Console.WriteLine(b);
+            } catch (Exception e) {
+                _logger.LogError("Something went wrong with the GetUsername function: {0}",e.Message);
+                Console.WriteLine("Something went wrong with the GetUsername function");
+                Console.Beep();
+                System.Environment.Exit(1);
+            }
+        }
+
+        public void RegisterUsername() {
+            throw new NotImplementedException();
         }
     }
 }

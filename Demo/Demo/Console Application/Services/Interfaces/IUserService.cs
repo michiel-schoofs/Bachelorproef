@@ -1,10 +1,13 @@
-﻿using Nethereum.RPC.Accounts;
+﻿using Nethereum.Web3;
+using System.Threading.Tasks;
 
 namespace Console_Application.Services.Interfaces {
     public interface IUserService {
-        public IAccount GetUser();
-        public IAccount RegisterAccount();
-        public IAccount RegisterUsername();
+        public Web3 GetUser();
+        public Web3 RegisterAccount();
+        public void RegisterUsername();
         public bool HasAccount();
+        public Task<bool> HasUsername();
+        public Task GetUsername();
     }
 }

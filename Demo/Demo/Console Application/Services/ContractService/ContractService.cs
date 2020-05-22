@@ -1,27 +1,34 @@
-﻿using Console_Application.Services.Interfaces;
+﻿using Console_Application.Contracts.Deployment;
+using Console_Application.Services.Interfaces;
 using Microsoft.Extensions.Logging;
+using Nethereum.RPC.Eth.DTOs;
+using Nethereum.Web3;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Transactions;
 
 namespace Console_Application.Services.ContractService {
     public class ContractService : IContractService {
         private readonly ILogger<Program> _logger;
         private IDictionary<string, string> _contracts;
-
+        private readonly IDictionary<string, string> _deployed = new Dictionary<string,string>();
         public string FilePath { get; set; }
 
-        public ContractService(ILogger<Program> logger) {
+        public ContractService(ILoggerFactory loggerFactory, string filePath) {
+            _logger = loggerFactory.CreateLogger<Program>();
+            FilePath = filePath;
             Initialize();
-            _logger = logger;
         }
 
         private void Initialize() {
             try {
 
                 FileStream file = File.OpenRead(FilePath);
-                
+
                 using (StreamReader reader = new StreamReader(file)) {
                     string json = reader.ReadToEnd();
                     _contracts = JsonConvert.DeserializeObject<IDictionary<string, string>>(json);
@@ -37,16 +44,61 @@ namespace Console_Application.Services.ContractService {
             }
         }
 
-        public string ContractExist(string name) {
-            throw new System.NotImplementedException();
-        }
-
         public string GetByteCode(string name) {
-            throw new System.NotImplementedException();
+            _contracts.TryGetValue(name, out string val);
+            return val;
         }
 
         public string[] GetContractsNames() {
-            throw new System.NotImplementedException();
+            return _contracts.Keys.ToArray();
+        }
+
+        public bool ContractExist(string name) {
+            return _contracts.ContainsKey(name);
+        }
+
+        public bool ContractDeployed(string name) {
+            return _deployed.ContainsKey(name);
+        }
+
+        public string GetAddressDeployedContract(string name) {
+            _deployed.TryGetValue(name, out string val);
+            return val;
+        }
+
+        public string[] GetDeployedContractsNames() {
+            return _deployed.Keys.ToArray();
+        }
+
+        public async Task DeployContracts(Web3 web3) {
+            try {
+                foreach (string byteCode in _contracts.Values) {
+                    string contractName = _contracts.Keys.ToList()[_contracts.Values.ToList().IndexOf(byteCode)];
+                    _logger.LogInformation("Attempting deployment of {0}",contractName);
+
+                    NoParameterContract.Bytecode = byteCode;
+                    NoParameterContract contract = new NoParameterContract();
+                    var deploymentHandler = web3.Eth.GetContractDeploymentHandler<NoParameterContract>();
+                    TransactionReceipt transactionReceipt = await deploymentHandler.SendRequestAndWaitForReceiptAsync(contract);
+                    CheckIfDeploymentWasSuccesfull(transactionReceipt);
+
+                   
+                    string address = transactionReceipt.ContractAddress;
+                    _deployed.Add(contractName, address);
+
+                    _logger.LogInformation("Deployment of {0} succesfull",contractName);
+                }
+            } catch (Exception e) {
+                _logger.LogError("Something went wrong with the deployment: "+e.Message);
+                Console.WriteLine("Something went wrong with deployment of contracts");
+                Console.Beep();
+                System.Environment.Exit(1);
+            }
+        }
+
+        private void CheckIfDeploymentWasSuccesfull(TransactionReceipt transactionReceipt) {
+            if (transactionReceipt.IsContractAddressEmptyOrEqual("0x0") || transactionReceipt.Failed())
+                throw new TransactionException("Something went wrong with the deployment");
         }
     }
 }
