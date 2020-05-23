@@ -22,6 +22,10 @@ contract UserService {
         return usernameToUser[_username]._address != address(0);
     }
 
+    function RequireTest() public pure {
+        require(1==2,"Require test failed");
+    }
+
     function GetUsernameFromUser() public view returns(string memory) {
         require(userHasAccount(),"This user has no account");
         return addressToUsername[msg.sender];

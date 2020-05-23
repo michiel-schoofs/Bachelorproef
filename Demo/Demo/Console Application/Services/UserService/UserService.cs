@@ -7,10 +7,15 @@ using System.Linq;
 using Nethereum.KeyStore.Crypto;
 using System.Threading.Tasks;
 using Nethereum.Web3;
+using System.Linq;
 using Nethereum.RPC.Eth.Exceptions;
 using Console_Application.Contracts.Contract;
 using Nethereum.Hex.HexTypes;
 using Nethereum.RPC.Eth.DTOs;
+using Nethereum.JsonRpc.Client;
+using System.Collections.Generic;
+using System.Collections;
+using Newtonsoft.Json.Linq;
 
 namespace Console_Application.Services.UserService {
     public class UserService : IUserService {
@@ -131,11 +136,28 @@ namespace Console_Application.Services.UserService {
 
                 _logger.LogInformation("Registering username for {0} gas", gasprice.Value.ToString());
                 TransactionReceipt receipt = await _functionHandler.SendRequestAndWaitForReceiptAsync(contract_ad, addFunction);
+
+                if (receipt.Failed())
+                    throw new Exception("Something went wrong");
+
             } catch (Exception e) {
                 _logger.LogError("Something went wrong with the RegisterUsername function: {0}", e.Message);
                 Console.WriteLine("Something went wrong with Registering a username");
                 Console.Beep();
                 System.Environment.Exit(1);
+            }
+        }
+
+        //Demonstrating error handling
+        public async Task RequireTest() {
+            RequireTestFunction function = new RequireTestFunction();
+            var handler = _web3.Eth.GetContractTransactionHandler<RequireTestFunction>();
+            string contract_ad = _contractService.GetAddressDeployedContract("UserService");
+
+            try {
+                TransactionReceipt rec = await handler.SendRequestAndWaitForReceiptAsync(contract_ad);
+            } catch (RpcResponseException e) {
+                _logger.LogError("Something went wrong with the request");
             }
         }
     }

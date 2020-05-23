@@ -16,4 +16,7 @@ namespace Console_Application.Contracts.Contract {
         [Parameter("string", "_username")]
         public string Username { get; set; }
     }
+
+    [Function("RequireTest")]
+    public class RequireTestFunction : FunctionMessage { }
 }
