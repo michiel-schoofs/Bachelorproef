@@ -53,8 +53,9 @@ namespace Console_Application {
                     });
                 })
                 .AddSingleton<IContractService>(s => new ContractService(
-                   s.GetService<ILoggerFactory>(), 
-                   Directory.GetCurrentDirectory() + "\\CompiledContracts.json"
+                   s.GetService<ILoggerFactory>(),
+                   //Note this is development paths
+                   Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\CompiledContracts.json"
                 ));
 
             return collection.BuildServiceProvider();

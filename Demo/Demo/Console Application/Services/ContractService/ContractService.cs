@@ -73,20 +73,14 @@ namespace Console_Application.Services.ContractService {
         public async Task DeployContracts(Web3 web3,string path) {
             try {
 
-                if (File.Exists(path)) {
-                    char[] validResponses = new char[]{'y','n'};
-                    char response='n';
-                    do {
-                        Console.Write("Do you want to redeploy contracts (y,n)? ");
-                        response = Console.ReadKey().KeyChar;
-                    } while (!validResponses.Contains(response));
-
-                    if (response.Equals('n')) {
+                if (File.Exists(path) && File.Exists(FilePath)) {
+                    if (File.GetLastWriteTime(FilePath) < File.GetLastWriteTime(path)) {
                         FileStream stream = File.OpenRead(path);
                         using (StreamReader reader = new StreamReader(stream)) {
                             string json = reader.ReadToEnd();
                             _deployed = JsonConvert.DeserializeObject<IDictionary<string, string>>(json);
                         }
+
                         stream.Close();
                         return;
                     }
