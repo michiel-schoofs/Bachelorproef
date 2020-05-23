@@ -10,6 +10,7 @@ using Nethereum.Web3;
 using Nethereum.RPC.Eth.Exceptions;
 using Console_Application.Contracts.Contract;
 using Nethereum.Hex.HexTypes;
+using Nethereum.RPC.Eth.DTOs;
 
 namespace Console_Application.Services.UserService {
     public class UserService : IUserService {
@@ -129,7 +130,7 @@ namespace Console_Application.Services.UserService {
                 HexBigInteger gasprice = await _functionHandler.EstimateGasAsync(contract_ad, addFunction);
 
                 _logger.LogInformation("Registering username for {0} gas", gasprice.Value.ToString());
-                _functionHandler.SendRequestAndWaitForReceiptAsync(contract_ad, addFunction);
+                TransactionReceipt receipt = await _functionHandler.SendRequestAndWaitForReceiptAsync(contract_ad, addFunction);
             } catch (Exception e) {
                 _logger.LogError("Something went wrong with the RegisterUsername function: {0}", e.Message);
                 Console.WriteLine("Something went wrong with Registering a username");

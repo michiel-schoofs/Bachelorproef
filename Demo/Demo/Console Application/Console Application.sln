@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Console Application", "Console Application.csproj", "{FA7AEF33-65E3-48CC-9B78-D857FB368A78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Console Application", "Console Application.csproj", "{FA7AEF33-65E3-48CC-9B78-D857FB368A78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateContractsJsonFile", "..\GenerateContractsJsonFile\GenerateContractsJsonFile.csproj", "{907791CC-DA46-4F8C-9B8E-10F2D6F8789D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Deployment", "..\Deployment\Deployment.csproj", "{89B82A1A-991F-47D2-ADFB-668EAE416C06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenerateContractsJsonFile", "..\GenerateContractsJsonFile\GenerateContractsJsonFile.csproj", "{907791CC-DA46-4F8C-9B8E-10F2D6F8789D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,6 @@ Global
 		{907791CC-DA46-4F8C-9B8E-10F2D6F8789D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{907791CC-DA46-4F8C-9B8E-10F2D6F8789D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{907791CC-DA46-4F8C-9B8E-10F2D6F8789D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{89B82A1A-991F-47D2-ADFB-668EAE416C06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{89B82A1A-991F-47D2-ADFB-668EAE416C06}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{89B82A1A-991F-47D2-ADFB-668EAE416C06}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{89B82A1A-991F-47D2-ADFB-668EAE416C06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
