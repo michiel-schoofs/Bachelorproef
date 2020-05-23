@@ -9,6 +9,6 @@ namespace Console_Application.Services.Interfaces {
         public bool ContractDeployed(string name);
         public string GetAddressDeployedContract(string name);
         public string[] GetDeployedContractsNames();
-        public Task DeployContracts(Web3 web3);
+        public Task DeployContracts(Web3 web3,string path);
     }
 }

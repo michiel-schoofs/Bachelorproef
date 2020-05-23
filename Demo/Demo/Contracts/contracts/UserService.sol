@@ -31,7 +31,7 @@ contract UserService {
         return users.contains(msg.sender);
     }
 
-    function addUser(string memory _username) public {
+    function addUser(string memory _username) public{
         require(!usernameExists(_username),"You have to provide a unique username");
         require(!users.contains(msg.sender),"This user already has an account");
 

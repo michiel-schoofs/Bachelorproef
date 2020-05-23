@@ -26,8 +26,9 @@ namespace Console_Application.Services.LoginService {
         }
 
         public async Task SayGreeting() {
-            if (!(await _userService.HasUsername())){ 
-                
+            if (!(await _userService.HasUsername())){
+                _logger.LogWarning("No username found, Registering username");
+                await _userService.RegisterUsername();
             }
         }
     }

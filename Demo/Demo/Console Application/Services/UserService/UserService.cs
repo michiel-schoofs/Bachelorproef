@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Nethereum.Web3;
 using Nethereum.RPC.Eth.Exceptions;
 using Console_Application.Contracts.Contract;
+using Nethereum.Hex.HexTypes;
 
 namespace Console_Application.Services.UserService {
     public class UserService : IUserService {
@@ -17,7 +18,7 @@ namespace Console_Application.Services.UserService {
         private static Web3 _web3;
         private readonly IContractService _contractService;
 
-        public UserService(IKeyStoreService keyStore, ILogger<Program> logger,IContractService contractService) {
+        public UserService(IKeyStoreService keyStore, ILogger<Program> logger, IContractService contractService) {
             _keyStoreService = keyStore;
             _logger = logger;
             _contractService = contractService;
@@ -28,11 +29,11 @@ namespace Console_Application.Services.UserService {
             Console.Write("Provide the password of your keystore: ");
             string password = Console.ReadLine();
 
-            if (_web3 != null)
-                return _web3;
-
             try {
-                return new Web3(_keyStoreService.GetAccount(password), url: "http://127.0.0.1:7545");
+                if (_web3 == null)
+                   _web3 = new Web3(_keyStoreService.GetAccount(password), url: "http://127.0.0.1:7545");
+                
+                return _web3;
             } catch (DecryptionException) {
 
                 Console.WriteLine("Invalid password");
@@ -99,15 +100,43 @@ namespace Console_Application.Services.UserService {
                 bool b = await HasUsername();
                 Console.WriteLine(b);
             } catch (Exception e) {
-                _logger.LogError("Something went wrong with the GetUsername function: {0}",e.Message);
+                _logger.LogError("Something went wrong with the GetUsername function: {0}", e.Message);
                 Console.WriteLine("Something went wrong with the GetUsername function");
                 Console.Beep();
                 System.Environment.Exit(1);
             }
         }
 
-        public void RegisterUsername() {
-            throw new NotImplementedException();
+        public async Task RegisterUsername() {
+            try {
+                string username;
+
+                if (!_contractService.ContractDeployed("UserService"))
+                    throw new Exception("The contract is not deployed");
+
+                string contract_ad = _contractService.GetAddressDeployedContract("UserService");
+
+                do {
+                    Console.Write("No username registered, Please provide a username: ");
+                    username = Console.ReadLine();
+                } while (string.IsNullOrEmpty(username));
+
+                AddUserFunction addFunction = new AddUserFunction() {
+                    Username = username
+                };
+
+                var _functionHandler = _web3.Eth.GetContractTransactionHandler<AddUserFunction>();
+                HexBigInteger gasprice = await _functionHandler.EstimateGasAsync(contract_ad, addFunction);
+
+                _logger.LogInformation("Registering username for {0} gas", gasprice.Value.ToString());
+                _functionHandler.SendRequestAndWaitForReceiptAsync(contract_ad, addFunction);
+            } catch (Exception e) {
+                _logger.LogError("Something went wrong with the RegisterUsername function: {0}", e.Message);
+                Console.WriteLine("Something went wrong with Registering a username");
+                Console.Beep();
+                System.Environment.Exit(1);
+            }
         }
     }
 }
+

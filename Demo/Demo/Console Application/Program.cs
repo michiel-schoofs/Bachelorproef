@@ -30,9 +30,9 @@ namespace Console_Application {
             Web3 web3 = loginService.Login();
 
             IContractService contractService = provider.GetService<IContractService>();
-            contractService.DeployContracts(web3).Wait();
+            contractService.DeployContracts(web3, Directory.GetCurrentDirectory() + "/DeployedContracts.json").Wait();
 
-            loginService.SayGreeting();
+            loginService.SayGreeting().Wait();
         }
 
         public static ServiceProvider BuildProvider() {

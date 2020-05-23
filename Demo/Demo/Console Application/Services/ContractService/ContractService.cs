@@ -15,7 +15,7 @@ namespace Console_Application.Services.ContractService {
     public class ContractService : IContractService {
         private readonly ILogger<Program> _logger;
         private IDictionary<string, string> _contracts;
-        private readonly IDictionary<string, string> _deployed = new Dictionary<string,string>();
+        private IDictionary<string, string> _deployed = new Dictionary<string,string>();
         public string FilePath { get; set; }
 
         public ContractService(ILoggerFactory loggerFactory, string filePath) {
@@ -70,8 +70,28 @@ namespace Console_Application.Services.ContractService {
             return _deployed.Keys.ToArray();
         }
 
-        public async Task DeployContracts(Web3 web3) {
+        public async Task DeployContracts(Web3 web3,string path) {
             try {
+
+                if (File.Exists(path)) {
+                    char[] validResponses = new char[]{'y','n'};
+                    char response='n';
+                    do {
+                        Console.Write("Do you want to redeploy contracts (y,n)? ");
+                        response = Console.ReadKey().KeyChar;
+                    } while (!validResponses.Contains(response));
+
+                    if (response.Equals('n')) {
+                        FileStream stream = File.OpenRead(path);
+                        using (StreamReader reader = new StreamReader(stream)) {
+                            string json = reader.ReadToEnd();
+                            _deployed = JsonConvert.DeserializeObject<IDictionary<string, string>>(json);
+                        }
+                        stream.Close();
+                        return;
+                    }
+                } 
+
                 foreach (string byteCode in _contracts.Values) {
                     string contractName = _contracts.Keys.ToList()[_contracts.Values.ToList().IndexOf(byteCode)];
                     _logger.LogInformation("Attempting deployment of {0}",contractName);
@@ -85,15 +105,32 @@ namespace Console_Application.Services.ContractService {
                    
                     string address = transactionReceipt.ContractAddress;
                     _deployed.Add(contractName, address);
-
                     _logger.LogInformation("Deployment of {0} succesfull",contractName);
                 }
+
+                SaveToFile(path);
             } catch (Exception e) {
                 _logger.LogError("Something went wrong with the deployment: "+e.Message);
                 Console.WriteLine("Something went wrong with deployment of contracts");
                 Console.Beep();
                 System.Environment.Exit(1);
             }
+        }
+
+        private void SaveToFile(string path) {
+            if (File.Exists(path)) {
+                _logger.LogError("Deployed Contracts already exits, removing file");
+                File.Delete(path);
+            }
+
+            FileStream stream = File.Create(path);
+
+            using (StreamWriter writer = new StreamWriter(stream)) {
+                string json = JsonConvert.SerializeObject(_deployed);
+                writer.Write(json);
+            }
+
+            stream.Close();
         }
 
         private void CheckIfDeploymentWasSuccesfull(TransactionReceipt transactionReceipt) {
