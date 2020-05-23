@@ -30,7 +30,13 @@ namespace Console_Application {
             Web3 web3 = loginService.Login();
 
             IContractService contractService = provider.GetService<IContractService>();
-            contractService.DeployContracts(web3, Directory.GetCurrentDirectory() + "/DeployedContracts.json").Wait();
+
+            //Production
+            //contractService.DeployContracts(web3, Directory.GetCurrentDirectory() + "/DeployedContracts.json").Wait();
+            //Development
+            string directory = Directory.GetCurrentDirectory();
+            string projectDirectory = Directory.GetParent(directory).Parent.Parent.FullName + "/DeployedContracts.json";
+            contractService.DeployContracts(web3, projectDirectory).Wait();
 
             loginService.SayGreeting().Wait();
         }

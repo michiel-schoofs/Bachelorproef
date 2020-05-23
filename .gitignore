@@ -38,3 +38,5 @@ Demo/Example app with ipfs/Image-of-the-day/src/abis/*
 /Demo/Demo/Console Application/obj
 /Demo/Demo/GenerateContractsJsonFile/obj
 /Demo/Demo/GenerateContractsJsonFile/bin/Debug/netcoreapp3.1
+/Demo/Demo/Deployment/obj
+/.vs
