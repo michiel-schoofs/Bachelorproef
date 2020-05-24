@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >=0.6.0;
-import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
+import "./Helpers/OwnableOtherContract.sol";
 
-contract Repository is Ownable{
+contract Repository is OwnableOtherContract {
     string public cid;
     string public name;
     uint256 public id;
@@ -14,8 +14,12 @@ contract Repository is Ownable{
 
     Visibility public repoVisibility;
 
-    constructor(string memory _name, uint256 _id) public {
+    function setName(string memory _name) public {
+        require(bytes(_name).length != 0,"Please provide a name for the repository");
         name = _name;
+    }
+
+    function setId(uint256 _id) public {
         id = _id;
     }
 }

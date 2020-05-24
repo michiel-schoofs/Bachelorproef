@@ -20,6 +20,7 @@ using Nethereum.ABI;
 using Nethereum.ABI.Encoders;
 using Nethereum.ABI.Decoders;
 using Nethereum.ABI.JsonDeserialisation;
+using Nethereum.Contracts;
 
 namespace Console_Application.Services.UserService {
     public class UserService : IUserService {
@@ -157,6 +158,8 @@ namespace Console_Application.Services.UserService {
 
                 if (receipt.Failed())
                     throw new Exception("Something went wrong");
+
+                List<EventLog<>> events = receipt.DecodeAllEvents<>
             } catch (Exception e) {
                 _logger.LogError("Something went wrong with the RegisterUsername function: {0}", e.Message);
                 Console.WriteLine("Something went wrong with Registering a username");
