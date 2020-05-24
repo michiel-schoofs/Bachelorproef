@@ -8,7 +8,7 @@ namespace Console_Application.Services.Interfaces {
         public Task RegisterUsername();
         public bool HasAccount();
         public Task<bool> HasUsername();
-        public Task GetUsername();
+        public Task<string> GetUsername();
         public Task RequireTest();
     }
 }

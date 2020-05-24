@@ -16,6 +16,10 @@ using Nethereum.JsonRpc.Client;
 using System.Collections.Generic;
 using System.Collections;
 using Newtonsoft.Json.Linq;
+using Nethereum.ABI;
+using Nethereum.ABI.Encoders;
+using Nethereum.ABI.Decoders;
+using Nethereum.ABI.JsonDeserialisation;
 
 namespace Console_Application.Services.UserService {
     public class UserService : IUserService {
@@ -101,15 +105,29 @@ namespace Console_Application.Services.UserService {
             );
         }
 
-        public async Task GetUsername() {
+        public async Task<string> GetUsername() {
             try {
                 bool b = await HasUsername();
-                Console.WriteLine(b);
+
+                if (!b)
+                    throw new Exception("GetUsername called despite not having a username");
+
+                if (!_contractService.ContractDeployed("UserService"))
+                    throw new Exception("The contract is not deployed");
+
+                string contract_ad = _contractService.GetAddressDeployedContract("UserService");
+
+                GetUsernameFunction getUsernameFunction = new GetUsernameFunction();
+                var handler = _web3.Eth.GetContractQueryHandler<GetUsernameFunction>();
+                string username = await handler.QueryAsync<string>(contract_ad, getUsernameFunction);
+
+                return username;
             } catch (Exception e) {
                 _logger.LogError("Something went wrong with the GetUsername function: {0}", e.Message);
                 Console.WriteLine("Something went wrong with the GetUsername function");
                 Console.Beep();
                 System.Environment.Exit(1);
+                return null;
             }
         }
 
@@ -139,7 +157,6 @@ namespace Console_Application.Services.UserService {
 
                 if (receipt.Failed())
                     throw new Exception("Something went wrong");
-
             } catch (Exception e) {
                 _logger.LogError("Something went wrong with the RegisterUsername function: {0}", e.Message);
                 Console.WriteLine("Something went wrong with Registering a username");
@@ -148,7 +165,6 @@ namespace Console_Application.Services.UserService {
             }
         }
 
-        //Demonstrating error handling
         public async Task RequireTest() {
             RequireTestFunction function = new RequireTestFunction();
             var handler = _web3.Eth.GetContractTransactionHandler<RequireTestFunction>();
@@ -157,7 +173,10 @@ namespace Console_Application.Services.UserService {
             try {
                 TransactionReceipt rec = await handler.SendRequestAndWaitForReceiptAsync(contract_ad);
             } catch (RpcResponseException e) {
-                _logger.LogError("Something went wrong with the request");
+                _logger.LogError("Error handling is stupid in Nethereum");
+                Console.WriteLine("Something went wrong but that's expected");
+                Console.Beep();
+                System.Environment.Exit(1);
             }
         }
     }

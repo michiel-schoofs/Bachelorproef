@@ -30,6 +30,9 @@ namespace Console_Application.Services.LoginService {
                 _logger.LogWarning("No username found, Registering username");
                 await _userService.RegisterUsername();
             }
+
+            string username = await _userService.GetUsername();
+            Console.WriteLine(string.Format("Welcome {0}!", username));
         }
     }
 }

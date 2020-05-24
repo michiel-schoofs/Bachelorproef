@@ -11,6 +11,9 @@ namespace Console_Application.Contracts.Contract {
         public string Username { get; set; }
     }
 
+    [Function("GetUsernameFromUser", "string")]
+    public class GetUsernameFunction : FunctionMessage { }
+
     [Event("NewUserAdded")]
     public class NewUserAddedEvent : IEventDTO { 
         [Parameter("string", "_username")]
