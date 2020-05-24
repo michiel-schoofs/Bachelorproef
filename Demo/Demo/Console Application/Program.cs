@@ -16,6 +16,7 @@ using Console_Application.Services.LoginService;
 using Figgle;
 using Console_Application.Services.ContractService;
 using System.IO;
+using Console_Application.Services.RepositoryService;
 
 namespace Console_Application {
     public class Program {
@@ -39,6 +40,9 @@ namespace Console_Application {
             contractService.DeployContracts(web3, projectDirectory).Wait();
 
             loginService.SayGreeting().Wait();
+
+            Facade.Facade facade = new Facade.Facade(provider);
+            facade.ShowMenu();
         }
 
         public static ServiceProvider BuildProvider() {
@@ -46,6 +50,7 @@ namespace Console_Application {
             collection.AddSingleton<IKeyStoreService, KeyStoreService>()
                 .AddSingleton<IUserService, UserService>()
                 .AddSingleton<ILoginService, LoginService>()
+                .AddSingleton<IRepositoryService,RepositoryService>()
                 .AddLogging(opt => {
                     opt.AddConsole(c => {
                         c.DisableColors = false;

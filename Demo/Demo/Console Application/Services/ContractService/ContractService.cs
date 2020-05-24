@@ -87,19 +87,46 @@ namespace Console_Application.Services.ContractService {
                 } 
 
                 foreach (string byteCode in _contracts.Values) {
+                    if (byteCode.Equals("0x0"))
+                        continue;
+
                     string contractName = _contracts.Keys.ToList()[_contracts.Values.ToList().IndexOf(byteCode)];
+
+                    if (_deployed.Keys.Contains(contractName))
+                        continue;
+
                     _logger.LogInformation("Attempting deployment of {0}",contractName);
 
-                    NoParameterContract.Bytecode = byteCode;
-                    NoParameterContract contract = new NoParameterContract();
-                    var deploymentHandler = web3.Eth.GetContractDeploymentHandler<NoParameterContract>();
-                    TransactionReceipt transactionReceipt = await deploymentHandler.SendRequestAndWaitForReceiptAsync(contract);
-                    CheckIfDeploymentWasSuccesfull(transactionReceipt);
+                    string[] excludeList = new string[] { "RepositoryService" };
 
-                   
-                    string address = transactionReceipt.ContractAddress;
-                    _deployed.Add(contractName, address);
-                    _logger.LogInformation("Deployment of {0} succesfull",contractName);
+                    if (!(excludeList.Contains(contractName))) {
+                        NoParameterContract.Bytecode = byteCode;
+                        NoParameterContract contract = new NoParameterContract();
+                        var deploymentHandler = web3.Eth.GetContractDeploymentHandler<NoParameterContract>();
+                        TransactionReceipt transactionReceipt = await deploymentHandler.SendRequestAndWaitForReceiptAsync(contract);
+                        CheckIfDeploymentWasSuccesfull(transactionReceipt);
+                        string address = transactionReceipt.ContractAddress;
+                        _deployed.Add(contractName, address);
+                    } else {
+                        switch (contractName){
+                            case "RepositoryService":
+                                RepositoryServiceContract.Bytecode = byteCode;
+                                _deployed.TryGetValue("UserService", out string ad);
+
+                                RepositoryServiceContract repoContract = new RepositoryServiceContract() {
+                                    UserServiceAddress = ad
+                                };
+
+                                var deploymentHandler = web3.Eth.GetContractDeploymentHandler<RepositoryServiceContract>();
+                                TransactionReceipt transactionReceipt = await deploymentHandler.SendRequestAndWaitForReceiptAsync(repoContract);
+                                CheckIfDeploymentWasSuccesfull(transactionReceipt);
+                                string address = transactionReceipt.ContractAddress;
+                                _deployed.Add(contractName, address);
+                                break;
+                        }
+                    }
+
+                    _logger.LogInformation("Deployment of {0} succesfull", contractName);
                 }
 
                 SaveToFile(path);

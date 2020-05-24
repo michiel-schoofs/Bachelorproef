@@ -43,6 +43,12 @@ contract RepositoryService {
         names.push(name);
 
         emit RepositoryAdded(currentId);
+
+        require(userServiceContract.TXUserHasAccount(),"You don't have an account");
+
+        string memory username = userServiceContract.GetUsernameFromTXUser();
+        userServiceContract.addRepositoryToUser(username,address(repo));
+
         currentId++;
     }
 

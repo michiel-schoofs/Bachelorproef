@@ -37,6 +37,9 @@ namespace Console_Application.Services.UserService {
         }
 
         public Web3 GetUser() {
+            if (_web3 != null)
+                return _web3;
+
             Console.Write("Provide the password of your keystore: ");
             string password = Console.ReadLine();
 
@@ -159,7 +162,8 @@ namespace Console_Application.Services.UserService {
                 if (receipt.Failed())
                     throw new Exception("Something went wrong");
 
-                List<EventLog<>> events = receipt.DecodeAllEvents<>
+                //Decode event
+                //List<EventLog<>> events = receipt.DecodeAllEvents<>
             } catch (Exception e) {
                 _logger.LogError("Something went wrong with the RegisterUsername function: {0}", e.Message);
                 Console.WriteLine("Something went wrong with Registering a username");

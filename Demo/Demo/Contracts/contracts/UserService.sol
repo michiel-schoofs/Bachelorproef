@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
+pragma experimental ABIEncoderV2;
 import "../node_modules/@openzeppelin/contracts/utils/EnumerableSet.sol";
+import './Repository.sol';
 
 
 contract UserService {
@@ -8,6 +10,7 @@ contract UserService {
 
     struct User {
         address _address;
+        address[] _repositories;
     }
 
     mapping(string => User) usernameToUser;
@@ -17,6 +20,13 @@ contract UserService {
 
     event NewUserAdded(string _username);
     event UserDeleted(string _username);
+    event UserHasNewRepository(address repo);
+
+    function returnRepositoriesByUser(string memory _username) public view returns(User memory) {
+        require(usernameExists(_username),"The specified user doesn't exist");
+        User memory user = usernameToUser[_username];
+        return user;
+    }
 
     function usernameExists(string memory _username) public view returns(bool) {
         return usernameToUser[_username]._address != address(0);
@@ -26,9 +36,18 @@ contract UserService {
         require(1==2,"Require test failed");
     }
 
+    function GetUsernameFromTXUser() public view returns(string memory) {
+        require(TXUserHasAccount(),"This user has no account");
+        return addressToUsername[tx.origin];
+    }
+
     function GetUsernameFromUser() public view returns(string memory) {
         require(userHasAccount(),"This user has no account");
         return addressToUsername[msg.sender];
+    }
+
+    function TXUserHasAccount() public view returns(bool){
+        return users.contains(tx.origin);
     }
 
     function userHasAccount() public view returns(bool){
@@ -66,5 +85,15 @@ contract UserService {
         addressToUsername[msg.sender] = "";
 
         emit UserDeleted(_username);
+    }
+
+    function addRepositoryToUser(string memory _username, address _repoAd) public {
+        require(usernameExists(_username),"The specified user doesn't exist");
+        require(_repoAd != address(0),"You can't give an empty repository to a user");
+
+        User storage user = usernameToUser[_username];
+        user._repositories.push(_repoAd);
+
+        emit UserHasNewRepository(_repoAd);
     }
 }

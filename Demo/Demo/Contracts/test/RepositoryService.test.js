@@ -5,12 +5,16 @@ const truffleAssert = require('truffle-assertions');
 
 contract('RepositoryService',(accounts)=>{
     var contract;
+    var userContract;
+
     const account = accounts[0];
     const repoName = "My cool repo";
+    const username = "Bee benson";
 
     beforeEach(async () => {
-        const ad = await UserService.deployed();
-        contract = await RepositoryService.new(ad.address);
+        userContract = await UserService.new();
+        await userContract.addUser(username);
+        contract = await RepositoryService.new(userContract.address);
     });
 
     it('contract is deployed', async ()=>{
@@ -50,14 +54,13 @@ contract('RepositoryService',(accounts)=>{
         assert.strictEqual(id.toNumber()+1,id2.toNumber());
     })
 
+    it('Repository creation without account should throw exception', async() => {
+        await truffleAssert.reverts(contract.CreateRepository(repoName,{from: accounts[1]}))
+    })
+
     it('Repository creation should emit an event', async()=>{
         var result = await contract.CreateRepository(repoName,{from: account});
         truffleAssert.eventEmitted(result,"RepositoryAdded");
-    })
-
-    it('Repository not created should set the existsName function to false', async()=>{
-        const exist = await contract.methods['CheckIfRepoExists(string)'](repoName);
-        assert.isFalse(exist);
     })
 
     it('Repository created should set the existsName function to true', async() => {
@@ -107,5 +110,22 @@ contract('RepositoryService',(accounts)=>{
 
         const owner = await repository.owner();
         assert.strictEqual(owner, account);
+    })
+
+    it('Asking repositories for non existing account throws exception', async()=>{
+        const nonExistingUsername = "Beerooo benson";
+        await truffleAssert.reverts(userContract.returnRepositoriesByUser(nonExistingUsername));
+    })
+
+    it('User originally has no repositories', async()=>{
+        const result = await userContract.returnRepositoriesByUser(username);
+        assert.isEmpty(result);
+    })
+
+    it('User respository created getRespoitory returns result', async()=>{     
+        const result = await contract.CreateRepository(repoName,{from: account});
+        const address = await contract.methods['getRepository(string)'](repoName,{from: account});
+        const repos = await userContract.returnRepositoriesByUser(username);
+        assert.include(repos,address);
     })
 })
