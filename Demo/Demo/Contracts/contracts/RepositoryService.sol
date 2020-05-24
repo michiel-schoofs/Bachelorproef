@@ -23,7 +23,7 @@ contract RepositoryService {
         require(bytes(name).length != 0,"Please provide a name for the repository");
         require(!CheckIfRepoExists(name),"This name is already in use");
 
-        Repository repo = new Repository();
+        Repository repo = new Repository(name, currentId);
 
         nameToRepository[name] = repo;
         idToRepository[currentId] = repo;
