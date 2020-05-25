@@ -21,6 +21,7 @@ using Console_Application.Services;
 
 namespace Console_Application {
     public class Program {
+        [STAThread]
         static void Main(string[] args) {
             Console.WriteLine(FiggleFonts.Isometric1.Render("Git Eth"));
             ServiceProvider provider = BuildProvider();

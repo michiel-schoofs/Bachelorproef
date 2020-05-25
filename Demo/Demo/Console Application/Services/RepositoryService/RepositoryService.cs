@@ -36,6 +36,14 @@ namespace Console_Application.Services.RepositoryService {
                 if (!_contractService.ContractDeployed("RepositoryService"))
                     throw new Exception("The contract is not deployed");
 
+                string path = _ipfsService.SelectPath();
+
+                if (path == null) {
+                    throw new Exception("Please select a valid folder");
+                }
+
+                string cid = await _ipfsService.AddDirectoryOnIPFS(path);
+
                 string contractAd = _contractService.GetAddressDeployedContract("RepositoryService");
 
                 Web3 client = _userService.GetUser();
