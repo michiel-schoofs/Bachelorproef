@@ -22,19 +22,37 @@ namespace Console_Application.Facade {
             
             switch (choice) {
                 case 1:
-                    menu = "1. View own repositories\n2. View public repositories\n3. View repositories by user";
+                    menu = "1. View own repositories\n" +
+                        "2. View public repositories\n" +
+                        "3. View repositories by user\n" +
+                        "4. Add Repository";
                     Console.WriteLine(menu);
-                    int c = ReadOption(3);
+                    int c = ReadOption(4);
                     RepositoryHandler(c);
                     break;
             }
 
         }
 
+        private string AskForString(string message) {
+            string res = null;
+
+            do {
+                Console.Write(message);
+                res = Console.ReadLine();
+            } while (string.IsNullOrEmpty(res));
+
+            return res;
+        }
+
         public void RepositoryHandler(int choice) {
             switch (choice){
                 case 1:
                     repositoryService.GetRepositoriesByCurrentUser().Wait();
+                    break;
+                case 4:
+                    string repoName = AskForString("Enter a name for the repository: ");
+                    repositoryService.AddRepository(repoName).Wait();
                     break;
             }
         }

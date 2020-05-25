@@ -5,6 +5,6 @@ namespace Console_Application.Services.Interfaces {
         public Task GetRepositoriesByUser(string username);
         public Task GetRepositoriesByCurrentUser();
         public Task<string[]> GetRepositories();
-        public Task<string[]> AddRepository(string name);
+        public Task AddRepository(string name);
     }
 }

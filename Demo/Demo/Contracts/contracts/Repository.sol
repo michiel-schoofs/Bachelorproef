@@ -14,6 +14,14 @@ contract Repository is OwnableOtherContract {
 
     Visibility public repoVisibility;
 
+    function getName() public view returns(string memory) {
+        return name;
+    }
+
+    function getId() public view returns(uint256) {
+        return id;
+    }
+
     function setName(string memory _name) public {
         require(bytes(_name).length != 0,"Please provide a name for the repository");
         name = _name;

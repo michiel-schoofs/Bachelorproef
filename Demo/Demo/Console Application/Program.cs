@@ -17,6 +17,7 @@ using Figgle;
 using Console_Application.Services.ContractService;
 using System.IO;
 using Console_Application.Services.RepositoryService;
+using Console_Application.Services;
 
 namespace Console_Application {
     public class Program {
@@ -51,6 +52,7 @@ namespace Console_Application {
                 .AddSingleton<IUserService, UserService>()
                 .AddSingleton<ILoginService, LoginService>()
                 .AddSingleton<IRepositoryService,RepositoryService>()
+                .AddSingleton<IIPFSService,IPFSService>()
                 .AddLogging(opt => {
                     opt.AddConsole(c => {
                         c.DisableColors = false;

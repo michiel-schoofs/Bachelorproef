@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 pragma experimental ABIEncoderV2;
+
 import "../node_modules/@openzeppelin/contracts/utils/EnumerableSet.sol";
 import './Repository.sol';
-
 
 contract UserService {
     using EnumerableSet for EnumerableSet.AddressSet;
@@ -22,9 +22,9 @@ contract UserService {
     event UserDeleted(string _username);
     event UserHasNewRepository(address repo);
 
-    function returnRepositoriesByUser(string memory _username) public view returns(User memory) {
+    function ReturnUser(string memory _username) public view returns(User memory) {
         require(usernameExists(_username),"The specified user doesn't exist");
-        User memory user = usernameToUser[_username];
+        User storage user = usernameToUser[_username];
         return user;
     }
 

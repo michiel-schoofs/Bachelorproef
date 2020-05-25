@@ -2,8 +2,8 @@
 using Nethereum.Contracts;
 
 namespace Console_Application.Contracts.Contract {
-   [Function("name", "string")]
+   [Function("getName", "string")]
    public class GetNameOfRepo : FunctionMessage { }
-   [Function("id", "uint256")]
+   [Function("getId", "uint256")]
    public class GetIdOfRepo : FunctionMessage { }
 }
