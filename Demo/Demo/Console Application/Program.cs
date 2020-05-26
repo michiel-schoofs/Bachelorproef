@@ -29,10 +29,20 @@ namespace Console_Application {
             ILogger logger = GetLogger(provider);
             logger.LogInformation("Application started...");
 
+            IIPFSService IPFS = provider.GetService<IIPFSService>();
+            IPFS.LaunchDaemon();
+
             ILoginService loginService = provider.GetService<ILoginService>();
             Web3 web3 = loginService.Login();
 
             IContractService contractService = provider.GetService<IContractService>();
+
+            string dir = Directory.GetCurrentDirectory();
+            string repofile = Directory.GetParent(dir).Parent.Parent.FullName + "/Repository.json";
+
+            IRepositoryService repoService = provider.GetService<IRepositoryService>();
+            repoService.SetRepositoryFile(repofile);
+            repoService.CleanRepositoryFile();
 
             //Production
             //contractService.DeployContracts(web3, Directory.GetCurrentDirectory() + "/DeployedContracts.json").Wait();
@@ -44,7 +54,9 @@ namespace Console_Application {
             loginService.SayGreeting().Wait();
 
             Facade.Facade facade = new Facade.Facade(provider);
-            facade.ShowMenu();
+            while (true) {
+                facade.ShowMenu();
+            }
         }
 
         public static ServiceProvider BuildProvider() {

@@ -6,16 +6,29 @@ contract Repository is OwnableOtherContract {
     string public cid;
     string public name;
     uint256 public id;
+    uint256 public version;
 
-    enum Visibility {
-        pub,
-        priv
+    mapping(uint256 => string) history;
+    event CIDChanged(string _cid);
+
+    constructor() public {
+        version = 1;
     }
-
-    Visibility public repoVisibility;
 
     function getName() public view returns(string memory) {
         return name;
+    }
+
+    function setCid(string memory _cid) public{
+        require(bytes(_cid).length != 0,"Please provide a cid for this repository");
+        history[version] = _cid;
+        cid = _cid;
+        emit CIDChanged(_cid);
+        version++;
+    }
+
+    function getCid() public view returns(string memory){
+        return cid;
     }
 
     function getId() public view returns(uint256) {

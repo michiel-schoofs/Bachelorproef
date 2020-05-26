@@ -1,11 +1,13 @@
 ﻿using GenerateContractsJsonFile.Model;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text.Json.Serialization;
 
 /// <summary>
@@ -37,10 +39,12 @@ namespace GenerateContractsJsonFile {
         static void PopulateDictonary() {
             foreach (string path in files) {
                 FileStream stream = File.OpenRead(path);
-                
                 using (StreamReader reader = new StreamReader(stream)) {
                     Contract c = JsonConvert.DeserializeObject<Contract>(reader.ReadToEnd());
-                    contracts.Add(c.contractName, c.bytecode);
+
+                    if (!c.bytecode.Equals("0x")) {
+                        contracts.Add(c.contractName, c.bytecode);
+                    }
                 }
 
                 stream.Close();

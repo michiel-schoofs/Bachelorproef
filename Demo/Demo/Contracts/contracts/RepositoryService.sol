@@ -29,12 +29,13 @@ contract RepositoryService {
         return names;
     }
 
-    function CreateRepository(string memory name) public {
+    function CreateRepository(string memory name, string memory cid) public {
         require(!CheckIfRepoExists(name),"This name is already in use");
 
         Repository repo = new Repository();
         repo.setName(name);
         repo.setId(currentId);
+        repo.setCid(cid);
 
         nameToRepository[name] = address(repo);
         idToRepository[currentId] = address(repo);

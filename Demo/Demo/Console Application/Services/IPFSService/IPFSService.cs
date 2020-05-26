@@ -14,7 +14,6 @@ namespace Console_Application.Services {
 
         public IPFSService(ILogger<Program> logger) {
             _logger = logger;
-            LaunchDaemon();
         }
 
         public void LaunchDaemon() {
@@ -35,6 +34,7 @@ namespace Console_Application.Services {
                 }
             }
 
+            System.Threading.Thread.Sleep(4000);
             p.Close();
             _logger.LogInformation("IPFS daemon launched");
         }

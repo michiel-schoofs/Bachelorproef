@@ -6,4 +6,6 @@ namespace Console_Application.Contracts.Contract {
    public class GetNameOfRepo : FunctionMessage { }
    [Function("getId", "uint256")]
    public class GetIdOfRepo : FunctionMessage { }
+   [Function("getCid","string")]
+   public class GetCidOfRepo : FunctionMessage { }
 }

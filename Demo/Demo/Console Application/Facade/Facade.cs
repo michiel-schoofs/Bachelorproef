@@ -11,9 +11,11 @@ namespace Console_Application.Facade {
         }
 
         public void ShowMenu() {
-            string menu = "What category of operation do you want to preform?\n1. Repositories\n";
+            string menu = "What category of operation do you want to preform?\n" +
+                "1. Repositories\n" +
+                "2. Quit\n";
             Console.Write(menu);
-            int option = ReadOption(1);
+            int option = ReadOption(2);
             ShowSubMenu(option);
         }
 
@@ -25,10 +27,14 @@ namespace Console_Application.Facade {
                     menu = "1. View own repositories\n" +
                         "2. View public repositories\n" +
                         "3. View repositories by user\n" +
-                        "4. Add Repository";
+                        "4. Add Repository\n" +
+                        "5. Clone Repository";
                     Console.WriteLine(menu);
-                    int c = ReadOption(4);
+                    int c = ReadOption(5);
                     RepositoryHandler(c);
+                    break;
+                case 2:
+                    QuitApplication();
                     break;
             }
 
@@ -45,6 +51,10 @@ namespace Console_Application.Facade {
             return res;
         }
 
+        private void QuitApplication() {
+            System.Environment.Exit(0);
+        }
+
         public void RepositoryHandler(int choice) {
             switch (choice){
                 case 1:
@@ -53,6 +63,9 @@ namespace Console_Application.Facade {
                 case 4:
                     string repoName = AskForString("Enter a name for the repository: ");
                     repositoryService.AddRepository(repoName).Wait();
+                    break;
+                case 5:
+                    repositoryService.CloneRepository().Wait();
                     break;
             }
         }
