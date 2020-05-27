@@ -399,40 +399,88 @@ Op basis van de hash van de individuele blokken wordt vervolgens een CID opgeste
 
 \section{Blockchain principes}
 \subsection{Inleiding}
-Blockchain is een gedecentraliseerd opslag oplossing die werd ontworpen door  Satoshi Nakamoto en de basis vormt voor Bitcoin. Het systeem is ontworpen in 2009. Zoals vermeld in het witboek geschreven door \textcite{Satoshi2009} is de doelstelling van Bitcoin om een elektronisch peer-to-peer betalingssysteem te voorzien. Het idee van Nakamoto was vooral revolutionair aangezien het een manier biedt om binnen een P2P netwerk gegevens op te slaan en deze gegevens ook te valideren. Het probleem dat bitcoin oplost voor P2P netwerken staat ook wel bekent als het \textit{Byzantine Generals’ Problem}.Dit probleem kan als volgt worden beschreven:\\
+Blockchain is een gedecentraliseerde opslagoplossing. Blockchain werd in 2009 ontworpen door \textcite{Satoshi2009} en vormt de basis van Bitcoin. Zoals vermeld in het Witboek van \textcite{Satoshi2009} is de doelstelling van Bitcoin om een elektronisch peer-to-peer betalingssysteem te voorzien. Het idee van Nakamoto was vooral revolutionair aangezien het een manier biedt om binnen een P2P netwerk gegevens op te slaan en deze gegevens ook te valideren. Het probleem dat Bitcoin oplost voor P2P netwerken staat ook wel bekenD als het \textit{Byzantine Generals’ Problem}.\\
 
-Drie generalen moeten beslissen om een stad aan te vallen. Ze kunnen enkel communiceren via koeriers die tussen de verschillende generalen berichten overbrengen. De drie generalen moeten het eens geraken om de stad aan te vallen of deze met rust te laten. eenmaal de aanval is ingezet is er geen manier om terug te trekken \autocite{Peter2018}. Aanvankelijk lijkt dit probleem triviaal, ze sturen alle drie een bericht naar elkaar en bereiken een consensus door twee derde meerderheid. Toch is dit probleem complexer, wat als de boodschapper niet te vertrouwen is bijvoorbeeld? Of wat als er een generaal is die twee verschillende stemmen uitbrengt?\\
+Dit probleem kan als volgt worden beschreven: Drie generalen moeten beslissen om een stad aan te vallen. Ze kunnen enkel communiceren via koeriers die tussen de verschillende generalen berichten overbrengen. De drie generalen moeten het eens geraken om de stad aan te vallen of met rust te laten. Eenmaal de aanval is ingezet is er geen manier om terug te trekken \autocite{Peter2018}. Aanvankelijk lijkt dit probleem triviaal. Ze sturen alle drie een bericht naar elkaar en bereiken een consensus door twee derde meerderheid. Toch is dit probleem complexer: wat als de boodschapper niet te vertrouwen is bijvoorbeeld? Wat als er een generaal is die twee verschillende stemmen uitbrengt?\\
 
-Dit probleem demonstreert dat het niet eenvoudig is om tot een consensus te komen in een systeem waar ieder als gelijke wordt gezien. Er is immers één rotte appel nodig om de hele consensus te beïnvloeden. Blockchain bied aldus een consensus algoritme om binnen een P2P netwerk -waar iedere node als gelijke wordt gezien- boodschappen en gegevens te gaan opslaan. Deze boodschappen en gegevens worden ook wel \textbf{transacties} genoemd.\\
+Dit probleem demonstreert dat het niet eenvoudig is om tot een consensus te komen in een systeem waar ieder als gelijke wordt gezien. Er is immers één rotte appel nodig om de hele consensus te beïnvloeden. Blockchain is innoverend omdat het een consensus algoritme biedt om binnen een P2P netwerk -waar iedere node als gelijke wordt gezien- boodschappen en gegevens op te slaan. Deze boodschappen en gegevens worden ook wel \textbf{transacties} genoemd.\\
 
-Hoe kadert blockchain binnen de POC die wordt ontwikkeld? Zoals eerder vermeld -zie \ref{Duiding_IPFS}- bestaat een versiebeheersysteem niet enkel uit bestanden maar ook uit een logboek. Dit logboek is in essentie een overzicht van alle wijzigingen in de bestanden. Dit logboek moet worden opgeslagen en kunnen worden aangepast op een P2P netwerk. Hiervoor kan er worden gebruik gemaakt van een blockchain.\\
+Hoe kadert blockchain binnen de POC die in deze bachelorproef wordt ontwikkeld? Zoals eerder vermeld -zie \ref{Duiding_IPFS}- bestaat een versiebeheersysteem niet enkel uit bestanden maar ook uit een logboek. Dit logboek is in essentie een overzicht van alle wijzigingen in de bestanden. Dit logboek moet worden opgeslagen en kunnen worden aangepast op een P2P netwerk. Hiervoor kan er worden gebruik gemaakt van een blockchain.\\
 
 \subsection{Basis principes van een blockchain}
-In deze sectie wordt blockchain uitgelegd. Hoe kunnen transacties worden toegevoegd en gevalideerd op een blockchain? Deze tekst is gebaseerd op het originele voorstel door \textcite{Satoshi2009} en de video gepubliceerd door \textcite{Blue2017}.\\
+In deze sectie wordt blockchain uitgelegd aan de hand van het originele voorstel door \textcite{Satoshi2009} en de video gepubliceerd door \textcite{Blue2017}.\\
 
-In het kort gesteld is Blockchain een geheel van met elkaar verbonden blokken van transacties. Dit systeem van onderling verbonden blocken wordt ook wel een \textbf{ledger} genoemd. Elke peer heeft ten allen tijden een kopie van deze ledger. Een transactie is een bepaalde set van data. In het geval van bitcoin is dit een overschrijving. Een voorbeeld van een transactie op het bitcoin netwerk is Alice geeft Bob 25 bitcoins. Een blok is aldus een lijst van transacties. Om dit principe te verduidelijken kan er gebruikt worden van onderstaande grafische voorstelling:\\
+In het kort gesteld is blockchain een geheel van met elkaar verbonden blokken van transacties. Dit systeem van onderling verbonden blokken wordt ook wel een \textbf{ledger} genoemd. Elke peer heeft ten allen tijden een kopie van deze ledger. Een transactie is een bepaalde set van data. In het geval van bitcoin is dit een overschrijving. Een voorbeeld van een transactie op het bitcoin netwerk is Alice geeft Bob 25 bitcoins. Een blok is aldus een lijst van transacties. Om dit principe te verduidelijken, kan er gebruik worden gemaakt van onderstaande grafische voorstelling:\\
 
 \begin{figure}[h!]
 	\centering
 		\includegraphics[scale=0.4]{blockchain-1.png}
 	\caption[Blockchain - Voorstelling 1]{De blockchain bestaat uit onderling verbonden blokken. Een blok bevat een lijst van transacties.}
+	\label{blocks}
 \end{figure}
 
-Hoe worden deze transacties gevalideerd? Hoe weten we bijvoorbeeld dat Alice wel degelijk 15 bitcoins aan Bob geeft? Dit gebeurd door \textbf{asymmetrische cryptografie}. Een formele definitie wordt gegeven door \textcite{Farah2012}. Deze stellen dat asymmetrische cryptografie gebruik maakt van twee sleutels. Langs de ene kant hebben we de sleutel die gebruikt wordt bij het encrypteren van een bericht. Langs de andere kant hebben we de sleutel die gebruikt wordt bij het decrypteren. Het is hierbij computermatig onwaarschijnlijk om gegeven een encryptiesleutel en het gebruikte algoritme de decryptiesleutel te vinden. De encryptiesleutel wordt ook wel de \textbf{publieke sleutel} genoemd. De decryptiesleutel wordt de \textbf{privé sleutel} genoemd. De privé sleutel is enkel in handen van één persoon en mag niet gedeeld worden met andere. De publieke sleutel is toegankelijk voor iedereen. Hoe wordt dit principe gebruikt om te verifiëren dat Alice wel degelijk de verzender is van het bericht?\\
+Hoe worden deze transacties gevalideerd? Hoe weten we bijvoorbeeld dat Alice wel degelijk 15 bitcoins aan Bob geeft? Dit gebeurt door \textbf{asymmetrische cryptografie}. \textcite{Farah2012} stellen dat asymmetrische cryptografie gebruik maakt van twee sleutels: enerzijds de sleutel die gebruikt wordt bij het encrypteren van een bericht, anderzijds de sleutel die gebruikt wordt bij het decrypteren. Als zowel de encryptiesleutel en het hashingalgoritme gekend zijn dan is het computermatig onwaarschijnlijk dat de decryptiesleutel kan worden achterhaald. De encryptiesleutel wordt ook wel de \textbf{publieke sleutel} genoemd. De decryptiesleutel wordt de \textbf{privé sleutel} genoemd. De privé sleutel is enkel in handen van één persoon en mag niet gedeeld worden met andere. De publieke sleutel is toegankelijk voor iedereen. Hoe wordt dit principe gebruikt om te verifiëren dat Alice wel degelijk de verzender is van het bericht?\\
 
-Alice kan bewijzen dat ze een transactie heeft goedgekeurd door deze transactie te gaan ondertekenen met haar privé sleutel. Dit principe is gelijkaardig aan de manier waarop officiële documenten worden ondertekend. Bij handtekeningen op officiële documenten kan er worden geverifieerd dat deze ondertekend zijn door een bepaald persoon door middel van zijn/haar handschrift. Bij digitale handtekeningen kunnen we verifiëren dat ze zijn ondertekend door een bepaald privé sleutel van een persoon. Dit gebeurd door de corresponderende publieke sleutel, de handtekening en het originele bericht.\footnote{Deze uitleg is nogal kort door de bocht. Asymmetrische encryptie is een uitgebreid concept. Voor meer informatie hoe deze wordt toegepast binnen bitcoin zie: $https://learnmeabitcoin.com/beginners/digital_signatures$} Om dit nog eens duidelijk te maken kan er gebruik worden gemaakt van onderstaande grafiek:
+Alice kan bewijzen dat ze een transactie heeft goedgekeurd door deze transactie te ondertekenen met haar privé sleutel. Dit principe is gelijkaardig aan de manier waarop officiële documenten worden ondertekend. Bij handtekeningen op officiële documenten kan er worden geverifieerd dat deze ondertekend zijn door een bepaald persoon door middel van zijn/haar handschrift. Bij digitale handtekeningen kunnen we verifiëren dat ze zijn ondertekend door een bepaald privé sleutel van een persoon. Dit gebeurt door de corresponderende publieke sleutel, de handtekening en het originele bericht.\footnote{Deze uitleg is nogal kort door de bocht. Asymmetrische encryptie is een uitgebreid concept. Voor meer informatie hoe deze wordt toegepast binnen bitcoin zie: $https://learnmeabitcoin.com/beginners/digital_signatures$} Dit wordt geïllustreerd in de onderstaande grafiek:
 
 \begin{figure}[h!]
 	\centering
 		\includegraphics[scale=0.4]{blockchain-2.png}
-	\caption[Blockchain - Voorstelling 2]{Alice ondertekend transacties aan de hand van haar privé sleutel.}
+	\caption[Blockchain - Voorstelling 2]{Alice ondertekent transacties aan de hand van haar privé sleutel.}
 \end{figure}
 
+Elke peer heeft zoals reeds eerder vermeld zijn eigen kopie van de ledger. Dit wilt zeggen dat elke deelnemer van het netwerk ten allen tijden een volledige lijst van transacties heeft. Een voordeel van een volledige lijst van transacties bij te houden is dat er kan geverifieerd worden dat Alice wel degelijk over 15 bitcoin beschikt. Alice kan aldus niet meet uitgeven dan ze reeds heeft. Op het moment dat Alice of Bob een transactie uitvoeren, zal deze dus over heel het netwerk worden verspreid.  Al deze transacties worden gebundeld onder de vorm van blokken -zie grafiek \ref{blocks} -. Door bijvoorbeeld twee keer dezelfde blokken toe te voegen of bepaalde blokken eruit te halen kan een individuele gebruiker blockchain en transacties manipuleren.  Om dit te vermijden wordt het concept van een consensus algoritme gebruikt. Om meer specifiek te zijn wordt binnen bitcoin het zogenaamde \textbf{Proof of Work} algoritme gebruikt.\\
 
-\textbf{Binnen dit hoofdstuk zullen de volgende delen behandeld worden}:
+Proof of work is een concept dat is ontwikkeld door \textcite{Dwork}. Proof of work vereist het oplossen van een uniek wiskundig probleem alvorens een bepaalde handeling mag worden uitgevoerd. In het artikel van \textcite{Dwork} werd dit principe gebruikt om spam te vermijden. Indien een computer voor elke e-mail een wiskundig probleem moest oplossen is het praktisch onmogelijk om duizenden en duizenden e-mails te versturen. Hoe kadert dit principe binnen blockchain?\\
+
+Bitcoin gebruikt het proof of work (=PoW) principe voor het valideren van blokken. Pas als het volgende wiskundig probleem is opgelost, mag een blok worden toegevoegd aan de blockchain. Binnen cryptografie speelt het concept van hashing een grote rol - zie \ref{hashing} -. Een eigenschap van deze hashes is dat het wiskundig onwaarschijnlijk is om gegeven een bepaalde hashwaarde de originele input waarde te vinden. Het is echter relatief eenvoudig om een bepaalde input waarde te hashen. Het PoW algoritme gebruikt deze eigenschappen door volgend wiskundig probleem op te stellen:\\
+
+Bereken de hashwaarde gebruik makend van alle transacties + een bepaald getal. De resulterende hash moet x-aantal nullen bevatten in het begin van de hashcode. Het probleem bestaat er aldus uit om het getal te vinden dat ervoor zorgt dat de resulterende hash met x-aantal nullen begint.  Om dit principe nog eens te verduidelijken stel onderstaand scenario:\\
+
+Alice ontvangt 200 transacties. Ze bundelt deze samen tot een blok. De wiskundige opgave bestaat er aldus uit om een getal x te vinden (ook wel de \textbf{nonce} genoemd) dat samen met de lijst van transacties door het SHA-256 een hash code oplevert met n-aantal nullen in het begin.\\
+
+De volgende grafiek verduidelijkt dit scenario:
+
+\begin{figure}[h!]
+	\centering
+		\includegraphics[scale=0.3]{blockchain-3.png}
+	\caption[Blockchain - Voorstelling 3]{Voorstelling van een hash-puzzel.}
+\end{figure}
+
+\newpage
+
+Het proof of work algoritme heeft twee verschillende eigenschappen:
 
 \begin{enumerate}
-\item Inleiding
-\item Basis principes
-\item Ethereum en smartcontracts
+	\item De nonce kan enkel worden gevonden door alle verschillende mogelijkheden te berekenen Zoals vermeld in \ref{hashing} kan men niet via de gewenste uitkomst de inputwaarde berekenen. Men kan dus niet simpelweg een getal met het aantal vereiste 0-bits omzetten naar een corresponderende inputwaarde.
+	\item De moeilijkheidsgraad voor het algoritme is rechtstreeks verbonden met het aantal nullen dat vereist is in het begin van de resulterende hashwaarde. Dit is immers ook logisch. Stel bijvoorbeeld dat de resulterende hashwaarde 10 bit lang is en slechts één 0-bit vereist vooraan dan zijn er $2^9 = 512$ toegestane waarden. Wordt deze vereiste op vijf 0-bits gelegd dan zijn er slechts $2^5 = 32$ mogelijke uitkomsten.
 \end{enumerate}
+
+Er kan dus gesteld worden dat indien een peer een bepaalde nonce waarden heeft berekend deze een significant rekenkundige taak heeft verricht. Hoe zorgt het Proof Of Work algoritme nu echter voor data integriteit binnen een blockchain netwerk. Anders gesteld hoe zorgt dit algoritme ervoor dat fraude onwaarschijnlijk is.\\
+
+De echte kracht van blockchain ligt in het feit dat de blokken onderling zijn verbonden. Concreet wilt dit zeggen dat de oplossing uit het PoW algoritme wordt opgenomen in het volgende blok. Volgende grafiek illustreert dit principe:
+
+\begin{figure}[h!]
+	\centering
+		\includegraphics[scale=0.2]{blockchain-4.png}
+	\caption[Blockchain - Voorstelling 4]{De blockchain is een verzameling van blokken die onderling verbonden zijn.}
+\end{figure}
+
+Dit maakt het vervalsen van transacties uitermate moeilijk om de volgende reden:\\
+
+Stel dat er momenteel 85 blokken aanwezig zijn op de Blockchain. Bob wil blok 42 veranderen. Hiervoor berekent hij opnieuw de nonce waarde. Bob stuurt dit nieuwe blok naar alle andere peers. Deze peers zitten momenteel op blok nummer 85 en zullen het nieuw blok aldus niet opnemen. \textbf{De langste keten is immers correct}. Het blok dat Bob heeft gestuurd, bevat de PoW hash van block 41 en dus niet de meest recente PoW hash waarde. Bob zal dus de overige 44 blokken ook moeten berekenen. Tegen de tijd dat Bob al deze blokken heeft berekend, is het netwerk hoogstwaarschijnlijk al veel verder. Tenzij Bob sneller dan alle andere peers deze nonce waarde kan berekenen is het vervalsen haast onmogelijk.\\
+
+Alle bovenstaande principes vormen de achterliggende technologie van blockchain netwerken. Een korte definitie luidt dus als volgt: blockchain is een manier om in een gedecentraliseerd systeem aan dataopslag te doen. Het is een aaneenschakeling van lijsten van transacties. Hierbij wordt een Proof of Work algoritme gebruikt om ervoor te zorgen dat frauduleuze transacties onwaarschijnlijk zijn.
+
+\subsection{Blockchain mining}
+Om deel te nemen aan een blockchain netwerk moet men ten alle tijden een recente kopie hebben van de ledger. Vervolgens kan men transacties maken en deze gaan valideren. Het is hierbij belangrijk om te onthouden dat \textbf{transacties valideren geen vereiste} is om transacties aan te maken. Peers die actief transacties gaan valideren aan de hand van het Proof-of-work algoritme worden \textbf{miners} genoemd. Peers die deelnemen aan het netwerk wordt doorheen deze tekst bestempeld als \textbf{participanten}. Het is aldus de taak van miners om transacties door andere peers te gaan bundelen in blokken en vervolgens het PoW algoritme toe te passen. Eenmaal een blok is gevonden wordt deze verspreid over het netwerk (over zowel participanten als andere miners). Om het verschil tussen een participant en een miner nog eens te verduidelijken wordt volgende grafiek gebruikt:
+
+\begin{figure}[h!]
+	\centering
+		\includegraphics[scale=0.2]{blockchain-5.png}
+	\caption[Blockchain - Voorstelling 5]{Een demonstratie van het verschil tussen miners en participanten.}
+\end{figure}
+\newpage
+
+
+\subsection{Smartcontracts en ethereum}
