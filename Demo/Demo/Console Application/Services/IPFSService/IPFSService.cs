@@ -1,5 +1,6 @@
 ﻿using Console_Application.Services.Interfaces;
 using Ipfs;
+using Ipfs.CoreApi;
 using Ipfs.Http;
 using Microsoft.Extensions.Logging;
 using System;
@@ -91,6 +92,12 @@ namespace Console_Application.Services {
 
                 return null;
             }
+        }
+
+        public async Task<string> GetCid(string path) {
+            var options = new AddFileOptions { OnlyHash = true };
+            var fsn = await ipfs.FileSystem.AddDirectoryAsync(path, true,options);
+            return fsn.Id;
         }
     }
 }

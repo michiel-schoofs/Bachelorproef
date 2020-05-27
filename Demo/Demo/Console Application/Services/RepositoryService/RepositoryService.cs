@@ -127,10 +127,33 @@ namespace Console_Application.Services.RepositoryService {
                         int id = await idhand.QueryAsync<int>(repoad, getIdFunction);
                         string cid = await cidhand.QueryAsync<string>(repoad, getCidFunction);
 
-                        string status = LocalRepositoryExist(name) ? "local" : "remote";
+                        bool localExist = LocalRepositoryExist(name);
+                        string status = localExist ? "local" : "remote";
 
-                        Console.WriteLine(string.Format("id:{0} - name:{1} - cid:{2} - status:{3}"
-                            , id, name, cid, status));
+                        if (localExist) {
+                            bool update = cid.Equals(_ipfsService.GetCid(name));
+
+                            FileStream stream = File.OpenRead(repoFile);
+
+                            using (StreamReader reader = new StreamReader(stream)) {
+                                string json = reader.ReadToEnd();
+                                List<RepositorySerialized> repos = new List<RepositorySerialized>();
+
+                                if (json.Replace("{", "").Replace("}", "").Trim().Length != 0)
+                                    repos = JsonConvert.DeserializeObject<List<RepositorySerialized>>(json);
+
+                                var repo = repos.First(r => r.Name.Equals(name));
+                                string localCid = await _ipfsService.GetCid(repo.Path);
+                                string notUpToDate = localCid.Equals(cid) ? "up-to-date" : "please pull new changes";
+
+                                Console.WriteLine(string.Format("id:{0} - name:{1} - cid:{2} - status:{3} - clean? {4}"
+                                    , id, name, cid, status,notUpToDate));
+                            }
+
+                        } else {
+                            Console.WriteLine(string.Format("id:{0} - name:{1} - cid:{2} - status:{3}"
+                                , id, name, cid, status));
+                        }
                     }
                 }
 
@@ -267,6 +290,14 @@ namespace Console_Application.Services.RepositoryService {
                 string path = $"C:\\" + name;
                 await _ipfsService.GetDirectoryFromIPFS(path, cid);
                 Console.WriteLine(string.Format("repository {0} succefully cloned to {1}", name,path));
+
+                RepositorySerialized repos = new RepositorySerialized() {
+                    Name = name,
+                    CID = cid,
+                    Path = path
+                };
+
+                WriteToRepositoryFile(repos);
             } catch (Exception e) {
                 _logger.LogError("Something went wrong with the GetLocalRepository {0}", e.Message);
                 Console.WriteLine(e.Message);
