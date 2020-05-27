@@ -410,7 +410,7 @@ Hoe kadert blockchain binnen de POC die wordt ontwikkeld? Zoals eerder vermeld -
 \subsection{Basis principes van een blockchain}
 In deze sectie wordt blockchain uitgelegd. Hoe kunnen transacties worden toegevoegd en gevalideerd op een blockchain? Deze tekst is gebaseerd op het originele voorstel door \textcite{Satoshi2009} en de video gepubliceerd door \textcite{Blue2017}.\\
 
-In het kort gesteld is Blockchain een geheel van met elkaar verbonden blokken van transacties. Een transactie is een bepaalde set van data. In het geval van bitcoin is dit een overschrijving. Een voorbeeld van een transactie op het bitcoin netwerk is Alice geeft Bob 25 bitcoins. Een blok is aldus een lijst van transacties. Om dit principe te verduidelijken kan er gebruikt worden van onderstaande grafische voorstelling:\\
+In het kort gesteld is Blockchain een geheel van met elkaar verbonden blokken van transacties. Dit systeem van onderling verbonden blocken wordt ook wel een \textbf{ledger} genoemd. Elke peer heeft ten allen tijden een kopie van deze ledger. Een transactie is een bepaalde set van data. In het geval van bitcoin is dit een overschrijving. Een voorbeeld van een transactie op het bitcoin netwerk is Alice geeft Bob 25 bitcoins. Een blok is aldus een lijst van transacties. Om dit principe te verduidelijken kan er gebruikt worden van onderstaande grafische voorstelling:\\
 
 \begin{figure}[h!]
 	\centering
@@ -418,12 +418,21 @@ In het kort gesteld is Blockchain een geheel van met elkaar verbonden blokken va
 	\caption[Blockchain - Voorstelling 1]{De blockchain bestaat uit onderling verbonden blokken. Een blok bevat een lijst van transacties.}
 \end{figure}
 
+Hoe worden deze transacties gevalideerd? Hoe weten we bijvoorbeeld dat Alice wel degelijk 15 bitcoins aan Bob geeft? Dit gebeurd door \textbf{asymmetrische cryptografie}. Een formele definitie wordt gegeven door \textcite{Farah2012}. Deze stellen dat asymmetrische cryptografie gebruik maakt van twee sleutels. Langs de ene kant hebben we de sleutel die gebruikt wordt bij het encrypteren van een bericht. Langs de andere kant hebben we de sleutel die gebruikt wordt bij het decrypteren. Het is hierbij computermatig onwaarschijnlijk om gegeven een encryptiesleutel en het gebruikte algoritme de decryptiesleutel te vinden. De encryptiesleutel wordt ook wel de \textbf{publieke sleutel} genoemd. De decryptiesleutel wordt de \textbf{privé sleutel} genoemd. De privé sleutel is enkel in handen van één persoon en mag niet gedeeld worden met andere. De publieke sleutel is toegankelijk voor iedereen. Hoe wordt dit principe gebruikt om te verifiëren dat Alice wel degelijk de verzender is van het bericht?\\
+
+Alice kan bewijzen dat ze een transactie heeft goedgekeurd door deze transactie te gaan ondertekenen met haar privé sleutel. Dit principe is gelijkaardig aan de manier waarop officiële documenten worden ondertekend. Bij handtekeningen op officiële documenten kan er worden geverifieerd dat deze ondertekend zijn door een bepaald persoon door middel van zijn/haar handschrift. Bij digitale handtekeningen kunnen we verifiëren dat ze zijn ondertekend door een bepaald privé sleutel van een persoon. Dit gebeurd door de corresponderende publieke sleutel, de handtekening en het originele bericht.\footnote{Deze uitleg is nogal kort door de bocht. Asymmetrische encryptie is een uitgebreid concept. Voor meer informatie hoe deze wordt toegepast binnen bitcoin zie: $https://learnmeabitcoin.com/beginners/digital_signatures$} Om dit nog eens duidelijk te maken kan er gebruik worden gemaakt van onderstaande grafiek:
+
+\begin{figure}[h!]
+	\centering
+		\includegraphics[scale=0.4]{blockchain-2.png}
+	\caption[Blockchain - Voorstelling 2]{Alice ondertekend transacties aan de hand van haar privé sleutel.}
+\end{figure}
+
 
 \textbf{Binnen dit hoofdstuk zullen de volgende delen behandeld worden}:
 
 \begin{enumerate}
+\item Inleiding
 \item Basis principes
 \item Ethereum en smartcontracts
-\item Truffel
-\item Open zepplin
 \end{enumerate}
