@@ -39,6 +39,7 @@ Wat zijn de eigenschappen en valkuilen van gedecentraliseerde(P2P) netwerken? & 
 \end{tabularx}
 \end{table} 
 \newpage
+\newpage
 \begin{table}[h!]
 \begin{tabularx}{\linewidth}{ |X|X| }
 \hline
@@ -48,27 +49,29 @@ Wat zijn smartcontracts en hoe bieden ze een meerwaarde aan Blockchain applicati
 \end{tabularx}
 \end{table} 
 \newpage
-
-Door bovenstaande deelvragen kan er een goed idee worden gevormd over wat er exact nodig is om een Proof Of Concept op te stelen. De eigenlijke doelstelling van de onderzoeksvraag is het bekomen van een gedecentraliseerd versiebeheer systeem. Welke eigenschappen moet de POC voorzien om te voldoen aan deze vereisten:
+\newpage
+Bovenstaande deelvragen bieden een goed overzicht van wat er exact nodig is om een Proof Of Concept op te stelen. De eigenlijke doelstelling van de onderzoeksvraag is het bekomen van een gedecentraliseerd versiebeheer systeem. Welke eigenschappen moet de POC voorzien om te voldoen aan deze vereisten?:
 
 \begin{enumerate}
-	\item De oplossing die wordt ontwikkeld mag geen centrale component hebben en moet op een volledig gedistribueerde manier instaat zijn om te functioneren.
-	\item De oplossing moet een gebruiker instaat stellen om documenten met elkaar te kunnen delen.
+	\item De oplossing die wordt ontwikkeld mag geen centrale component hebben en moet op een volledig gedistribueerde manier in staat zijn om te functioneren.
+	\item De oplossing moet een gebruiker instaat stellen om documenten met anderen te kunnen delen.
 	\item De oplossing moet een manier aanbieden om wijzigingen aan deze documenten op te slaan onder de vorm van verschillende versies. Deze verschillende versies moeten kunnen geraadpleegd worden.
 \end{enumerate}
 
 \section{Tools}
-Het delen van bestanden wordt mogelijk gemaakt door middel van IPFS. Dit protocol stelt de POC instaat om bestanden te verspreiden op een gedistribueerde manier en deze vervolgens opnieuw op te vragen. Hiervoor gebruikt IPFS het principe van een CID. Dit is in essentie een zelf beschrijvende hash code die vervolgens kan worden gebruikt om bestanden op te halen -zie \ref{ipfs_decent}-. IPFS stelt ons ook instaat om meerdere versies van dezelfde bestand(en) op te slaan en ter beschikking stellen. Stel bijvoorbeeld onderstaand scenario:\\
+Het delen van bestanden wordt mogelijk gemaakt door middel van IPFS. Dit protocol stelt de POC in staat om bestanden te verspreiden op een gedistribueerde manier en deze vervolgens opnieuw op te vragen. Hiervoor gebruikt IPFS het principe van een CID. Dit is in essentie een zelfbeschrijvende hash code die vervolgens kan worden gebruikt om bestanden op te halen -zie \ref{ipfs_decent}-. IPFS stelt ons ook in staat om meerdere versies van dezelfde bestand(en) op te slaan en ter beschikking te stellen. neem bijvoorbeeld onderstaand scenario:\\
 
 Bob en Alice willen een website ontwikkelen. Bob plaatst de homepagina op het IPFS netwerk en krijgt een CID om dit bestand opnieuw op te vragen. Hij deelt deze CID met Alice die vervolgens het bestand lokaal binnenhaalt. Alice brengt enkele wijzigingen aan en zet het bestand opnieuw op het netwerk. Alice zal een nieuwe CID worden toegewezen. Er zijn nu in feite twee verschillende versies van dit bestand op het netwerk, een versie van Bob die kan worden opgehaald met de CID die Bob heeft en een versie van Alice met haar eigen CID.\\
 
-Toch is IPFS op zich niet voldoende. Er is immers geen eenvoudige manier voorzien om deze CIDS met elkaar te delen. Hier biedt blockchain een oplossing. Blockchain functioneert immers als een databank. De CIDS kunnen daar dus worden bewaard en opgevraagd. Om dit proces van opslaan en opvragen te vereenvoudigen wordt gebruik gemaakt van smart contracts. Niet iedere blockchain ondersteund deze smartcontracs. Ethereum is een gekend voorbeeld van een netwerk dat dit wel ondersteund.\\
+Toch is IPFS op zich niet voldoende. Er is immers geen eenvoudige manier voorzien om deze CIDS met elkaar te delen. Hier biedt blockchain een oplossing. Blockchain functioneert immers als een databank. De CIDS kunnen daar dus worden bewaard en opgevraagd. Om dit proces van opslaan en opvragen te vereenvoudigen wordt gebruik gemaakt van smart contracts. Niet iedere blockchain ondersteunt deze smartcontracs. Ethereum is een gekend voorbeeld van een netwerk dat dit wel ondersteunt.\\
 
-Deze smartcontracts worden geschreven in de programmeertaal Solidity. Veel netwerken vragen transactiekosten voor het werken met smartcontracts . Om deze transactie kosten te vermeiden kan er gebruik gemaakt worden van een lokaal ethereum netwerk. Dit lokaal netwerk voorziet dezelfde functies maar heeft geen transactiekosten. De software die hiervoor gebruik wordt is \textcite{Ganache}.\\
+Deze smartcontracts worden geschreven in de programmeertaal Solidity. Veel netwerken vragen transactiekosten voor het werken met smartcontracts . Om deze transactie kosten te vermeiden kan er gebruik gemaakt worden van een lokaal Ethereum netwerk. Dit lokaal netwerk voorziet dezelfde functies maar heeft geen transactiekosten. De software die hiervoor gebruik wordt is \textcite{Ganache}.\\
 
-Het ontwikkelen en testen van smartcontracts is ook niet evident. Om dit te vergemakkelijken wordt gebruik gemaakt van de \textcite{Truffle} suite. Deze suite bied de mogelijkheid om smartcontracts te testen. Hiervoor wordt gebruikt gemaakt van het javascript framework Mocha.js. Truffle wordt ook gebruikt om de smartcontracts die worden ontwikkeld op de lokale blockchain uit te rollen.\\
+Het ontwikkelen en testen van smartcontracts is ook niet evident. Om dit te vergemakkelijken wordt gebruik gemaakt van de \textcite{Truffle} suite. Deze suite biedt de mogelijkheid om smartcontracts te testen. Hiervoor wordt gebruik gemaakt van het javascript framework Mocha.js. Truffle wordt ook gebruikt om de smartcontracts die worden ontwikkeld op de lokale blockchain uit te rollen.\\
 
 Tot slot wordt er gebruik gemaakt van een console applicatie geschreven in Dotnet-core 3.1 om de verschillende elementen samen te brengen. Deze console applicatie zal onder andere de verschillende bestanden op het IPFS netwerk plaatsen en de smartcontracts op de blockchain aanspreken. Om smartcontracts te kunnen aanspreken vanuit onze console applicatie zal gebruik gemaakt worden van \textcite{Nethereum}. Om IPFS te kunnen gebruiken wordt gebruik gemaakt van \textcite{IPFSClient}.\\
 
 \section{Werkwijze}
-Om de verschillende smartcontracts te ontwikkelen is er gekozen om gebruik te maken van een klasse diagram. Dit diagram bied een schematisch overzicht van de verschillende contracten die ontwikkeld zijn alsook de verschillende functies en attributen
+Om de verschillende smartcontracts te ontwikkelen is er gekozen om gebruik te maken van een klasse diagram. Dit diagram biedt een schematisch overzicht van de verschillende contracten die ontwikkeld zijn alsook de verschillende functies en attributen
+
+\textbf{TODO: Hier komt nog een klasse diagram alsook een kort overzicht van de oplossing}

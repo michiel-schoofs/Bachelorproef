@@ -394,3 +394,22 @@ Op basis van de hash van de individuele blokken wordt vervolgens een CID opgeste
 %Een groot probleem binnen file-sharing protocollen is het probleem van de Ratio. Binnen file-sharing Torrent protocollen kent men het onderscheid tussen een \textbf{Leecher} en een \textbf{Seeder}. Een peer die een bestand download wordt ook wel een Leecher genoemd en een node die een bestand beschikbaar stelt voor deze Leechers noemen we een Seeder. De ratio is bijgevolg het aantal seeders ten opzichte van het aantal leechers. Bij veel niet gesuperviseerde netwerken is dit ratio eerder laag -sommige netwerken legen namelijk verplichtingen op aan deelnemers zodat bestanden vlot toegankelijk blijven-. Veel leechers kiezen er namelijk voor om enkel bestanden te downloaden. Indien er geen Seeders meer zijn voor een bestand is dit in essentie ontoegankelijk geworden. Deze problemen kunnen worden vermeden door een voldoende groot netwerk te kiezen. Dit probleem doet zich echter ook voor bij protocollen zoals Gnutella en IPFS. Er is namelijk geen verplichting om bestanden beschikbaar te stellen. Eenmaal de peer de gewenste bestanden heeft binnen gehaald is er geen stimulans meer deze te delen. Het is dan ook aangewezen om een groot aantal deelnemers te hebben. Hoe meer Peers binnen een netwerk hoe meer toegankelijk het wordt en hoe meer kans dat deze peers ook effectief bestanden zullen beschikbaar stellen. Vandaar dat het aangewezen is om een reeds bestaand netwerk te gebruiken ten opzichte van een eigen implementatie.\\
 \section{vergelijking van de verschillende file-sharing protocollen}
 \label{vergelijking-FS}
+\textbf{Moet nog aangevuld}
+
+\section{Blockchain principes}
+\subsection{Inleiding}
+Blockchain is een gedecentraliseerd opslag oplossing die werd ontworpen door  Satoshi Nakamoto en de basis vormt voor Bitcoin. Het systeem is ontworpen in 2009. Zoals vermeld in het witboek geschreven door \textcite{Satoshi2009} is de doelstelling van Bitcoin om een elektronisch peer-to-peer betalingssysteem te voorzien. Het idee van Nakamoto was vooral revolutionair aangezien het een manier biedt om binnen een P2P netwerk gegevens op te slaan en deze gegevens ook te valideren. Het probleem dat bitcoin oplost voor P2P netwerken staat ook wel bekent als het \textit{Byzantine Generals’ Problem}.Dit probleem kan als volgt worden beschreven:\\
+
+Drie generalen moeten beslissen om een stad aan te vallen. Ze kunnen enkel communiceren via koeriers die tussen de verschillende generalen berichten overbrengen. De drie generalen moeten het eens geraken om de stad aan te vallen of deze met rust te laten. eenmaal de aanval is ingezet is er geen manier om terug te trekken \autocite{Peter2018}. Aanvankelijk lijkt dit probleem triviaal, ze sturen alle drie een bericht naar elkaar en bereiken een consensus door twee derde meerderheid. Toch is dit probleem complexer, wat als de boodschapper niet te vertrouwen is bijvoorbeeld? Of wat als er een generaal is die twee verschillende stemmen uitbrengt?\\◘
+
+Dit probleem demonstreert dat het niet eenvoudig is om tot een consensus te komen in een systeem waar ieder als gelijke wordt gezien. Er is immers één rotte appel nodig om de hele consensus te beïnvloeden. Blockchain bied aldus een consensus algoritme om binnen een P2P netwerk -waar iedere node als gelijke wordt gezien- boodschappen en gegevens te gaan opslaan. Deze boodschappen en gegevens worden ook wel \textbf{transacties} genoemd.\\
+\subsection{Kadering van Blockchain binnen de POC}
+
+\textbf{Binnen dit hoofdstuk zullen de volgende delen behandeld worden}:
+
+\begin{enumerate}
+\item Basis principes
+\item Ethereum en smartcontracts
+\item Truffel
+\item Open zepplin
+\end{enumerate}
