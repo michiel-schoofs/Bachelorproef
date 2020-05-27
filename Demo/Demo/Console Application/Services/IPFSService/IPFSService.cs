@@ -2,8 +2,11 @@
 using Ipfs;
 using Ipfs.Http;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -42,6 +45,35 @@ namespace Console_Application.Services {
         public async Task<string> AddDirectoryOnIPFS(string path) {
             IFileSystemNode node = await ipfs.FileSystem.AddDirectoryAsync(path, true);
             return node.Id.Encode();
+        }
+
+        public async Task GetDirectoryFromIPFS(string path, string cid) {
+            IFileSystemNode node = await ipfs.FileSystem.ListFileAsync(cid);
+
+            if (!node.IsDirectory)
+                throw new Exception("This is not a directory");
+
+            if (Directory.Exists(path))
+                throw new Exception("A directory under the project name already exists");
+
+            Directory.CreateDirectory(path);
+            List<IFileSystemLink> directories = new List<IFileSystemLink>(node.Links);
+
+            do {
+                var first = directories.First();
+                directories.Remove(first);
+                node = await ipfs.FileSystem.ListFileAsync(first.Id);
+
+                if (node.IsDirectory) {
+                    directories.AddRange(node.Links);
+                } else {
+                    FileStream file = File.Create(path+"\\"+first.Name);
+                    Stream s = await ipfs.FileSystem.ReadFileAsync(first.Id);
+                     s.CopyTo(file);
+                    file.Flush();
+                    file.Close();
+                }
+            } while (directories.Count != 0);
         }
 
         public string SelectPath() {

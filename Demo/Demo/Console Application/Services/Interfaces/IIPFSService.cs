@@ -5,5 +5,6 @@ namespace Console_Application.Services.Interfaces {
         public void LaunchDaemon();
         public string SelectPath();
         public Task<string> AddDirectoryOnIPFS(string path);
+        public Task GetDirectoryFromIPFS(string path, string cid);
     }
 }

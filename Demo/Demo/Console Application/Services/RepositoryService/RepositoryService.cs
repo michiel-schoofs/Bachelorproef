@@ -221,6 +221,7 @@ namespace Console_Application.Services.RepositoryService {
             }
         }
 
+        [STAThread]
         public async Task CloneRepository() {
             try {
                 string name = "";
@@ -247,6 +248,25 @@ namespace Console_Application.Services.RepositoryService {
                 if (!exists)
                     throw new Exception("The specified repository doesn't exist");
 
+                GetRepositoryFunction getRepoFunction = new GetRepositoryFunction() { 
+                    Name = name
+                };
+                var getRepoHandler = user.Eth.GetContractQueryHandler<GetRepositoryFunction>();
+
+                string contractAd = await getRepoHandler.QueryAsync<string>(ad, getRepoFunction);
+
+                if (string.IsNullOrEmpty(contractAd))
+                    throw new Exception("Something went wrong with the execution of this function");
+
+                var cidHandler = user.Eth.GetContractQueryHandler<GetCidOfRepo>();
+                string cid = await cidHandler.QueryAsync<string>(contractAd, new GetCidOfRepo());
+
+                if (string.IsNullOrEmpty(cid))
+                    throw new Exception("Something went wrong with the execution of this function");
+
+                string path = $"C:\\" + name;
+                await _ipfsService.GetDirectoryFromIPFS(path, cid);
+                Console.WriteLine(string.Format("repository {0} succefully cloned to {1}", name,path));
             } catch (Exception e) {
                 _logger.LogError("Something went wrong with the GetLocalRepository {0}", e.Message);
                 Console.WriteLine(e.Message);
