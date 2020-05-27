@@ -206,6 +206,7 @@ De doelstelling van deze bachelorproef is om een werkend P2P versiebeheersysteem
 \section{Het omspringen met bestanden in een gedecentraliseerd systeem}
 \label{IPFS}
 \subsection{Duiding van dit hoofdstuk}
+\label{Duiding_IPFS}
 De doelstelling van deze bachelorproef is om een volledig gedecentraliseerd versiebeheersysteem uit te werken. Zoals in de vorige sectie reeds werd uitgelegd is een versiebeheersysteem een verzameling van bestanden en een logboek waarin alle veranderingen aan deze bestanden worden bijgehouden. Dit logboek is aldus een collectie van data. Hierdoor kan een logboek eenvoudig worden gedecentraliseerd aan de hand van een blockchain. \textbf{Maar ook dan blijft de vraag nog steeds waar kunnen de bestanden worden bewaard?}\\
 
 In eerste instantie lijkt het eenvoudig om deze bestanden ook gewoon op een blockchain te zetten. Dit is echter niet mogelijk (hier wordt verder op ingegaan in hoofdstuk 3). Een andere eenvoudige oplossing zou zijn dat Bob gewoon rechtstreeks de bestanden deelt met Alice. Dit kan doormidden van een FTP connectie of andere oplossingen. Hierdoor komen Bob en Alice echter in een klassiek server-client model terecht. De nadelen van dit model worden uitvoerig besproken in \ref{ipfs_decent}. Er is dus een manier nodig om bestanden te delen zonder dat men daarbij gebruik moet maken van een server. Dit principe wordt ook wel \textbf{gedecentraliseerde file-sharing} genoemd.\\
@@ -400,10 +401,23 @@ Op basis van de hash van de individuele blokken wordt vervolgens een CID opgeste
 \subsection{Inleiding}
 Blockchain is een gedecentraliseerd opslag oplossing die werd ontworpen door  Satoshi Nakamoto en de basis vormt voor Bitcoin. Het systeem is ontworpen in 2009. Zoals vermeld in het witboek geschreven door \textcite{Satoshi2009} is de doelstelling van Bitcoin om een elektronisch peer-to-peer betalingssysteem te voorzien. Het idee van Nakamoto was vooral revolutionair aangezien het een manier biedt om binnen een P2P netwerk gegevens op te slaan en deze gegevens ook te valideren. Het probleem dat bitcoin oplost voor P2P netwerken staat ook wel bekent als het \textit{Byzantine Generals’ Problem}.Dit probleem kan als volgt worden beschreven:\\
 
-Drie generalen moeten beslissen om een stad aan te vallen. Ze kunnen enkel communiceren via koeriers die tussen de verschillende generalen berichten overbrengen. De drie generalen moeten het eens geraken om de stad aan te vallen of deze met rust te laten. eenmaal de aanval is ingezet is er geen manier om terug te trekken \autocite{Peter2018}. Aanvankelijk lijkt dit probleem triviaal, ze sturen alle drie een bericht naar elkaar en bereiken een consensus door twee derde meerderheid. Toch is dit probleem complexer, wat als de boodschapper niet te vertrouwen is bijvoorbeeld? Of wat als er een generaal is die twee verschillende stemmen uitbrengt?\\◘
+Drie generalen moeten beslissen om een stad aan te vallen. Ze kunnen enkel communiceren via koeriers die tussen de verschillende generalen berichten overbrengen. De drie generalen moeten het eens geraken om de stad aan te vallen of deze met rust te laten. eenmaal de aanval is ingezet is er geen manier om terug te trekken \autocite{Peter2018}. Aanvankelijk lijkt dit probleem triviaal, ze sturen alle drie een bericht naar elkaar en bereiken een consensus door twee derde meerderheid. Toch is dit probleem complexer, wat als de boodschapper niet te vertrouwen is bijvoorbeeld? Of wat als er een generaal is die twee verschillende stemmen uitbrengt?\\
 
 Dit probleem demonstreert dat het niet eenvoudig is om tot een consensus te komen in een systeem waar ieder als gelijke wordt gezien. Er is immers één rotte appel nodig om de hele consensus te beïnvloeden. Blockchain bied aldus een consensus algoritme om binnen een P2P netwerk -waar iedere node als gelijke wordt gezien- boodschappen en gegevens te gaan opslaan. Deze boodschappen en gegevens worden ook wel \textbf{transacties} genoemd.\\
-\subsection{Kadering van Blockchain binnen de POC}
+
+Hoe kadert blockchain binnen de POC die wordt ontwikkeld? Zoals eerder vermeld -zie \ref{Duiding_IPFS}- bestaat een versiebeheersysteem niet enkel uit bestanden maar ook uit een logboek. Dit logboek is in essentie een overzicht van alle wijzigingen in de bestanden. Dit logboek moet worden opgeslagen en kunnen worden aangepast op een P2P netwerk. Hiervoor kan er worden gebruik gemaakt van een blockchain.\\
+
+\subsection{Basis principes van een blockchain}
+In deze sectie wordt blockchain uitgelegd. Hoe kunnen transacties worden toegevoegd en gevalideerd op een blockchain? Deze tekst is gebaseerd op het originele voorstel door \textcite{Satoshi2009} en de video gepubliceerd door \textcite{Blue2017}.\\
+
+In het kort gesteld is Blockchain een geheel van met elkaar verbonden blokken van transacties. Een transactie is een bepaalde set van data. In het geval van bitcoin is dit een overschrijving. Een voorbeeld van een transactie op het bitcoin netwerk is Alice geeft Bob 25 bitcoins. Een blok is aldus een lijst van transacties. Om dit principe te verduidelijken kan er gebruikt worden van onderstaande grafische voorstelling:\\
+
+\begin{figure}[h!]
+	\centering
+		\includegraphics[scale=0.4]{blockchain-1.png}
+	\caption[Blockchain - Voorstelling 1]{De blockchain bestaat uit onderling verbonden blokken. Een blok bevat een lijst van transacties.}
+\end{figure}
+
 
 \textbf{Binnen dit hoofdstuk zullen de volgende delen behandeld worden}:
 
