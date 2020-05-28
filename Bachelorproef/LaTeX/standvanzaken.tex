@@ -1,19 +1,6 @@
 \chapter{\IfLanguageName{dutch}{Stand van zaken}{State of the art}}
 \label{ch:stand-van-zaken}
 \graphicspath{{../../Images/}} 
-% Tip: Begin elk hoofdstuk met een paragraaf inleiding die beschrijft hoe
-% dit hoofdstuk past binnen het geheel van de bachelorproef. Geef in het
-% bijzonder aan wat de link is met het vorige en volgende hoofdstuk.
-
-% Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
-
-%%Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken \autocite{Pollefliet2011}.
-
-%%Je verwijst bij elke bewering die je doet, vakterm die je introduceert, enz. naar je bronnen. In \LaTeX{} kan dat met het commando \texttt{$\backslash${textcite\{\}}} of \texttt{$\backslash${autocite\{\}}}. Als argument van het commando geef je de ``sleutel'' van een ``record'' in een bibliografische databank in het Bib\LaTeX{}-formaat (een tekstbestand). Als je expliciet naar de auteur verwijst in de zin, gebruik je \texttt{$\backslash${}textcite\{\}}.
-%%Soms wil je de auteur niet expliciet vernoemen, dan gebruik je \texttt{$\backslash${}autocite\{\}}. In de volgende paragraaf een voorbeeld van elk.
-
-%%\textcite{Knuth1998} schreef een van de standaardwerken over sorteer- en zoekalgoritmen. Experten zijn het erover eens dat cloud computing een interessante opportuniteit vormen, zowel voor gebruikers als voor dienstverleners op vlak van informatietechnologie~\autocite{Creeger2009}.
-%\newpage
 \section{Versiebeheer}
 \subsection{Inleiding: De drie types van versiebeheersystemen}
 \label{sec:vb_inleiding}
@@ -75,15 +62,15 @@ Mocht het centraal aanspreekpunt niet beschikbaar zijn is dit geen probleem. Elk
 
 RCS \textit{(Revision Control System)} is een lokaal versiebeheer systeem. Het wordt voor het eerst beschreven in een artikel geschreven door \textcite{Tichy85rcs}. Het werd verder ontwikkeld binnen het GNU project -Een open source besturingssysteem \footnote{GNU is veel meer dan enkel open source. Het GNU project is sterk verbonden met de ideologie en organisatie van de free software foundation (FSF). Meer informatie omtrent deze organisatie en beweging is te vinden op: \url{https://www.fsf.org/}}- waar het als vervanging voor het CSSC Systeem \autocite{GNUCSSC} werd gebruikt. CSSC is een systeem gebaseerd op SCCS (Source code control system) dat ontworpen is voor UNIX systemen. SCCS is in opdracht van Bell Labs ontwikkeld door \textcite{Rochkind1975}.\\
 
-Voordat RCS op de markt kwam is er nog tal van andere software ontwikkeld. Zo was er CA-Panvalet een gepatenteerde oplossing voor Mainframe computers.\\
+Voordat RCS op de markt kwam is er nog tal van andere software ontwikkeld. Zo was er CA-Panvalet, een gepatenteerde oplossing voor Mainframe computers.\\
 
 Waarom is het interessanter om RCS in detail te bekijken? Veel van de concepten waar het gebruik van maakt zijn aanwezig in moderne systemen (zoals GIT). Het is open source en wordt nog steeds op vrijwillige basis onderhouden, wat aansluit bij de visie van deze bachelorproef.\\
 
 De manier waarop versies worden bijgehouden in RCS -zoals door \textcite{Tichy85rcs} beschreven- is gebaseerd op een boomstructuur -denk aan een stamboom-. Volgens \textcite{Lievens2019}, is een boom een collectie van \textbf{toppen} \textit{(in het Engels ook wel Nodes genoemd)}. Deze toppen hebben een hiërarchische verband.Zo bestaat er bijvoorbeeld een kind-ouder verband. Er zijn twee bijzondere toppen in een boom:
 
 \begin{itemize}
-	\item de wortel(\textit{root}): Deze top ligt helemaal aan het begin van de boom. Alle andere toppen zijn afstammelingen van deze top. Het heeft aldus geen ouders.
-	\item een blad(\textit{leaf}): Deze top heeft geen kinderen. In tegenstelling tot een wortel kunnen er meerdere bladeren aanwezig zijn.
+	\item de wortel(\textit{root}): deze top ligt helemaal aan het begin van de boom. Alle andere toppen zijn afstammelingen van deze top. Het heeft aldus geen ouders.
+	\item een blad(\textit{leaf}): deze top heeft geen kinderen. In tegenstelling tot een wortel kunnen er meerdere bladeren aanwezig zijn.
 \end{itemize}
 
 Alle andere toppen worden intermediair genoemd. Elke top heeft mogelijk een aantal kinderen. De diepte van de wortel is nul ($d$=1) en elk kind heeft als diepte: 
@@ -104,7 +91,7 @@ Al deze concepten worden ook nog eens grafisch verduidelijkt in de figuur \ref{f
 
 Er kan gebruik gemaakt worden van een boomstructuur om de onderlinge relaties tussen de versies weer te geven. Stel: Bob en Alice zijn bezig aan de hoofdpagina. Bob maakt een initiële versie van de pagina. Vervolgens wilt hij die graag delen met Alice. Hiervoor gebruikt hij het commando om een nieuwe versie aan te maken: \Verb+ci homepage.html+. Dit commando wordt \textbf{inchecken} genoemd. Binnen GIT is dit vergelijkbaar met het commando \textit{git push}. Aangezien dit de eerste versie is kan men dit vergelijken met het aanmaken van een wortel. Volgende versies worden kinderen van de vorige versie. Zo wordt versie 1.4 kind van versie 1.3. Inchecken gaat niet alleen onze boomstructuur aanmaken maar ook de extensie \textit{.v} toevoegen (\verb+homepage.html.v+). Het originele bestand wordt ook verwijderd\\
 
-Het bestand krijgt ook een \textbf{versienummer}. Dit versienummer heeft de vorm: $x_1.x_2$.\ $x_1$ (ook wel \textit{release} genoemd) staat voor een grote verandering. Bijvoorbeeld het in productie nemen van een nieuwe versie.$x_2$ (\textit{level}) staat voor een kleinere verandering. Een andere manier om $x_2$ te bekijken is de diepte met als wortel de laatste release ($x_1$). 1.1 is het versienummer van de wortel die Bob heeft aangemaakt. 1.4 is het derde kind van de wortel.Elke check-in zal het level ($x_2$) met één verhogen. Het release nummer ($x_1$) wordt manueel verhoogd door middel van de \textit{-r} optie bij check-in \footnote{\Verb+ci -r2 homepage.html+}. Bij branches is er ook nog spraken van $x_3$ en $x_4$ zie \ref{par:branches}.\\
+Het bestand krijgt ook een \textbf{versienummer}. Dit versienummer heeft de vorm: $x_1.x_2$.\ $x_1$ (ook wel \textit{release} genoemd) staat voor een grote verandering. Bijvoorbeeld het in productie nemen van een nieuwe versie.$x_2$ (\textit{level}) staat voor een kleinere verandering. Een andere manier om $x_2$ te bekijken is de diepte met als wortel de laatste release ($x_1$). 1.1 is het versienummer van de wortel die Bob heeft aangemaakt. 1.4 is het derde kind van de wortel.Elke check-in zal het level ($x_2$) met één verhogen. Het release nummer ($x_1$) wordt manueel verhoogd door middel van de \textit{-r} optie bij check-in \footnote{\Verb+ci -r2 homepage.html+}. Bij branches is er ook nog sprake van $x_3$ en $x_4$ zie \ref{par:branches}.\\
 
 Deze manier van versies te bestempelen wordt nog steeds gebruikt. Het is echter niet de enige manier. \textit{Semantic versioning} is een gekend alternatief. Het concept van versienummers bestaat in Git onder de vorm van \textit{tags}.\\
 
@@ -122,9 +109,9 @@ Hoe worden de verschillen tussen de versies bijgehouden in ons lokaal archief? E
 Inchecken en uitchecken ligt aan de basis van het archiefsysteem. Toch is er nog een probleem aanwezig met deze manier van werken. Stel dat Alice en Bob gelijktijdig wijzigingen aanbrengen aan een bestand. Ze willen dit bestand elk afzonderlijk publiceren.  Hierdoor ontstaan er twee versies die afstammen van één gezamenlijke versie. De boomstructuur wordt in twee gesplitst. Dit is niet mogelijk aangezien een versie altijd uniek moet zijn. Hoe kan men verzekeren dat elke versie slechts één kind heeft (op dezelfde branch)? Dit probleem wordt opgelost door \textbf{sloten}(engels=lock).Dit concept geeft gebruikers de mogelijkheid om een versie te  versleutelen. Terwijl een versie versleuteld is kan niemand anders wijzigingen aanbrengen. Andere gebruikers kunnen deze nog bekijken. Op het moment dat Bob zijn versie gaat uitchecken kan hij deze versleutelen (door middel van de \textit{-l} optie bij het co commando). Hierdoor kan Alice geen nieuwe versie meer aanmaken tot Bob zijn wijzigingen heeft doorgevoerd. Met andere woorden zolang Bob het slot niet vrijgeeft kunnen er geen nieuwe versies worden aangemaakt\footnote{In sommige gevallen kan het slot ook worden 'geforceerd' mocht Bob bijvoorbeeld ziek vallen}. Deze manier van werken heeft een zichtbaar nadeel. Alice is verplicht om te wachten op Bobs nieuwe versie alvorens ze veranderingen kan aanbrengen. Git gebruikt het concept van sloten niet. Daar maakt men gebruik van \textbf{merges} om dit zelfde probleem aan te pakken %\ref{sec:GIT}%.
 
 \subsubsection{Opmerkingen}
-In het originele artikel wordt de klemtoon gelegd op het onderling delen van de verschillende versies. Hierdoor kan men de indruk krijgen dat er een centrale server betrokken is. Dit is niet het geval. De software is ontworpen om op één besturingssysteem uitgevoerd te worden. Volgens \textcite{Debian2020} is GNU aangezien het gebaseerd is op UNIX een \textit{multi-user os}. Dat wil zeggen dat meerdere gebruikers het systeem tezelfdertijd kunnen gebruiken door middel van een terminal connectie. Hierdoor kan men onderling de bestanden delen ondanks dat men niet gaat werken in een CVCS.
+In het originele artikel wordt de klemtoon gelegd op het onderling delen van de verschillende versies. Hierdoor kan men de indruk krijgen dat er een centrale server betrokken is. Dit is niet het geval. De software is ontworpen om op één besturingssysteem uitgevoerd te worden. Volgens \textcite{Debian2020} is GNU aangezien het gebaseerd is op UNIX een \textit{multi-user os}. Dat wil zeggen dat meerdere gebruikers het systeem terzelfdertijd kunnen gebruiken door middel van een terminal connectie. Hierdoor kan men onderling de bestanden delen ondanks dat men niet gaat werken in een CVCS.
 
-\subsection{branches}
+\subsection{Branches}
 \label{par:branches}
 \subsubsection{Duiding}
 Door het principe van sloten en inchecken lijkt het alsof elke versie exact één opvolger heeft. Zo zal versie 1.3 de opvolger zijn van 1.2. Toch kunnen er zich zoals in een stamboom  vertakkingen voordoen. De vertakkingen worden \textbf{Branches} genoemd. De hoofdboom (niet vertakte toppen die afstammen van de wortel) wordt de \textbf{trunk} genoemd. Dit principe kan men het best demonstreren aan de hand van een figuur. Zo kan men zien in figuur \ref{fig_tree} dat er twee vertakkingen zijn op versie 1.2. Het principe van vertakkingen lijkt op het eerste zicht complex en onoverzichtelijk. \textcite{Tichy85rcs} geeft enkele redenen om dit toch toe te passen.
@@ -175,7 +162,7 @@ De verschillende types van versiebeheersystemen -zoals besproken in \ref{sec:vb_
 
 P2P is voornamelijk bekend onder de vorm van file-sharing netwerken zoals Napster. \textcite{Chawathe2003} stellen dat Napster één van de eerste systemen was die erin slaagde om een succesvol netwerk uit te bouwen. Bij dit netwerk worden files niet opgevraagd aan een centrale server. In plaats hiervan gebruikt men een netwerk van \textbf{peers}. Door de principes van dit type van netwerken toe te passen kan men een centraal archief op een gedistribueerde manier opslaan. Zo behoudt men het voordeel van CVCS zonder een SPOF. \\
 
-De doelstelling van deze bachelorproef is om een werkend P2P versiebeheersysteem te gaan implementeren. Hiervoor moet men afbakenen welke functionaliteiten deze implementatie moet voorzien. In vorige paragrafen werden de verschillende concepten besproken. Hieronder volgt een oplijsting van deze verschillende concepten alsook een korte uitleg. Hierbij worden de terminologie en concepten van Git gebruikt. Deze worden vervolgens meegenomen naar volgende hoofdstukken, waar een implementatie wordt voorzien.
+De doelstelling van deze bachelorproef is om een werkend P2P versiebeheersysteem te implementeren. Hiervoor moet men afbakenen welke functionaliteiten deze implementatie moet voorzien. In vorige paragrafen werden de verschillende concepten besproken. Hieronder volgt een oplijsting van deze verschillende concepten alsook een korte uitleg. Hierbij worden de terminologie en concepten van Git gebruikt. Deze worden vervolgens meegenomen naar volgende hoofdstukken waar een implementatie wordt voorzien.
 
 \begin{table}[h!]
 	\centering
@@ -232,7 +219,7 @@ Volgens \textcite{Schollmeier2001} zijn er  twee verschillende categorieën van 
 \end{itemize}
 
 
-\textbf{Waarom zouden we dus kiezen voor een gedecentraliseerd systeem?} Om dit duidelijk te maken kunnen de voor~ en nadelen worden samengevat in onderstaande tabel:\\
+\textbf{Waarom zouden we dus kiezen voor een gedecentraliseerd systeem?} Om dit duidelijk te maken kunnen de voor- en nadelen worden samengevat in onderstaande tabel:\\
 
 \begin{table}[h!]
 	\centering
@@ -242,7 +229,7 @@ Volgens \textcite{Schollmeier2001} zijn er  twee verschillende categorieën van 
 		\hline
 		\textbf{Probleem}&\textbf{Client-Server}&\textbf{P2P}\\
 		\hline
-		\textbf{SPOF}&Doordat alle informatie zich op één server bevindt is er ook één kritieke plaats waar alles kan fout lopen. Is de server onbeschikbaar zijn alle diensten en informatie hierop dat ook.& Er is niet één computer die optreedt als server. Elke deelnemer van het netwerk (ook wel \textbf{Peer} genoemd) treedt op als server en cliënt. Hierdoor is er geen kritiek punt is waarop het kan fout lopen.\footnote{Zoals hierboven vermeld geld dit enkel voor een puur netwerk. Een hybride netwerk heeft nog steeds het probleem van SPOF.}\\
+		\textbf{SPOF}&Doordat alle informatie zich op één server bevindt is er ook één kritieke plaats waar alles kan fout lopen. Is de server onbeschikbaar zijn alle diensten en informatie hierop dat ook.& Er is niet één computer die optreedt als server. Elke deelnemer van het netwerk (ook wel \textbf{Peer} genoemd) treedt op als server en cliënt. Hierdoor is er geen kritiek punt waarop het kan fout lopen.\footnote{Zoals hierboven vermeld geld dit enkel voor een puur netwerk. Een hybride netwerk heeft nog steeds het probleem van SPOF.}\\
 		\hline
 		\textbf{Netwerkbelasting}&Doordat al het verkeer moet verwerkt worden door dezelfde hardware kan dit leiden tot een hoge serverbelasting. Hierdoor kan het verwerken van deze verzoeken traag verlopen.&Het hele netwerk verwerkt onderling verzoeken waardoor de individuele belasting op één peer eerder laag blijft. Hierdoor is het netwerk in staat om op een efficiënte manier verzoeken te verwerken.\\
 		\hline
@@ -301,7 +288,7 @@ In de derde stap wilt men toegang verkrijgen tot andere peers die dit bestand be
 \newpage
 Om dit principe te verduidelijken wordt verder gebouwd op bovenstaand voorbeeld:\\
 
-Charlie wil de website van Bob en Alice. Hij heeft van Alice het metainfo bestand ontvangen. Aangezien dit bestand het IP-adres van Bobs computer als Tracker bestempeld wordt er naar deze computer een HTTP-GET verzoek verstuurd. Bob en Alice hebben beiden deze bestanden lokaal staan en vormen aldus samen een swarm. Charlie zal hun IP-adres en poort waarop het verkeer kan verlopen doorgestuurd krijgen en gaat rechtstreeks met beide computers communiceren om de bestanden te downloaden.\\
+Charlie wil de website van Bob en Alice. Hij heeft van Alice het metainfo bestand ontvangen. Aangezien dit bestand het IP-adres van Bobs computer als Tracker bestempeld, wordt er naar deze computer een HTTP-GET verzoek verstuurd. Bob en Alice hebben beiden deze bestanden lokaal staan en vormen aldus samen een swarm. Charlie zal hun IP-adres en poort waarop het verkeer kan verlopen doorgestuurd krijgen en gaat rechtstreeks met beide computers communiceren om de bestanden te downloaden.\\
 
 Er dient opgemerkt te worden dat netwerken en bestanden erg veranderlijk zijn. Een computer kan elk moment uitgaan of van het netwerk treden. Het is dus noodzakelijk dat de Tracker een accurate lijst van peers bijhoudt in de Swarm. Om dit te bereiken zal een Tracker vragen dat elke peer op een vast tijdsinterval zijn status rapporteert. Zo kan de Tracker accurate informatie voorzien.\\
 
@@ -330,23 +317,21 @@ Vele van deze problemen stellen zich ook in het klassieke Client-Server model.
 \subsection{IPFS}
 \label{IPFS}
 \subsubsection{Inleiding}
-IPFS is een modern file-sharing protocol dat veel van de tekortkomingen van Bit-Torrent en Gnutella oplost -zie \ref{vergelijking-FS}. Het is ook het protocol dat gaat worden gebruikt in het opstellen van de POC. De uitleg in dit hoofdstuk is afkomstig van de officiële documentatie \autocite{}, Github Repository \autocite{} en video's(\autocite{} , \autocite{}).\\
+IPFS is een modern file-sharing protocol dat veel van de tekortkomingen van Bit-Torrent oplost. Het is ook het protocol dat zal worden gebruikt in het opstellen van de POC. De uitleg in dit hoofdstuk is afkomstig van de officiële documentatie \autocite{IPFSDocs} en video's gepubliceerd door \textcite{Simply2018} en \textcite{IPFS2020}.\\
 
-Allereerst wordt het concept van een \textbf{CID} en \textbf{Content based addressing} toegelicht. Dit concept wordt namelijk gebruikt om bestanden te gaan identificeren binnen de POC. 
+In dit hoofdstuk ligt de focus op \textbf{Content based addressing} en het  concept van een \textbf{CID}. Deze twee concepten spelen namelijk een grote rol binnen de POC. 
 
-\subsubsection{Content Based Adressing}
-%Hellemaal opnieuw te beginnen, Hoe worden bestande opgeslaan op IPFS.
+\subsubsection{Content Based Adressing en CIDS}
 \label{CBA}
-\textbf{Wordt nog verder aangevuld}
- De opzet van het protocol beperkt zich niet louter tot bestandsoverdracht. Ze beschrijven zichzelf als een gedistribueerd bestandssysteem dat een alternatief biedt voor de manier waarop er op het internet informatie wordt opgevraagd. Wat wordt daar echter mee bedoeld?\\
+IPFS beperkt zich niet louter tot bestandsoverdracht. Op de officiële website van IPFS wordt het protocol als volgt beschreven: IPFS is een gedistribueerd bestandssysteem dat een alternatief biedt voor de manier waarop bestanden op het internet worden opgevraagd. Wat wordt daar echter mee bedoeld?\\
 
-IPFS heeft als doelstelling om alle bestanden op het netwerk te gaan verspreiden over verschillende peers. Deze bestanden kunnen vervolgens eenvoudig worden opgevraagd en weergegeven in een webbrowser. Een peer kan vervolgens rechtstreeks aan het netwerk deze bestanden gaan opvragen. In tegenstelling tot Bit-Torrent is er aldus geen sprake van Trackers of Swarms. Gnutella heeft echter dezelfde benadering. Dus wat maakt IPFS uniek?\\
+IPFS heeft als doelstelling om alle bestanden op het netwerk te verspreiden over verschillende peers. Deze bestanden kunnen vervolgens eenvoudig worden opgevraagd en weergegeven in een webbrowser. Een peer kan vervolgens rechtstreeks aan het netwerk deze bestanden opvragen. In tegenstelling tot Bit-Torrent is er dus geen sprake van Trackers of Swarms. Dus wat maakt IPFS uniek?\\
 
 Volgens IPFS is er een probleem met de manier waarop er klassiek wordt gezocht naar bestanden. Stel bijvoorbeeld onderstaand scenario:\\
 
-Bob wilt graag een nieuwe achtergrond en gaat opzoek naar een afbeelding van een Capybara. Hij vindt twee afbeelding op google van een mooie Capybara en slaat vervolgens de links op. Drie dagen erna bezoekt hij nog eens de links, één van deze links lijdt naar een 404 pagina. De afbeelding is immers verwijderd. De andere link lijdt tot zijn verbazing tot een afbeelding van een Tapir.\\
+Bob wilt graag een nieuwe achtergrond en gaat op zoek naar een afbeelding van een Capybara. Hij vindt twee afbeelding op google van een mooie Capybara en slaat vervolgens de links op. Drie dagen erna bezoekt hij nog eens de links. Eén van deze links leidt naar een 404 pagina. De afbeelding is immers verwijderd. De andere link leidt tot zijn verbazing tot een afbeelding van een Tapir.\\
 
-Dit is eveneens een voorbeeld van \textbf{Location based addressing}. Location based addressing(=lba) is het principe dat men een bestand gaat opvragen aan de hand van waar dit bestand bevind. Zo gaat de link abc.com/cat.jpg het bestand cat.jpg gaan opvragen aan de server van abc.com. Bovenstaand voorbeeld illustreert ook onmiddellijk drie problemen met lba:
+Dit is eveneens een voorbeeld van \textbf{Location based addressing}. Location based addressing(=lba) is het principe dat men een bestand gaat opvragen aan de hand van waar dit bestand zich bevindt. Zo gaat de link abc.com/cat.jpg het bestand cat.jpg  opvragen aan de server van abc.com. Bovenstaand voorbeeld illustreert ook onmiddellijk drie problemen met lba:
 
 \begin{enumerate}
 \item Informatie kan gemakkelijk offline worden gehaald. Er is geen enkele garantie dat afbeeldingen, websites en andere bestanden beschikbaar blijven.\\
@@ -354,27 +339,11 @@ Dit is eveneens een voorbeeld van \textbf{Location based addressing}. Location b
 \item Informatie kan eenvoudig worden gewijzigd. De afbeelding die gisteren nog een capybara was kan veranderd zijn in een afbeelding van een Kat.\\
 \end{enumerate}
 
-Het zijn deze problemen die worden aangepakt met Content Based Adressing (=CBA),IPFS en het concept van een CID. Binnen CBA worden bestanden opgevraagd aan de hand van hun inhoud. Bij een klassieke url moet immers zowel de naam van de server (of het ip-address) alsook de naam van het bestand in kwestie gekend zijn. CBA vervangt dan ook het concept van een URL door een uniek identificatie nummer dat gebaseerd is op de inhoud van het bestand. Dit uniek identificatie nummer wordt een CID genoemd. Het is belangrijk dat de verschillende elementen van een CID worden besproken. Op die manier kan er worden geïllustreerd wat de verschillende eigenschappen zijn van CBA en hoe deze kunnen worden toegepast binnen IPFS.\\
-
-Om het principe van een CID te kunnen uitleggen kan er worden gekeken wat er exact gebeurd op het moment dat er een bestand op het IPFS netwerk wordt gezet. Op het moment dat een bestand wordt geplaatst op het IPFS netwerk zal het eerst lokaal worden opgedeeld in stukken van maximaal 256kb groot. Voor elk van deze delen alsook het hoofdbestand wordt een hashwaarde berekend -voor meer informatie zie \ref{hashing}-. IPFS gebruikt SHA2-256. De waarde die verkregen wordt uit deze functie wordt ook wel de \textbf{digest} genoemd.\\
-
-\begin{figure}[h!]
-	\centering
-		\includegraphics[scale=0.6]{ipfs-1.png}
-	\caption[IPFS - Stap 1]{Bestand wordt opgedeeld in verschillende blokken. Elk van deze blokken en het bestand zelf worden vervolgens door SHA2-512 gehashed en men verkrijgt aldus een digest. }
-\end{figure}
-
-Op basis van de hash van de individuele blokken wordt vervolgens een CID opgesteld.  
-
-%\subsubsection{Het probleem van altruïsme}
-%Een groot probleem binnen file-sharing protocollen is het probleem van de Ratio. Binnen file-sharing Torrent protocollen kent men het onderscheid tussen een \textbf{Leecher} en een \textbf{Seeder}. Een peer die een bestand download wordt ook wel een Leecher genoemd en een node die een bestand beschikbaar stelt voor deze Leechers noemen we een Seeder. De ratio is bijgevolg het aantal seeders ten opzichte van het aantal leechers. Bij veel niet gesuperviseerde netwerken is dit ratio eerder laag -sommige netwerken legen namelijk verplichtingen op aan deelnemers zodat bestanden vlot toegankelijk blijven-. Veel leechers kiezen er namelijk voor om enkel bestanden te downloaden. Indien er geen Seeders meer zijn voor een bestand is dit in essentie ontoegankelijk geworden. Deze problemen kunnen worden vermeden door een voldoende groot netwerk te kiezen. Dit probleem doet zich echter ook voor bij protocollen zoals Gnutella en IPFS. Er is namelijk geen verplichting om bestanden beschikbaar te stellen. Eenmaal de peer de gewenste bestanden heeft binnen gehaald is er geen stimulans meer deze te delen. Het is dan ook aangewezen om een groot aantal deelnemers te hebben. Hoe meer Peers binnen een netwerk hoe meer toegankelijk het wordt en hoe meer kans dat deze peers ook effectief bestanden zullen beschikbaar stellen. Vandaar dat het aangewezen is om een reeds bestaand netwerk te gebruiken ten opzichte van een eigen implementatie.\\
-\section{vergelijking van de verschillende file-sharing protocollen}
-\label{vergelijking-FS}
-\textbf{Moet nog aangevuld}
+Het zijn deze problemen die worden aangepakt met Content Based Adressing (=CBA),IPFS en het concept van een CID. Binnen CBA worden bestanden opgevraagd aan de hand van hun inhoud. Bij een klassieke url moet immers zowel de naam van de server (of het ip-address) alsook de naam van het bestand in kwestie gekend zijn. CBA vervangt dan ook het concept van een URL door een uniek identificatienummer dat gebaseerd is op de inhoud van het bestand. Dit uniek identificatie nummer wordt een CID genoemd.\\
 
 \section{Blockchain principes}
 \subsection{Inleiding}
-Blockchain is een gedecentraliseerde opslagoplossing. Blockchain werd in 2009 ontworpen door \textcite{Satoshi2009} en vormt de basis van Bitcoin. Zoals vermeld in het Witboek van \textcite{Satoshi2009} is de doelstelling van Bitcoin om een elektronisch peer-to-peer betalingssysteem te voorzien. Het idee van Nakamoto was vooral revolutionair aangezien het een manier biedt om binnen een P2P netwerk gegevens op te slaan en deze gegevens ook te valideren. Het probleem dat Bitcoin oplost voor P2P netwerken staat ook wel bekenD als het \textit{Byzantine Generals’ Problem}.\\
+Blockchain is een gedecentraliseerde opslagoplossing. Blockchain werd in 2009 ontworpen door \textcite{Satoshi2009} en vormt de basis van Bitcoin. Zoals vermeld in het Witboek van \textcite{Satoshi2009} is de doelstelling van Bitcoin om een elektronisch peer-to-peer betalingssysteem te voorzien. Het idee van Nakamoto was vooral revolutionair aangezien het een manier biedt om binnen een P2P netwerk gegevens op te slaan en deze gegevens ook te valideren. Het probleem dat Bitcoin oplost voor P2P netwerken staat ook wel bekend als het \textit{Byzantine Generals’ Problem}.\\
 
 Dit probleem kan als volgt worden beschreven: Drie generalen moeten beslissen om een stad aan te vallen. Ze kunnen enkel communiceren via koeriers die tussen de verschillende generalen berichten overbrengen. De drie generalen moeten het eens geraken om de stad aan te vallen of met rust te laten. Eenmaal de aanval is ingezet is er geen manier om terug te trekken \autocite{Peter2018}. Aanvankelijk lijkt dit probleem triviaal. Ze sturen alle drie een bericht naar elkaar en bereiken een consensus door twee derde meerderheid. Toch is dit probleem complexer: wat als de boodschapper niet te vertrouwen is bijvoorbeeld? Wat als er een generaal is die twee verschillende stemmen uitbrengt?\\
 
@@ -382,7 +351,7 @@ Dit probleem demonstreert dat het niet eenvoudig is om tot een consensus te kome
 
 Hoe kadert blockchain binnen de POC die in deze bachelorproef wordt ontwikkeld? Zoals eerder vermeld -zie \ref{Duiding_IPFS}- bestaat een versiebeheersysteem niet enkel uit bestanden maar ook uit een logboek. Dit logboek is in essentie een overzicht van alle wijzigingen in de bestanden. Dit logboek moet worden opgeslagen en kunnen worden aangepast op een P2P netwerk. Hiervoor kan er worden gebruik gemaakt van een blockchain.\\
 
-\subsection{Basis principes van een blockchain}
+\subsection{Basisprincipes van een blockchain}
 In deze sectie wordt blockchain uitgelegd aan de hand van het originele voorstel door \textcite{Satoshi2009} en de video gepubliceerd door \textcite{Blue2017}.\\
 
 In het kort gesteld is blockchain een geheel van met elkaar verbonden blokken van transacties. Dit systeem van onderling verbonden blokken wordt ook wel een \textbf{ledger} genoemd. Elke peer heeft ten allen tijden een kopie van deze ledger. Een transactie is een bepaalde set van data. In het geval van bitcoin is dit een overschrijving. Een voorbeeld van een transactie op het bitcoin netwerk is Alice geeft Bob 25 bitcoins. Een blok is aldus een lijst van transacties. Om dit principe te verduidelijken, kan er gebruik worden gemaakt van onderstaande grafische voorstelling:\\
@@ -396,7 +365,7 @@ In het kort gesteld is blockchain een geheel van met elkaar verbonden blokken va
 
 Hoe worden deze transacties gevalideerd? Hoe weten we bijvoorbeeld dat Alice wel degelijk 15 bitcoins aan Bob geeft? Dit gebeurt door \textbf{asymmetrische cryptografie}. \textcite{Farah2012} stellen dat asymmetrische cryptografie gebruik maakt van twee sleutels: enerzijds de sleutel die gebruikt wordt bij het encrypteren van een bericht, anderzijds de sleutel die gebruikt wordt bij het decrypteren. Als zowel de encryptiesleutel en het hashingalgoritme gekend zijn dan is het computermatig onwaarschijnlijk dat de decryptiesleutel kan worden achterhaald. De encryptiesleutel wordt ook wel de \textbf{publieke sleutel} genoemd. De decryptiesleutel wordt de \textbf{privé sleutel} genoemd. De privé sleutel is enkel in handen van één persoon en mag niet gedeeld worden met andere. De publieke sleutel is toegankelijk voor iedereen. Hoe wordt dit principe gebruikt om te verifiëren dat Alice wel degelijk de verzender is van het bericht?\\
 
-Alice kan bewijzen dat ze een transactie heeft goedgekeurd door deze transactie te ondertekenen met haar privé sleutel. Dit principe is gelijkaardig aan de manier waarop officiële documenten worden ondertekend. Bij handtekeningen op officiële documenten kan er worden geverifieerd dat deze ondertekend zijn door een bepaald persoon door middel van zijn/haar handschrift. Bij digitale handtekeningen kunnen we verifiëren dat ze zijn ondertekend door een bepaald privé sleutel van een persoon. Dit gebeurt door de corresponderende publieke sleutel, de handtekening en het originele bericht.\footnote{Deze uitleg is nogal kort door de bocht. Asymmetrische encryptie is een uitgebreid concept. Voor meer informatie hoe deze wordt toegepast binnen bitcoin zie: $https://learnmeabitcoin.com/beginners/digital_signatures$} Dit wordt geïllustreerd in de onderstaande grafiek:
+Alice kan bewijzen dat ze een transactie heeft goedgekeurd door deze transactie te ondertekenen met haar privé sleutel. Dit principe is gelijkaardig aan de manier waarop officiële documenten worden ondertekend. Bij handtekeningen op officiële documenten kan er worden geverifieerd dat deze ondertekend zijn door een bepaald persoon door middel van zijn/haar handschrift. Bij digitale handtekeningen kunnen we verifiëren dat ze zijn ondertekend door een bepaald privé sleutel van een persoon. Dit gebeurt door de corresponderende publieke sleutel, de handtekening en het originele bericht.\footnote{Asymmetrische encryptie is een uitgebreid concept. Voor meer informatie hoe deze wordt toegepast binnen bitcoin zie: $https://learnmeabitcoin.com/beginners/digital_signatures$} Dit wordt geïllustreerd in de onderstaande grafiek:
 
 \begin{figure}[h!]
 	\centering
@@ -404,7 +373,7 @@ Alice kan bewijzen dat ze een transactie heeft goedgekeurd door deze transactie 
 	\caption[Blockchain - Voorstelling 2]{Alice ondertekent transacties aan de hand van haar privé sleutel.}
 \end{figure}
 
-Elke peer heeft zoals reeds eerder vermeld zijn eigen kopie van de ledger. Dit wilt zeggen dat elke deelnemer van het netwerk ten allen tijden een volledige lijst van transacties heeft. Een voordeel van een volledige lijst van transacties bij te houden is dat er kan geverifieerd worden dat Alice wel degelijk over 15 bitcoin beschikt. Alice kan aldus niet meet uitgeven dan ze reeds heeft. Op het moment dat Alice of Bob een transactie uitvoeren, zal deze dus over heel het netwerk worden verspreid.  Al deze transacties worden gebundeld onder de vorm van blokken -zie grafiek \ref{blocks} -. Door bijvoorbeeld twee keer dezelfde blokken toe te voegen of bepaalde blokken eruit te halen kan een individuele gebruiker blockchain en transacties manipuleren.  Om dit te vermijden wordt het concept van een consensus algoritme gebruikt. Om meer specifiek te zijn wordt binnen bitcoin het zogenaamde \textbf{Proof of Work} algoritme gebruikt.\\
+Elke peer heeft zoals reeds eerder vermeld zijn eigen kopie van de ledger. Dit wilt zeggen dat elke deelnemer van het netwerk ten allen tijden een volledige lijst van transacties heeft. Een voordeel van een volledige lijst van transacties bij te houden is dat er kan geverifieerd worden dat Alice wel degelijk over 15 bitcoin beschikt. Alice kan aldus niet meer uitgeven dan ze reeds heeft. Op het moment dat Alice of Bob een transactie uitvoert, zal deze dus over heel het netwerk worden verspreid.  Al deze transacties worden gebundeld onder de vorm van blokken -zie grafiek \ref{blocks} -. Door bijvoorbeeld twee keer dezelfde blokken toe te voegen of bepaalde blokken eruit te halen kan een individuele gebruiker blockchain en transacties manipuleren.  Om dit te vermijden wordt het concept van een consensus algoritme gebruikt. Om meer specifiek te zijn wordt binnen bitcoin het zogenaamde \textbf{Proof of Work} algoritme gebruikt.\\
 
 Proof of work is een concept dat is ontwikkeld door \textcite{Dwork}. Proof of work vereist het oplossen van een uniek wiskundig probleem alvorens een bepaalde handeling mag worden uitgevoerd. In het artikel van \textcite{Dwork} werd dit principe gebruikt om spam te vermijden. Indien een computer voor elke e-mail een wiskundig probleem moest oplossen is het praktisch onmogelijk om duizenden en duizenden e-mails te versturen. Hoe kadert dit principe binnen blockchain?\\
 
@@ -431,7 +400,7 @@ Het proof of work algoritme heeft twee verschillende eigenschappen:
 	\item De moeilijkheidsgraad voor het algoritme is rechtstreeks verbonden met het aantal nullen dat vereist is in het begin van de resulterende hashwaarde. Dit is immers ook logisch. Stel bijvoorbeeld dat de resulterende hashwaarde 10 bit lang is en slechts één 0-bit vereist vooraan dan zijn er $2^9 = 512$ toegestane waarden. Wordt deze vereiste op vijf 0-bits gelegd dan zijn er slechts $2^5 = 32$ mogelijke uitkomsten.
 \end{enumerate}
 
-Er kan dus gesteld worden dat indien een peer een bepaalde nonce waarden heeft berekend deze een significant rekenkundige taak heeft verricht. Hoe zorgt het Proof Of Work algoritme nu echter voor data integriteit binnen een blockchain netwerk. Anders gesteld hoe zorgt dit algoritme ervoor dat fraude onwaarschijnlijk is.\\
+Er kan dus gesteld worden dat indien een peer een bepaalde nonce waarden heeft berekend deze een significant rekenkundige taak heeft verricht. Hoe zorgt het Proof Of Work algoritme nu echter voor data integriteit binnen een blockchain netwerk? Anders gesteld hoe zorgt dit algoritme ervoor dat fraude onwaarschijnlijk is?\\
 
 De echte kracht van blockchain ligt in het feit dat de blokken onderling zijn verbonden. Concreet wilt dit zeggen dat de oplossing uit het PoW algoritme wordt opgenomen in het volgende blok. Volgende grafiek illustreert dit principe:
 
@@ -459,7 +428,7 @@ Om deel te nemen aan een blockchain netwerk moet men ten alle tijden een recente
 
 Zoals hierboven vermeld is het verifiëren van blokken niet verplicht om deel te nemen aan het netwerk. Waarom zouden miners hun tijd en energie in dit proces steken? Ze worden beloond voor het verifiëren aan de hand van een \textbf{block reward}. Wanneer ze een transactielijst samenstellen voegt het bitcoin protocol een speciale transactie eraan toe. Deze transactie wijst een aantal bitcoin toe aan de miner van dit blok. Slaagt de miner er aldus in om dit blok te verifiëren krijgt hij het aantal bitcoin van deze transactie.\\
 
-Zoals hierboven vermeld worden er dus nieuwe munten in circulatie gebracht door het PoW algoritme. Dit is zeker belangrijk als men realiseert dat er geen centrale autoriteit is die deze munt in circulatie brengt. In België bijvoorbeeld wordt de hoeveelheid geld in circulatie beheerd door de Nationale Bank. Hierdoor is er echter een probleem. Mocht het verificatie proces te snel gaan worden er teveel munten in omloop gebracht wat leidt tot het principe van inflatie. Hoe verloopt dit bij Bitcoin?\\
+Zoals hierboven vermeld worden er dus nieuwe munten in circulatie gebracht door het PoW algoritme. Dit is zeker belangrijk als men realiseert dat er geen centrale autoriteit is die deze munt in circulatie brengt. In België bijvoorbeeld wordt de hoeveelheid geld in circulatie beheerd door de Nationale Bank. Hierdoor is er echter een probleem. Mocht het verificatie proces te snel gaan, worden er teveel munten in omloop gebracht wat leidt tot het principe van inflatie. Hoe verloopt dit bij Bitcoin?\\
 
 Er zijn drie manieren waarop bitcoin en andere varianten hun geldstroom beheren:
 
@@ -467,12 +436,12 @@ Er zijn drie manieren waarop bitcoin en andere varianten hun geldstroom beheren:
 
 \item Zoals eerder vermeld is de moeilijkheidsgraad en tijd die het duurt voor het verifiëren rechtstreeks afhankelijk van het aantal 0-bits vereist in het PoW algoritme. Het bitcoin algoritme past dit aantal 0-bits automatisch aan zodat er gemiddeld één blok wordt aangemaakt elke tien minuten. Er worden aldus niet teveel nieuwe munten in omloop gebracht.\\
 
-\item De grootte van een blok is beperkt tot 1 megabyte. De reden hier achter is dat iedere peer een kopie moet bijhouden van de ledger. Opslagruimte is namelijk beperkt. Daarom kan een blok enkel om en bij de 2400 transacties bevatten. Als men weet dat er één blok elke 10 minuten wordt aangemaakt is het aantal transacties aldus min of meer constant. Het bitcoin netwerk is in staat om ongeveer 14.400 transacties te verwerken per uur.\\
+\item De grootte van een blok is beperkt tot 1 megabyte. De reden hierachter is dat iedere peer een kopie moet bijhouden van de ledger. Opslagruimte is namelijk beperkt. Daarom kan een blok enkel om en bij de 2400 transacties bevatten. Als men weet dat er één blok elke 10 minuten wordt aangemaakt is het aantal transacties aldus min of meer constant. Het bitcoin netwerk is in staat om ongeveer 14.400 transacties te verwerken per uur.\\
 
 \item Het aantal munten dat een miner krijgt voor het verifiëren van een transactie wordt ook wel de \textbf{block reward} genoemd. Deze block reward wordt automatisch gehalveerd elke 210.000 blokken (ongeveer 4 jaar). Hierdoor wordt het aantal nieuwe munten in circulatie verminderd.\\
 \end{enumerate}
 
-Zoals hierboven vermeld is het aantal transactie gelimiteerd tot ongeveer 14.400 transactie per uur. Hierdoor is het dus niet duidelijk dat wanneer een participant een transactie verstuurt deze ook effectief snel zal verwerkt worden. Om miners aan te sporen hun transacties te versnellen kunnen participanten ook een \textbf{transactiekost} aan hun transactie toevoegen.  Dit is een kleine optionele kost die participanten toevoegen en die rechtstreeks naar de miner gaat indien deze transactie verwerkt wordt.
+Zoals hierboven vermeld is het aantal transacties gelimiteerd tot ongeveer 14.400 transactie per uur. Hierdoor is het dus niet duidelijk dat wanneer een participant een transactie verstuurt deze ook effectief snel zal verwerkt worden. Om miners aan te sporen hun transacties te versnellen kunnen participanten ook een \textbf{transactiekost} aan hun transactie toevoegen.  Dit is een kleine optionele kost die participanten toevoegen en die rechtstreeks naar de miner gaat indien deze transactie verwerkt wordt.
 
 \subsection{Ethereum}
 Volgens \cite{EthFound2020} is Ethereum een open-source platform voor het schrijven van gedecentraliseerde applicaties. Op dit platform wordt gebruik gemaakt van blockchains. Het idee komt van Vitalik Buterin en werd geformaliseerd in een Witboek gepubliceerd in 2013. De volgende uitleg is dan ook gebaseerd op dit Witboek \cite{Buterin2015}.\\
@@ -484,20 +453,20 @@ Het bitcoin protocol is gebouwd bovenop blockchain technologie. Het biedt -zoals
 \item De applicatie maakt gebruik van de Bitcoin blockchain. Bitcoin is hier echter niet inherent voor ontworpen. De doelstelling van Bitcoin is namelijk om een p2p betalingssysteem te voorzien. Het is niet gemaakt voor de ontwikkeling van gedecentraliseerde applicaties.\\
 \end{enumerate}
 
-Ethereum is dus ontstaan uit de noodzaak voor een zogenaamde programmeerbare blockchain. Dit wilt zeggen een blockchain die bedoeld is om het schrijven van gedecentraliseerde applicaties te bevorderen. Ethereum steunt hierbij op hetzelfde algoritme en basis principes van bitcoin. Dat wilt zeggen dat er nog steeds sprake is van miners, een digitale munteenheid genaamd ether en een PoW algoritme. Ethereum bereikt deze programmeerbare blockchain door het concept van \textbf{Smart contracts}.
+Ethereum is dus ontstaan uit de noodzaak voor een zogenaamde programmeerbare blockchain. Dit wilt zeggen een blockchain die bedoeld is om het schrijven van gedecentraliseerde applicaties te bevorderen. Ethereum steunt hierbij op hetzelfde algoritme en basisprincipes van bitcoin. Dat wilt zeggen dat er nog steeds sprake is van miners, een digitale munteenheid genaamd ether en een PoW algoritme. Ethereum bereikt deze programmeerbare blockchain door het concept van \textbf{Smart contracts}.
 
 \subsection{Smart contracts}
-Smart contracts kunnen het best worden vergeleken met objecten. Met wie ze veel gelijkenissen vertonen. Zo kent een smart contracts volgende concepten:
+Smart contracts kunnen het best worden vergeleken met objecten met wie ze veel gelijkenissen vertonen. Zo kent een smart contract volgende concepten:
 
 \begin{enumerate}
 \item Een smart contract bevat variabelen en arrays. Dit zijn in essentie opslag plaatsen voor bepaalde waarden. Het datatype van deze variabelen wordt omgezet in bytes. Deze omzetting is gelijkaardig aan hoe zogenaamde \textit{high-level} programmeertalen zoals C\# en java werken.\\
-\item Een smart contract bevat functies. Deze functies kunnen de variabelen manipuleren of uitlezen. Zoals in klassieke programmeertalen kunnen functies ook parameters mee krijgen. Ze kunnen eveneens waarden gaan teruggeven. Het is ook belangrijk om op te merken dat smart contracts functies kunnen uitvoeren op andere smart contracts\
+\item Een smart contract bevat functies. Deze functies kunnen de variabelen manipuleren of uitlezen. Zoals in klassieke programmeertalen kunnen functies ook parameters mee krijgen. Ze kunnen eveneens waarde teruggeven. Het is ook belangrijk om op te merken dat smart contracts functies kunnen uitvoeren op andere smart contracts\
 \item Smart contracts bevatten \textbf{control flow}. Daarmee wordt bedoeld dat ze concepten bevatten zoals if statements en for loops.
 \end{enumerate}
 
 Er bestaan verschillende talen voor het schrijven van smart-contracts. De taal die gebruikt wordt binnen de POC wordt solidity genoemd. Het volledig overlopen van de syntax van deze taal ligt buiten de scope van deze bachelorproef. Voor enkele concrete voorbeelden van deze taal en een beknopte uitleg zie Appendix 3.\\
 
-Ethereum is in essentie een gedistribueerde computer. Het netwerk bestaat uit een verzameling van miners en participanten. Miners passen data in de blockchain aan op basis van code onder de vorm van smart contracts. Dit stelt softwareontwikkelaars in staat om gedecentraliseerde applicaties te schrijven .\\
+Ethereum is in essentie een gedistribueerde computer. Het netwerk bestaat uit een verzameling van miners en participanten. Miners passen data in de blockchain aan op basis van code onder de vorm van smart contracts. Dit stelt software ontwikkelaars in staat om gedecentraliseerde applicaties te schrijven .\\
 
 Elke transactie op de blockchain moet verwerkt worden door een miner. Hierbij voeren miners de code van smart contracts uit. Dit introduceert echter een probleem: wat als het contract vast komt te zitten of het veel tijd vergt? Om dit probleem tegen te gaan wordt er voor elke stap in de transactie een transactiekost vereist. Deze transactie kost wordt ook wel GAS genoemd. Doordat elke stap een bepaalde kost met zich mee draagt is het voor software ontwikkelaars cruciaal om deze transacties zo kort mogelijk te houden. Het is aldus ook niet mogelijk om een oneindige lus te schrijven. Deze GAS transactie kost gaat integraal naar de miners als een beloning voor het verrichte werk. Hierdoor worden miners ook aangezet om transactie te verwerken op het Ethereum netwerk.\\
 

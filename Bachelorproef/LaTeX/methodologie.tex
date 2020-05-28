@@ -141,19 +141,70 @@ Deze opzet fase kan men voorstellen door onderstaand sequentie diagram:
 
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=.4]{POC-1.png}
+\includegraphics[scale=.2]{POC-1.png}
 \caption[POC opstart]{Een sequentie diagram die de noodzakelijke opstart stappen overloopt. }
 \end{figure}
 
-\subsection{Het opslaan en opvragen van bestanden.}
-Voor het opslaan en bijhouden van de bestanden wordt gebruik gemaakt van het concept van een Repository. Een repository zoals gedefineerd in deze bachelorproef is vergelijkbaar met het concept van een archief -zie \ref{}-. Het bevat een unieke naam, alle versies van bestanden 
+\subsection{Repositories}
+Binnen deze proof of concept wordt gewerkt met het concept van een Repository. Dit concept is analoog aan Repositories binnen Git. Een Repository bevat volgende elementen:
 
-\subsection{Het delen van bestanden met anderen}
+\begin{enumerate}
+\item Een unieke naam. Deze naam wordt gebruikt om de repository opnieuw te kunnen opvragen en te identificeren.\\
+\item De meest recente CID van de bestanden. Deze CID wordt gebruikt om de bestanden te identificeren op het IPFS netwerk. Het is dus in feite een verwijzing naar de meest recente versie van onze bestanden.\\
+\item Een lijst van alle voorgaande CIDS. Dit is in feite een lijst van alle voorgaande versies van bestanden. Als een nieuwe versie wordt toegevoegd dan zal de vorige meest recente CID worden toegevoegd aan de lijst.\\
+\item Een functie om nieuwe versies te gaan toevoegen.
+\item Een functie om een specifieke versie te gaan opvragen.
+\item Een functie om de meest recent versie op te vragen.
+\end{enumerate}
 
-\subsection{Het aanbrengen en binnenhalen van wijzigingen}
+Om dit concept van repositories nog eens te verduidelijken kan gebruik worden gemaakt van volgende klasse diagram:
 
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.2]{POC-2.png}
+\caption[POC Repository]{Een grafische voorstelling van een repository.}
+\end{figure}
+
+
+\subsection{Het opslaan van de bestanden op een gedecentraliseerde manier}
+Bestanden binnen dit prototype worden opgeslagen op de volgende manier:
+
+\begin{enumerate}
+\item De gebruiker maakt een nieuwe repository met een opgegeven naam.\\
+\item De gebruiker selecteert een map van bestanden.\\
+\item Deze bestanden worden op het IPFS netwerk geplaatst. Hierdoor krijgen deze bestanden een unieke CID\footnote{Het concept van een CID wordt besproken in \ref{IPFS}}. Deze CID kan gebruikt worden om later deze bestanden terug te gaan opvragen aan het IPFS netwerk.\\
+\item Deze CID zal vervolgens op het blockchain netwerk worden geplaatst.\\
+\item De CID wordt vervolgens toegevoegd als meest recente versie aan de repository.
+\end{enumerate}
+
+\subsection{Het opvragen van bestanden op een gedecentraliseerde manier}
+Om bestanden op te halen wordt de volgende procedure gebruikt:
+
+\begin{enumerate}
+\item De gebruiker geeft de naam van het repository op.\\
+\item Er wordt gecontroleerd of deze repository wel effectief bestaat.\\
+\item Er wordt een referentie naar de repository opgehaald.\\
+\item Gebruikmakend van deze referentie wordt de meest recente CID opgehaald.\\
+\item De gebruiker geeft aan waar hij/zij wilt dat de bestanden worden gedownload.
+\item De bestanden worden van het IPFS netwerk gehaald. Hiervoor wordt gebruik gemaakt van de CID. Deze bestanden worden op de aangegeven locatie gedownload.
+\end{enumerate}
+
+Het delen van deze bestanden met andere is echter triviaal. Het volstaat immers om de naam van de Repository mee te delen aan iemand anders en deze kan de bestanden gaan downloaden.
+\subsection{Het aanbrengen van wijzigingen}
+Het aanbrengen van wijzigingen verloopt op volgende manier:
+
+\begin{enumerate}
+\item De gebruiker brengt de wijzigingen aan binnen het pad dat hij/zij heeft aangegeven bij het opvragen.
+\item De gebruiker geeft aan dat er wijzigingen zijn gebeurd.
+\item De nieuwe bestanden worden op het IPFS netwerk geplaatst. Hierdoor wordt aldus een nieuwe CID berekend.
+\item De repository waarbinnen deze bestanden zijn gewijzigd wordt op de hoogte gesteld van deze nieuwe CID. Deze zal de nieuwe CID als meest recente versie beschouwen. Hierbij wordt de vorige CID geplaatst op de lijst van voorgaande versies.
+\end{enumerate}
+\subsection{Het binnenhalen van wijzigingen}
+Het binnenhalen van wijzigingen kan dus via volgen principe:
+
+\begin{enumerate}
+\item De gebruiker geeft aan welke repository hij de wijzigingen van wilt binnen halen.
+\item De meest recente versie van deze repository wordt binnengehaald.
+\item 
+\end{enumerate}
 \subsection{Het teruggaan naar eerder versies}
-
-Om de verschillende smartcontracts te ontwikkelen is er gekozen om gebruik te maken van een klasse diagram. Dit diagram biedt een schematisch overzicht van de verschillende contracten die ontwikkeld zijn alsook de verschillende functies en attributen
-
-\textbf{TODO: Hier komt nog een klasse diagram alsook een kort overzicht van de oplossing}
