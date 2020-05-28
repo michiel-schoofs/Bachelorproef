@@ -355,7 +355,7 @@ Zoals eerder aangehaald moet een peer zich verbinden op het Gnutella netwerk om 
 \subsubsection{Inleiding}
 IPFS is een modern file-sharing protocol dat veel van de tekortkomingen van Bit-Torrent en Gnutella oplost -zie \ref{vergelijking-FS}. Het is ook het protocol dat gaat worden gebruikt in het opstellen van de POC. De uitleg in dit hoofdstuk is afkomstig van de officiële documentatie \autocite{}, Github Repository \autocite{} en video's(\autocite{} , \autocite{}).\\
 
-Allereerst wordt het concept van een \textbf{CID} en \textbf{Content based addressing} toegelicht. Dit concept wordt namelijk gebruikt om bestanden te gaan identificeren binnen de POC. %Vervolgens wordt IPNS besproken. Dit begrip is noodzakelijk om enkele tekortkomingen van content based adressing op te vangen -zie \ref{ipns}-.%
+Allereerst wordt het concept van een \textbf{CID} en \textbf{Content based addressing} toegelicht. Dit concept wordt namelijk gebruikt om bestanden te gaan identificeren binnen de POC. 
 
 \subsubsection{Content Based Adressing}
 %Hellemaal opnieuw te beginnen, Hoe worden bestande opgeslaan op IPFS.
@@ -389,8 +389,6 @@ Om het principe van een CID te kunnen uitleggen kan er worden gekeken wat er exa
 
 Op basis van de hash van de individuele blokken wordt vervolgens een CID opgesteld.  
 
-%\subsubsection{IPNS}
-%\label{ipns}
 %\subsubsection{Het probleem van altruïsme}
 %Een groot probleem binnen file-sharing protocollen is het probleem van de Ratio. Binnen file-sharing Torrent protocollen kent men het onderscheid tussen een \textbf{Leecher} en een \textbf{Seeder}. Een peer die een bestand download wordt ook wel een Leecher genoemd en een node die een bestand beschikbaar stelt voor deze Leechers noemen we een Seeder. De ratio is bijgevolg het aantal seeders ten opzichte van het aantal leechers. Bij veel niet gesuperviseerde netwerken is dit ratio eerder laag -sommige netwerken legen namelijk verplichtingen op aan deelnemers zodat bestanden vlot toegankelijk blijven-. Veel leechers kiezen er namelijk voor om enkel bestanden te downloaden. Indien er geen Seeders meer zijn voor een bestand is dit in essentie ontoegankelijk geworden. Deze problemen kunnen worden vermeden door een voldoende groot netwerk te kiezen. Dit probleem doet zich echter ook voor bij protocollen zoals Gnutella en IPFS. Er is namelijk geen verplichting om bestanden beschikbaar te stellen. Eenmaal de peer de gewenste bestanden heeft binnen gehaald is er geen stimulans meer deze te delen. Het is dan ook aangewezen om een groot aantal deelnemers te hebben. Hoe meer Peers binnen een netwerk hoe meer toegankelijk het wordt en hoe meer kans dat deze peers ook effectief bestanden zullen beschikbaar stellen. Vandaar dat het aangewezen is om een reeds bestaand netwerk te gebruiken ten opzichte van een eigen implementatie.\\
 \section{vergelijking van de verschillende file-sharing protocollen}
@@ -473,7 +471,7 @@ Stel dat er momenteel 85 blokken aanwezig zijn op de Blockchain. Bob wil blok 42
 Alle bovenstaande principes vormen de achterliggende technologie van blockchain netwerken. Een korte definitie luidt dus als volgt: blockchain is een manier om in een gedecentraliseerd systeem aan dataopslag te doen. Het is een aaneenschakeling van lijsten van transacties. Hierbij wordt een Proof of Work algoritme gebruikt om ervoor te zorgen dat frauduleuze transacties onwaarschijnlijk zijn.
 
 \subsection{Blockchain mining}
-Om deel te nemen aan een blockchain netwerk moet men ten alle tijden een recente kopie hebben van de ledger. Vervolgens kan men transacties maken en deze gaan valideren. Het is hierbij belangrijk om te onthouden dat \textbf{transacties valideren geen vereiste} is om transacties aan te maken. Peers die actief transacties gaan valideren aan de hand van het Proof-of-work algoritme worden \textbf{miners} genoemd. Peers die deelnemen aan het netwerk wordt doorheen deze tekst bestempeld als \textbf{participanten}. Het is aldus de taak van miners om transacties door andere peers te gaan bundelen in blokken en vervolgens het PoW algoritme toe te passen. Eenmaal een blok is gevonden wordt deze verspreid over het netwerk (over zowel participanten als andere miners). Om het verschil tussen een participant en een miner nog eens te verduidelijken wordt volgende grafiek gebruikt:
+Om deel te nemen aan een blockchain netwerk moet men ten alle tijden een recente kopie hebben van de ledger. Vervolgens kan men transacties maken en deze gaan valideren. Het is hierbij belangrijk om te onthouden dat \textbf{transacties valideren geen vereiste} is om transacties aan te maken. Peers die actief transacties valideren aan de hand van het Proof-of-work algoritme worden \textbf{miners} genoemd. Peers die deelnemen aan het netwerk worden doorheen deze tekst aangeduid als \textbf{participanten}. Het is de taak van miners om transacties door andere peers te bundelen in blokken en vervolgens het PoW algoritme toe te passen. Eenmaal een blok is gevonden, wordt deze verspreid over het netwerk (over zowel participanten als andere miners). De volgende grafiek verduidelijkt het verschil tussen een participant en een miner:
 
 \begin{figure}[h!]
 	\centering
@@ -482,21 +480,48 @@ Om deel te nemen aan een blockchain netwerk moet men ten alle tijden een recente
 \end{figure}
 \newpage
 
-Zoals hierboven vermeld is het verifiëren van blokken niet verplicht om deel te nemen aan het netwerk. waarom zouden miners hun tijd en energie in dit proces steken? Ze worden beloond voor het verifiëren aan de hand van een \textbf{block reward}. Wanneer ze een transactielijst gaan samenstellen voegt het bitcoin protocol een speciale transactie eraan toe. Deze transactie wijst een aantal bitcoin toe aan de miner van dit blok. Slaagt de miner er aldus in om dit blok te verifiëren krijgt hij het aantal bitcoin van deze transactie.\\
+Zoals hierboven vermeld is het verifiëren van blokken niet verplicht om deel te nemen aan het netwerk. Waarom zouden miners hun tijd en energie in dit proces steken? Ze worden beloond voor het verifiëren aan de hand van een \textbf{block reward}. Wanneer ze een transactielijst samenstellen voegt het bitcoin protocol een speciale transactie eraan toe. Deze transactie wijst een aantal bitcoin toe aan de miner van dit blok. Slaagt de miner er aldus in om dit blok te verifiëren krijgt hij het aantal bitcoin van deze transactie.\\
 
-Zoals hierboven vermeld worden er dus nieuwe munten in circulatie gebracht door het PoW algoritme. Dit is zeker belangrijk als men realiseert dat er geen centrale autoriteit is die deze munt circulatie brengt. In België bijvoorbeeld wordt het aantal geld in circulatie beheerd door de Nationale Bank. Hierdoor is er echter een probleem. Mocht het verificatie proces te snel gaan worden er teveel munten in omloop gebracht wat leidt tot het principe van inflatie. Hoe wordt dit tegen gegaan?\\
+Zoals hierboven vermeld worden er dus nieuwe munten in circulatie gebracht door het PoW algoritme. Dit is zeker belangrijk als men realiseert dat er geen centrale autoriteit is die deze munt in circulatie brengt. In België bijvoorbeeld wordt de hoeveelheid geld in circulatie beheerd door de Nationale Bank. Hierdoor is er echter een probleem. Mocht het verificatie proces te snel gaan worden er teveel munten in omloop gebracht wat leidt tot het principe van inflatie. Hoe verloopt dit bij Bitcoin?\\
 
 Er zijn drie manieren waarop bitcoin en andere varianten hun geldstroom beheren:
 
 \begin{enumerate}
 
-\item Zoals eerder vermeld is de moeilijkheidsgraad en tijd die het duurt voor het verifiëren rechtstreeks afhankelijk van het aantal 0-bits vereist in het PoW algoritme. Het bitcoin algoritme past dit aantal 0-bits automatisch aan zodat er gemiddeld één blok wordt aangemaakt elke tien minuten. Hierdoor wordt er niet teveel nieuwe munten in omloop gebracht.\\
+\item Zoals eerder vermeld is de moeilijkheidsgraad en tijd die het duurt voor het verifiëren rechtstreeks afhankelijk van het aantal 0-bits vereist in het PoW algoritme. Het bitcoin algoritme past dit aantal 0-bits automatisch aan zodat er gemiddeld één blok wordt aangemaakt elke tien minuten. Er worden aldus niet teveel nieuwe munten in omloop gebracht.\\
 
-\item De grote van een blok is beperkt tot 1 megabyte. De reden hier achter is dat iedere peer een kopie moet bijhouden van de ledger. Opslagruimte is namelijk beperkt. Daarom kan een blok enkel om en bij de 2400 transacties bevatten. Als men weet dat er één blok elke 10 minuten wordt aangemaakt is het aantal transacties aldus min of meer constant. Het bitcoin netwerk is instaat om ongeveer 14.400 transacties te verwerken per uur.\\
+\item De grootte van een blok is beperkt tot 1 megabyte. De reden hier achter is dat iedere peer een kopie moet bijhouden van de ledger. Opslagruimte is namelijk beperkt. Daarom kan een blok enkel om en bij de 2400 transacties bevatten. Als men weet dat er één blok elke 10 minuten wordt aangemaakt is het aantal transacties aldus min of meer constant. Het bitcoin netwerk is in staat om ongeveer 14.400 transacties te verwerken per uur.\\
 
 \item Het aantal munten dat een miner krijgt voor het verifiëren van een transactie wordt ook wel de \textbf{block reward} genoemd. Deze block reward wordt automatisch gehalveerd elke 210.000 blokken (ongeveer 4 jaar). Hierdoor wordt het aantal nieuwe munten in circulatie verminderd.\\
 \end{enumerate}
 
-Zoals hierboven vermeld is het aantal transactie gelimiteerd tot ongeveer 14.400 transactie per uur. Hierdoor is het dus niet duidelijk wanneer een participant een transactie verstuurd deze ook effectief snel zal verwerkt worden. Om miners aan te sporen hun transacties te versnellen kunnen participanten ook een \textbf{transactie kost} aan hun transactie toevoegen.  Dit is een kleine optionele kost die participanten toevoegen en rechtstreeks naar de miner gaat indien deze transactie verwerkt wordt.
+Zoals hierboven vermeld is het aantal transactie gelimiteerd tot ongeveer 14.400 transactie per uur. Hierdoor is het dus niet duidelijk dat wanneer een participant een transactie verstuurt deze ook effectief snel zal verwerkt worden. Om miners aan te sporen hun transacties te versnellen kunnen participanten ook een \textbf{transactiekost} aan hun transactie toevoegen.  Dit is een kleine optionele kost die participanten toevoegen en die rechtstreeks naar de miner gaat indien deze transactie verwerkt wordt.
 
-\subsection{Smartcontracts en ethereum}
+\subsection{Ethereum}
+Volgens \cite{EthFound2020} is Ethereum een open-source platform voor het schrijven van gedecentraliseerde applicaties. Op dit platform wordt gebruik gemaakt van blockchains. Het idee komt van Vitalik Buterin en werd geformaliseerd in een Witboek gepubliceerd in 2013. De volgende uitleg is dan ook gebaseerd op dit Witboek \cite{Buterin2015}.\\
+
+Het bitcoin protocol is gebouwd bovenop blockchain technologie. Het biedt -zoals uitgelegd in de inleiding- een manier om aan gedecentraliseerde dataopslag te doen. Hoe maakt men gebruik van deze nieuwe technologie in gedecentraliseerde applicaties? Stel dat men bijvoorbeeld berichten wil opslaan in de blockchain. Hoe maakt men dan gebruik van blockchain? Zoals Buterin vermeld zijn er twee mogelijkheden:
+
+\begin{enumerate}
+\item De applicatie voorziet zijn eigen vorm van blockchain technologie. Het is in essentie zijn eigen netwerk. Dit is echter geen eenvoudige taak. Men moet namelijk niet alleen de volledige code van de blockchain zelf  implementeren maar men moet ook een eigen netwerk maken met participanten en miners. Dan zit men ook nog met de logisitieke taak van een voldoende groot netwerk te hebben en de miners effectief aan te sporen om te valideren. Dit is dus hoogst onpraktisch.\\
+\item De applicatie maakt gebruik van de Bitcoin blockchain. Bitcoin is hier echter niet inherent voor ontworpen. De doelstelling van Bitcoin is namelijk om een p2p betalingssysteem te voorzien. Het is niet gemaakt voor de ontwikkeling van gedecentraliseerde applicaties.\\
+\end{enumerate}
+
+Ethereum is dus ontstaan uit de noodzaak voor een zogenaamde programmeerbare blockchain. Dit wilt zeggen een blockchain die bedoeld is om het schrijven van gedecentraliseerde applicaties te bevorderen. Ethereum steunt hierbij op hetzelfde algoritme en basis principes van bitcoin. Dat wilt zeggen dat er nog steeds sprake is van miners, een digitale munteenheid genaamd ether en een PoW algoritme. Ethereum bereikt deze programmeerbare blockchain door het concept van \textbf{Smart contracts}.
+
+\subsection{Smart contracts}
+Smart contracts kunnen het best worden vergeleken met objecten. Met wie ze veel gelijkenissen vertonen. Zo kent een smart contracts volgende concepten:
+
+\begin{enumerate}
+\item Een smart contract bevat variabelen en arrays. Dit zijn in essentie opslag plaatsen voor bepaalde waarden. Het datatype van deze variabelen wordt omgezet in bytes. Deze omzetting is gelijkaardig aan hoe zogenaamde \textit{high-level} programmeertalen zoals C\# en java werken.\\
+\item Een smart contract bevat functies. Deze functies kunnen de variabelen manipuleren of uitlezen. Zoals in klassieke programmeertalen kunnen functies ook parameters mee krijgen. Ze kunnen eveneens waarden gaan teruggeven. Het is ook belangrijk om op te merken dat smart contracts functies kunnen uitvoeren op andere smart contracts\
+\item Smart contracts bevatten \textbf{control flow}. Daarmee wordt bedoeld dat ze concepten bevatten zoals if statements en for loops.
+\end{enumerate}
+
+Er bestaan verschillende talen voor het schrijven van smart-contracts. De taal die gebruikt wordt binnen de POC wordt solidity genoemd. Het volledig overlopen van de syntax van deze taal ligt buiten de scope van deze bachelorproef. Voor enkele concrete voorbeelden van deze taal en een beknopte uitleg zie Appendix 3.\\
+
+Ethereum is in essentie een gedistribueerde computer. Het netwerk bestaat uit een verzameling van miners en participanten. Miners passen data in de blockchain aan op basis van code onder de vorm van smart contracts. Dit stelt softwareontwikkelaars in staat om gedecentraliseerde applicaties te schrijven .\\
+
+Elke transactie op de blockchain moet verwerkt worden door een miner. Hierbij voeren miners de code van smart contracts uit. Dit introduceert echter een probleem: wat als het contract vast komt te zitten of het veel tijd vergt? Om dit probleem tegen te gaan wordt er voor elke stap in de transactie een transactiekost vereist. Deze transactie kost wordt ook wel GAS genoemd. Doordat elke stap een bepaalde kost met zich mee draagt is het voor software ontwikkelaars cruciaal om deze transacties zo kort mogelijk te houden. Het is aldus ook niet mogelijk om een oneindige lus te schrijven. Deze GAS transactie kost gaat integraal naar de miners als een beloning voor het verrichte werk. Hierdoor worden miners ook aangezet om transactie te verwerken op het Ethereum netwerk.\\
+
+Smart contracts kunnen niet meer worden gewijzigd. Indien een smart contract op de blockchain is geplaatst, dan is deze permanent. Het is dus cruciaal dat een software ontwikkelaar zijn smart contracts goed test alvorens ze op het netwerk te plaatsen.
