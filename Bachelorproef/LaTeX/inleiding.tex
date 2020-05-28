@@ -5,7 +5,7 @@
 \chapter{\IfLanguageName{dutch}{Inleiding}{Introduction}}
 \label{ch:inleiding}
 \subsection{Introductie versiebeheersystemen}
-Elke software ontwikkelaar kan beamen dat software fel onderhevig is aan veranderingen. Constant moeten er nieuwe functies worden geïmplementeerd en fouten worden rechtgezet. Dit probleem wordt enkel verergerd indien er tientallen mensen samen aan deze projecten werken. Versiebeheersystemen bieden een oplossing voor deze problemen. Tegenwoordig zijn ze een onmisbaar deel geworden van de manier waarop software wordt ontwikkeld.\\
+Elke software ontwikkelaar kan beamen dat software fel onderhevig is aan veranderingen. Constant moeten er nieuwe functies worden geïmplementeerd en fouten worden rechtgezet. Dit probleem wordt enkel verergerd indien er tientallen mensen samen aan projecten werken. Versiebeheersystemen bieden een oplossing voor deze problemen. Tegenwoordig zijn ze een onmisbaar deel geworden van de manier waarop software wordt ontwikkeld.\\
 
 Deze systemen delen software op in een aaneenschakeling van veranderingen. Deze veranderingen worden ook wel versies genoemd. Deze systemen maken het mogelijk om nieuwe wijzigingen aan te brengen en toegang te krijgen tot oudere versies. Moderne versiebeheersystemen bieden daarbovenop ook de mogelijkheid om twee conflicterende wijzigingen samen te voegen. Hierdoor wordt samenwerken aan grote projecten vergemakkelijkt.\\
 
@@ -16,31 +16,31 @@ Kort samengevat bestaat een versiebeheersysteem uit twee verschillende functies:
 \item Een manier om wijzigingen aan te brengen en toegang te krijgen tot eerdere versies van deze bestanden.
 \end{enumerate}
 
-Versiebeheersystemen stellen softwareontwikkelaars instaat om code publiek toegankelijk te maken. Hierdoor kan elke software ontwikkelaar de broncode gaan raadplegen en aanpassen. Een principe dat mooi kadert binnen de zogenaamde Open-Source filosofie. Deze filosofie streeft naar een open en democratische ontwikkeling van software. Hierbij staat samenwerken aan verbeteringen centraal. Software projecten worden aldus aanzien als een gezamenlijk project.
+Versiebeheersystemen stellen software ontwikkelaars in staat om code publiek toegankelijk te maken. Hierdoor kan elke software ontwikkelaar de broncode raadplegen en aanpassen: een principe dat mooi kadert binnen de zogenaamde Open-Source filosofie. Deze filosofie streeft naar een open en democratische ontwikkeling van software. Hierbij staat samenwerken aan verbeteringen centraal. Software projecten worden aldus aanzien als een gezamenlijk project.
 
-\subsection{Probleem stelling}
-Toch is er een probleem met de manier waarop deze systemen functioneren. Ze vereisen namelijk een centrale server voor de bestanden en wijzigingen te gaan opslaan. Dit is problematisch aangezien deze servers eventueel beschadigd of onbereikbaar kunnen zijn. Hierdoor kunnen projecten onbeschikbaar zijn of in het ergste geval zelfs verloren gaan. Dit probleem staat ook wel bekend onder de naam \textbf{Single point of failure}.\\
+\subsection{Probleemstelling}
+Toch is er een probleem met de manier waarop deze systemen functioneren. Deze systemen gebruiken een centrale server om bestanden en wijzigingen op te slaan. Dit is een probleem aangezien deze servers eventueel beschadigd of onbereikbaar kunnen zijn. Hierdoor kunnen projecten onbeschikbaar zijn of in het ergste geval zelfs verloren gaan. Dit probleem staat ook wel bekend onder de naam \textbf{Single point of failure}.\\
 
-Een ander probleem is dat deze servers in de handen kunnen komen van grote tech-giganten. Zo heeft Microsoft in 2018 GitHub -een populair versiebeheer platform- overgekocht. Dit druist in tegen de eerder vermelde Open-Source filosofie. Want deze systemen zijn niet gevrijwaard van commerciële invloeden.\\
+Een ander probleem is dat deze servers in de handen kunnen komen van grote tech-giganten. Zo heeft Microsoft in 2018 GitHub -een populair versiebeheer platform- overgekocht. Dit druist in tegen de eerder vermelde Open-Source filosofie, want deze systemen zijn niet gevrijwaard van commerciële invloeden.\\
 
 Binnen deze bachelorproef wordt een systeem ontwikkeld dat geen centrale server vereist. Op die manier wordt het Single point of failure probleem vermeden en is de oplossing vrij van commerciële invloeden. Dit maakt de oplossing interessant voor Open-Source software bedrijven.
 \subsection{Introductie decentralisatie}
 Een alternatief voor deze centrale server bestaat onder de vorm van zogenaamde P2P protocollen. Deze protocollen hebben als doelstelling om de rol van centrale server op zich te nemen en de taak te verspreiden over een netwerk van computers. Het afstappen van een centrale server naar een netwerk van verschillende computers wordt ook wel decentralisatie genoemd.\\
 
-De doelstelling van deze bachelorproef is om versiebeheersystemen te gaan decentraliseren. De oplossing die hierbij wordt voorgesteld moet aldus voldoen aan volgende drie criteria:
+De doelstelling van deze bachelorproef is om versiebeheersystemen te  decentraliseren. De oplossing die hierbij wordt voorgesteld moet aldus voldoen aan volgende drie criteria:
 
 \begin{enumerate}
  \item De oplossing moet volledig gedecentraliseerd zijn. Dit wilt zeggen dat er geen centrale server of andere component aanwezig mag zijn. Dit komt dus in essentie neer op het gebruik maken van P2P protocollen.\\
- \item Er moet een manier zijn om bestanden te gaan delen en opvragen.\\
+ \item Er moet een manier zijn om bestanden te delen en op te vragen.\\
  \item Er moet een mogelijkheid zijn tot het aanbrengen van wijzigingen en het bijhouden van versies.
 \end{enumerate}
 
-Voor het bijhouden en opvragen van bestanden kan gebruik worden gemaakt van \textbf{IPFS}. Dit is een p2p file-sharing protocol. De wijzigingen en versies moeten worden bijgehouden in een dataopslag systeem. Een gekend gedecentraliseerd opslagsysteem is blockchain.
+Voor het bijhouden en opvragen van bestanden kan gebruik worden gemaakt van \textbf{IPFS}. Dit is een P2P file-sharing protocol. De wijzigingen en versies moeten worden bijgehouden in een dataopslagsysteem. Een gekend gedecentraliseerd opslagsysteem is blockchain.
 
 
 \section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}
 \label{sec:onderzoeksvraag}
-De onderzoeksvraag luidt dus als volgt: \textbf{Hoe kan men door middel van Blockchain principes en IPFS een werkbaar gedecentraliseerd versiebeheersysteem ontwikkelen?}.\\
+De onderzoeksvraag luidt dus als volgt: \textbf{hoe kan men door middel van Blockchain principes en IPFS een werkbaar gedecentraliseerd versiebeheersysteem ontwikkelen?}.\\
 
 Om deze onderzoeksvraag correct en volledig te beantwoorden wordt er ook met een aantal deelvragen gewerkt. Deze deelvragen worden sequentieel behandeld in de literatuurstudie:
 
@@ -48,7 +48,7 @@ Om deze onderzoeksvraag correct en volledig te beantwoorden wordt er ook met een
 \item Wat zijn de problemen die versiebeheersystemen oplossen? \\
 \item Waaruit bestaat een versiebeheersysteem? \\
 \item Waarom zouden we van gecentraliseerde (server-client architectuur) versiebeheersystemen overstappen naar een gedecentraliseerde variant?         \\
-\item Wat zijn de eigenschappen en valkuilen van gedecentraliseerde(P2P) netwerken?\\
+\item Wat zijn de eigenschappen en valkuilen van gedecentraliseerde netwerken?\\
 \item Wat is IPFS en hoe kadert het binnen versiebeheer?\\
 \item Wat zijn smartcontracts en hoe bieden ze een meerwaarde aan Blockchain applicaties?\\
 \end{enumerate}
@@ -57,29 +57,29 @@ Om deze onderzoeksvraag correct en volledig te beantwoorden wordt er ook met een
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}
 \label{sec:onderzoeksdoelstelling}
 
-Zoals in de onderzoeksvraag wordt vermeld is de doelstelling om een gedecentraliseerd versiebeheer systeem te ontwikkelen. Er zijn aldus drie criteria waar deze oplossing aan moet voldoen:
+Zoals in de onderzoeksvraag wordt vermeld is de doelstelling om een gedecentraliseerd versiebeheer systeem te ontwikkelen. Er zijn dus drie criteria waar deze oplossing aan moet voldoen:
 
 \begin{enumerate}
  \item De oplossing moet volledig gedecentraliseerd zijn. Dit wilt zeggen dat er geen centrale server of andere component aanwezig mag zijn.\\
- \item Er moet een manier zijn om bestanden te gaan delen en opvragen.\\
+ \item Er moet een manier zijn om bestanden te delen en op te vragen.\\
  \item Er moet een mogelijkheid zijn tot het aanbrengen van wijzigingen en het bijhouden van versies.
 \end{enumerate}
 
-Op het einde van deze bachelorproef is de doelstelling aldus om een werkend proto-type te hebben. Dit proto-type zal gebruik maken van IPFS en blockchain technologie om deze doelstelling te bereiken.
+Op het einde van deze bachelorproef is de doelstelling dus om een werkend prototype te hebben. Dit prototype zal gebruik maken van IPFS en blockchain technologie om deze doelstelling te bereiken.
 
 \section{\IfLanguageName{dutch}{Opzet van deze bachelorproef}{Structure of this bachelor thesis}}
 \label{sec:opzet-bachelorproef}
 
 De rest van deze bachelorproef is als volgt opgebouwd:
 
-In Hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand van zaken binnen het onderzoeksdomein, op basis van een literatuurstudie. Dit is onderverdeeld in drie verschillende delen:
+In hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand van zaken binnen het onderzoeksdomein, op basis van een literatuurstudie. Dit is onderverdeeld in drie verschillende delen:
 
 \begin{enumerate}
-\item Een literatuurstudie over versiebeheersystemen. In dit deel worden de  concepten binnen versiebeheer gekaderd en verduidelijkt. Zo krijgt men een beeld over wat er reeds beschikbaar is. Alsook aan welke vereisten het ontwikkelde prototype moet voldoen.\\
-\item Een studie over file-sharing protocollen. IPFS is een complex file-sharing protocol. Hier worden de concepten uitgelegd om voldoende achtergrond informatie te verschaffen om de achterliggende principes van het ontwikkelde prototype te begrijpen.\\
+\item Een literatuurstudie over versiebeheersystemen. In dit deel worden de  concepten binnen versiebeheer gekaderd en verduidelijkt. Zo krijgt men een beeld van wat er reeds beschikbaar is. Alsook aan welke vereisten het ontwikkelde prototype moet voldoen.\\
+\item Een studie over file-sharing protocollen. IPFS is een complex file-sharing protocol. Hier worden de concepten uitgelegd om voldoende achtergrondinformatie te verschaffen om de achterliggende principes van het ontwikkelde prototype te begrijpen.\\
 \item Een studie over de achterliggende principes van blockchain protocollen. Hierbij wordt uitgelegd wat blockchain is en hoe het zal verwerkt worden binnen het ontwikkelde proto-type.
 \end{enumerate}
 
-In Hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen.
+In hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen.
 
-In Hoofdstuk~\ref{ch:conclusie}, tenslotte, wordt de conclusie gegeven en een antwoord geformuleerd op de onderzoeksvragen. Daarbij wordt ook een aanzet gegeven voor toekomstig onderzoek binnen dit domein.
+In hoofdstuk~\ref{ch:conclusie}, tenslotte, wordt de conclusie gegeven en een antwoord geformuleerd op de onderzoeksvragen. Daarbij wordt ook een aanzet gegeven voor toekomstig onderzoek binnen dit domein.

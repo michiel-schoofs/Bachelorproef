@@ -12,36 +12,35 @@
 %% onderzoeksvraag.
 \section{Hoe de onderzoeksvraag tot stand is gekomen.}
 \label{POC_introduction}
-Dit onderzoek ontstond uit een persoonlijke interesse. Internet is een zeer veranderlijk geheel met tal van nieuwe technologieën die ingeburgerd raken. Software ontwikkeling is dan ook geen vast gegeven. Toch zijn er een aantal basis fundamenten waarop softwareontwikkeling gebaseerd is. Een van deze fundamenten is het klassieke server-client model. In dit model voorziet één centrale computer bestanden of diensten voor tal van andere computers. Een gekend voorbeeld hiervan is de manier waarop het internet werkt ook wel bekend onder het HTTP protocol.\\
+Dit onderzoek ontstond uit een persoonlijke interesse. Internet is een zeer veranderlijk geheel met tal van nieuwe technologieën die vervolgens ingeburgerd raken. Software ontwikkeling is dan ook geen vast gegeven. Toch zijn er een aantal basisfundamenten waarop softwareontwikkeling gebaseerd is. Een van deze fundamenten is het klassieke server-client model. In dit model voorziet één centrale computer bestanden of diensten voor tal van andere computers. Een gekend voorbeeld hiervan is de manier waarop het internet werkt ook wel bekend onder het HTTP protocol.\\
 
-Bestaat er dan geen alternatief voor het Client-Server model? Distributed Computing tracht deze vraag te beantwoorden. Eén van de oplossingen is een zogenaamd P2P netwerk. Binnen dit type netwerk voorzien computers onderling bestanden en diensten aan elkaar voorzien. Dit type netwerk werd vooral populair onder de vorm van File-Sharing Protocollen. Gekende voorbeelden zijn hierbij Pirate Bay en Napster. Hoewel deze protocollen een eenvoudig en elegant alternatief boden stonden ze nog niet op punt. Zo was er geen manier om op een veilig wijze aan dataopslag te doen.\\
+Bestaat er dan geen alternatief voor het Client-Server model? Distributed Computing tracht deze vraag te beantwoorden. Eén van de oplossingen is een zogenaamd P2P netwerk. Binnen dit type netwerk voorzien computers onderling bestanden en diensten aan elkaar. Dit type netwerk werd vooral populair onder de vorm van File-Sharing Protocollen. Gekende voorbeelden zijn hierbij Pirate Bay en Napster. Hoewel deze protocollen een eenvoudig en elegant alternatief boden, stonden ze nog niet op punt. Zo was er geen manier om op een veilig wijze aan dataopslag te doen.\\
 
-Blockchain bracht een oplossing voor het probleem van dataopslag. Blockchain technologie is vooral bekend van Bitcoin en de financiële impact die deze met zich mee bracht. Toch zijn de implicaties veel diepgaander. Blockchain bied een manier om op een veilige wijze aan dataopslag te doen in een gedistribueerd netwerk. Door dat data integriteit kan gewaarborgd worden kunnen ontwikkelaar veiligere en robuustere oplossingen ontwikkelen voor een P2P netwerk.\\
+Blockchain bracht een oplossing voor het probleem van dataopslag. Blockchain technologie is vooral bekend van Bitcoin en de financiële impact die deze met zich mee bracht. Toch zijn de implicaties veel diepgaander. Blockchain biedt een manier om op een veilige wijze aan dataopslag te doen in een gedistribueerd netwerk. Doordat data integriteit kan gewaarborgd worden kunnen ontwikkelaars veiligere en robuustere oplossingen ontwikkelen voor een P2P netwerk.\\
 
-Toch bleef de blockchain technologie niet beperkt tot Bitcoin en P2P netwerken en werd ze veel verder ontwikkeld. Zo kwam Ethereum met het idee van smart contracts die software ontwikkelaars in staat stellen om transacties op Blockchain netwerken verder te controleren. Hierdoor kunnen applicaties worden ontwikkeld die op een volledig gedistribueerde manier werken. Het is een zeer fascinerende en revolutionaire manier van denken die grote implicaties met zich mee kan dragen.\\
+Toch bleef de blockchain technologie niet beperkt tot Bitcoin en P2P netwerken en werd ze veel verder ontwikkeld. Zo kwam Ethereum met het idee van smart contracts die software ontwikkelaars in staat stellen om transacties op Blockchain netwerken verder te controleren. Hierdoor kunnen applicaties worden ontwikkeld die op een volledig gedistribueerde manier werken. Het is een zeer fascinerende en revolutionaire manier van denken die grote implicaties met zich mee kan bregen.\\
 
 Deze bachelorproef wil deze technologie verkennen en gebruiken in één van de meest fundamentele stappen van moderne software ontwikkeling: versiebeheer.\\
 
-Uiteraard is deze bachelorproef niet het enige onderzoek over het decentraliseren van versiebeheer. In hun onderzoek decentraliseren \textcite{Nizamuddin2019} versiebeheer aan de hand van de Ethereum blockchain en IPFS. Dit is een zeer interessante benadering geweest maar bleef echter beperkt. Veel van de achterliggende concepten werden niet uitgelegd en hun oplossing was eerder beperkt in grote in en complexiteit. Deze bachelorproef wilt hierop een aanvulling bieden en uitleggen wat blockchain, versiebeheer en IPFS exact zijn en hoe deze kunnen worden gecombineerd.
+Uiteraard is deze bachelorproef niet het enige onderzoek over het decentraliseren van versiebeheer. In hun onderzoek decentraliseren \textcite{Nizamuddin2019} versiebeheer aan de hand van de Ethereum blockchain en IPFS. Dit is een zeer interessante benadering geweest maar te beperkt. Veel van de achterliggende concepten werden niet uitgelegd en hun oplossing was eerder beperkt in grootte in en complexiteit. Deze bachelorproef wilt hierop een aanvulling bieden en uitleggen wat blockchain, versiebeheer en IPFS exact zijn en hoe deze kunnen worden gecombineerd.
 
 \section{Het ontleden van de onderzoeksvraag.}
 \label{ontleden van de onderzoeksvraag}
-Zoals besproken in \ref{POC_introduction} is de uiteindelijke onderzoeksvraag waarop een antwoord wordt gezocht: \textbf{Hoe kan men door middel van Blockchain principes en IPFS een werkbaar gedecentraliseerd versiebeheersysteem ontwikkelen} Deze wordt onderverdeeld in verschillende deelvragen die sequentieel zijn beantwoord in de literatuurstudie. Hieronder volgt een kort overzicht en antwoord op de verschillende deelvragen. Voor meer informatie zie \ref{ch:stand-van-zaken}.
+Zoals besproken in \ref{POC_introduction} is de uiteindelijke onderzoeksvraag waarop een antwoord wordt gezocht: \textbf{Hoe kan men door middel van Blockchain principes en IPFS een werkbaar gedecentraliseerd versiebeheersysteem ontwikkelen?} Deze wordt onderverdeeld in verschillende deelvragen die sequentieel zijn beantwoord in de literatuurstudie. Hieronder volgt een kort overzicht en antwoord op de verschillende deelvragen. Voor meer informatie zie \ref{ch:stand-van-zaken}.
  
 \begin{table}[h!]
 \begin{tabularx}{\linewidth}{ |X|X| }
 \hline
 Deelvraag & Antwoord \\ \hline
 Wat zijn de problemen die versiebeheersystemen oplossen? & 
-versiebeheersystemen bieden een manier om verschillende softwareversies aan te maken. Hierdoor kunnen softwareontwikkelaars ten allen tijden toegang krijgen tot verschillende versies van hun software. Versiebeheersystemen stellen ontwikkelaars in staat om hun code op een eenvoudige manier onderling met elkaar te delen en samen te werken.\\ \hline
-Waaruit bestaat een versiebeheersysteem? & Een versiebeheersysteem bestaat uit twee delen: Een manier om bestanden op te slaan en te delen met elkaar. Ten tweede een wijze om bestanden te gaan archiveren. Dit wilt zeggen dat ze verschillende versies van de bestanden kunnen opslaan en ook toegang bieden tot deze versies.\\ \hline
-Waarom zouden we van gecentraliseerde (server-client architectuur) versiebeheersystemen overstappen naar een gedecentraliseerde variant?         & Moderne versiebeheersystemen zijn vaak het eigendom van grote tech-giganten. Binnen software ontwikkeling streven open-source developers en bedrijven die streven naar democratische softwareontwikkeling. Gedecentraliseerde systemen kaderen goed binnen deze ideologie. Gedecentraliseerde systemen hebben ook het voordeel dat ze geen centraleserver architectuur vereisen. Servers zijn immers kostelijk en mocht de server kapot gaan is men alle gegevens kwijt (\textit{het zogenaamde SPOF probleem}).\\ \hline
+Versiebeheersystemen bieden een manier om verschillende softwareversies aan te maken. Hierdoor kunnen softwareontwikkelaars ten allen tijden toegang krijgen tot verschillende versies van hun software. Versiebeheersystemen stellen ontwikkelaars in staat om hun code op een eenvoudige manier onderling met elkaar te delen en samen te werken.\\ \hline
+Waaruit bestaat een versiebeheersysteem? & Een versiebeheersysteem bestaat uit twee delen: een manier om bestanden op te slaan en te delen met elkaar. Ten tweede een wijze om bestanden te archiveren. Dit wilt zeggen dat ze verschillende versies van de bestanden kunnen opslaan en ook toegang bieden tot deze versies.\\ \hline
+Waarom zouden we van gecentraliseerde (server-client architectuur) versiebeheersystemen overstappen naar een gedecentraliseerde variant?         & Moderne versiebeheersystemen zijn vaak het eigendom van grote tech-giganten. Binnen software ontwikkeling streven open-source developers en bedrijven naar democratische softwareontwikkeling. Gedecentraliseerde systemen kaderen goed binnen deze ideologie. Gedecentraliseerde systemen hebben ook het voordeel dat ze geen centrale server architectuur vereisen. Servers zijn immers kostelijk en mocht de server kapot gaan is men alle gegevens kwijt (\textit{het zogenaamde SPOF probleem}).\\ \hline
 Wat zijn de eigenschappen en valkuilen van gedecentraliseerde(P2P) netwerken? & P2P netwerken bieden een manier om op een gedecentraliseerde wijze diensten en software aan te bieden. Elke peer zal hierbij de rol van zowel server als client op zich nemen om dit te bereiken. Het grootste nadeel is echter dat deze netwerken een groot aantal deelnemers vereisen om functioneel werkbaar te zijn.\\ \hline
 \end{tabularx}
 \end{table} 
 \newpage
-\newpage
-\begin{table}[h!]
+\begin{table}[t!]
 \begin{tabularx}{\linewidth}{ |X|X| }
 \hline
 Deelvraag & Antwoord \\ \hline
@@ -55,43 +54,43 @@ Bovenstaande deelvragen bieden een goed overzicht van wat er exact nodig is om e
 
 \begin{enumerate}
 	\item De oplossing die wordt ontwikkeld mag geen centrale component hebben en moet op een volledig gedistribueerde manier in staat zijn om te functioneren.
-	\item De oplossing moet een gebruiker instaat stellen om documenten met anderen te kunnen delen.
+	\item De oplossing moet een gebruiker in staat stellen om documenten met anderen te kunnen delen.
 	\item De oplossing moet een manier aanbieden om wijzigingen aan deze documenten op te slaan onder de vorm van verschillende versies. Deze verschillende versies moeten kunnen geraadpleegd worden.
 \end{enumerate}
 
 \section{Tools}
 \label{Tools}
-Het delen van bestanden wordt mogelijk gemaakt door middel van IPFS. Dit protocol stelt de POC in staat om bestanden te verspreiden op een gedistribueerde manier en deze vervolgens opnieuw op te vragen. Hiervoor gebruikt IPFS het principe van een CID. Dit is in essentie een zelfbeschrijvende hash code die vervolgens kan worden gebruikt om bestanden op te halen -zie \ref{ipfs_decent}-. IPFS stelt ons ook in staat om meerdere versies van dezelfde bestand(en) op te slaan en ter beschikking te stellen. neem bijvoorbeeld onderstaand scenario:\\
+Het delen van bestanden wordt mogelijk gemaakt door middel van IPFS. Dit protocol stelt de POC in staat om bestanden te verspreiden op een gedistribueerde manier en deze vervolgens opnieuw op te vragen. Hiervoor gebruikt IPFS het principe van een CID. Dit is in essentie een zelfbeschrijvende hash code die vervolgens kan worden gebruikt om bestanden op te halen -zie \ref{ipfs_decent}-. IPFS stelt ons ook in staat om meerdere versies van dezelfde bestand(en) op te slaan en ter beschikking te stellen. Neem bijvoorbeeld onderstaand scenario:\\
 
 Bob en Alice willen een website ontwikkelen. Bob plaatst de homepagina op het IPFS netwerk en krijgt een CID om dit bestand opnieuw op te vragen. Hij deelt deze CID met Alice die vervolgens het bestand lokaal binnenhaalt. Alice brengt enkele wijzigingen aan en zet het bestand opnieuw op het netwerk. Alice zal een nieuwe CID worden toegewezen. Er zijn nu in feite twee verschillende versies van dit bestand op het netwerk, een versie van Bob die kan worden opgehaald met de CID die Bob heeft en een versie van Alice met haar eigen CID.\\
 
 Toch is IPFS op zich niet voldoende. Er is immers geen eenvoudige manier voorzien om deze CIDS met elkaar te delen. Hier biedt blockchain een oplossing. Blockchain functioneert immers als een databank. De CIDS kunnen daar dus worden bewaard en opgevraagd. Om dit proces van opslaan en opvragen te vereenvoudigen wordt gebruik gemaakt van smart contracts. Niet iedere blockchain ondersteunt deze smartcontracs. Ethereum is een gekend voorbeeld van een netwerk dat dit wel ondersteunt.\\
 
-Deze smartcontracts worden geschreven in de programmeertaal Solidity. Veel netwerken vragen transactiekosten voor het werken met smartcontracts . Om deze transactie kosten te vermeiden kan er gebruik gemaakt worden van een lokaal Ethereum netwerk. Dit lokaal netwerk voorziet dezelfde functies maar heeft geen transactiekosten. De software die hiervoor gebruik wordt is \textcite{Ganache}.\\
+Deze smartcontracts worden geschreven in de programmeertaal Solidity. Veel netwerken vragen transactiekosten voor het werken met smartcontracts . Om deze transactie kosten te vermijden kan er gebruik gemaakt worden van een lokaal Ethereum netwerk. Dit lokaal netwerk voorziet dezelfde functies maar heeft geen transactiekosten. De software die hiervoor gebruik wordt is \textcite{Ganache}.\\
 
-Het ontwikkelen en testen van smartcontracts is ook niet evident. Om dit te vergemakkelijken wordt gebruik gemaakt van de \textcite{Truffle} suite. Deze suite biedt de mogelijkheid om smartcontracts te testen. Hiervoor wordt gebruik gemaakt van het javascript framework Mocha.js. Truffle wordt ook gebruikt om de smartcontracts die worden ontwikkeld op de lokale blockchain uit te rollen.\\
+Het ontwikkelen en testen van smartcontracts is ook niet evident. Om dit te vergemakkelijken wordt gebruik gemaakt van de \textcite{Truffle}. Deze suite biedt de mogelijkheid om smartcontracts te testen. Hiervoor wordt gebruik gemaakt van het javascript framework Mocha.js. Truffle wordt ook gebruikt om de smartcontracts die worden ontwikkeld op de lokale blockchain uit te rollen.\\
 
 Tot slot wordt er gebruik gemaakt van een console applicatie geschreven in Dotnet-core 3.1 om de verschillende elementen samen te brengen. Deze console applicatie zal onder andere de verschillende bestanden op het IPFS netwerk plaatsen en de smartcontracts op de blockchain aanspreken. Om smartcontracts te kunnen aanspreken vanuit onze console applicatie zal gebruik gemaakt worden van \textcite{Nethereum}. Om IPFS te kunnen gebruiken wordt gebruik gemaakt van \textcite{IPFSClient}.\\
 
 \section{Meetbare criteria}
-Zoals hierboven vermeldt wordt -zie \ref{ontleden van de onderzoeksvraag} zijn er drie eigenschappen waaraan het ontwikkelde prototype moet voldoen:
+Zoals hierboven vermeld wordt -zie \ref{ontleden van de onderzoeksvraag} zijn er drie eigenschappen waaraan het ontwikkelde prototype moet voldoen:
 
 \begin{enumerate}
 	\item De oplossing die wordt ontwikkeld mag geen centrale component hebben en moet op een volledig gedistribueerde manier in staat zijn om te functioneren.
-	\item De oplossing moet een gebruiker instaat stellen om documenten met anderen te kunnen delen.
+	\item De oplossing moet een gebruiker in staat stellen om documenten met anderen te kunnen delen.
 	\item De oplossing moet een manier aanbieden om wijzigingen aan deze documenten op te slaan onder de vorm van verschillende versies. Deze verschillende versies moeten kunnen geraadpleegd worden.
 \end{enumerate}
 
-Hoe kunnen we deze drie eigenschappen nu concreet af toetsen aan de ontwikkelde oplossing?\\
+Hoe kunnen we deze drie eigenschappen nu concreet aftoetsen aan de ontwikkelde oplossing?\\
 
-De oplossing voldoet aan de eerste vereiste als er strikt gebruik maakt van gedecentraliseerde P2P protocollen. Deze protocollen werken namelijk per definitie zonder centraal element. Doorheen de POC wordt gebruik gemaakt van IPFS en de Ethereum blockchain. Beide P2P protocollen. Zolang de console applicatie die deze twee protocollen gaat combineren geen gebruik maakt van een centrale server wordt aldus aan deze vereiste voldaan.\\
+De oplossing voldoet aan de eerste vereiste als er strikt gebruik wordt gemaakt van gedecentraliseerde P2P protocollen. Deze protocollen werken namelijk per definitie zonder centraal element. Doorheen de POC wordt gebruik gemaakt van IPFS en de Ethereum blockchain. Beide P2P protocollen. Zolang de console applicatie die deze twee protocollen combineert geen gebruik maakt van een centrale server wordt aldus aan deze vereiste voldaan.\\
 
-Om een functioneel versiebeheersysteem te zijn moet er een manier zijn om documenten te gaan opslaan en opvragen. Het moet ook mogelijk zijn om deze documenten met andere te gaan delen. Concreet is er dus aan de vereiste gedaan als volgende drie functionaliteiten zijn geïmplementeerd:
+Om een functioneel versiebeheersysteem te zijn moet er een manier zijn om documenten op te slaan en op te vragen. Het moet ook mogelijk zijn om deze voldaan als volgende drie functionaliteiten zijn geïmplementeerd:
 
 \begin{enumerate}
-\item Een manier om bestanden te gaan opslaan binnen de oplossing.
-\item Een manier om opgeslagen bestanden opnieuw te gaan downloaden.
-\item Een manier om deze opgeslagen bestanden te gaan delen met iemand anders.
+\item Een manier om bestanden op te slaan binnen de oplossing.
+\item Een manier om opgeslagen bestanden opnieuw te downloaden.
+\item Een manier om deze opgeslagen bestanden te delen met iemand anders.
 \end{enumerate}
 
 De laatste vereiste stelt dat er een manier moet zijn om wijzigingen aan te brengen aan de bestanden. Deze wijzigingen worden opgeslagen onder de vorm van verschillende versies. Het moet tevens mogelijk zijn om terug te gaan naar een eerdere versie van een bestand. Dat wilt concreet zeggen dat het mogelijk moet zijn om terug te grijpen naar een eerdere versie van het bestand voor een bepaalde wijziging is aangebracht. Er wordt dus aan de vereiste voldaan indien volgende functionaliteit aanwezig is:
@@ -102,7 +101,7 @@ De laatste vereiste stelt dat er een manier moet zijn om wijzigingen aan te bren
 \item Er moet een mogelijkheid voorzien worden om terug te grijpen naar een eerdere versie van de bestanden. 
 \end{enumerate}
 
-\textbf{Indien aan al deze vereiste wordt voldaan kan men spreken van een werkbaar gedecentraliseerd versiebeheersysteem.}\\
+\textbf{Indien aan al deze vereisten wordt voldaan kan men spreken van een werkbaar gedecentraliseerd versiebeheersysteem.}\\
 
 Al deze vereisten kunnen worden samengevat in onderstaande tabel:
 \begin{table}[h!]
@@ -111,9 +110,9 @@ Al deze vereisten kunnen worden samengevat in onderstaande tabel:
  		\hline
  		\large \textbf{Succescriteria van de POC} \\
  		\hline
- 		De applicatie mag enkel gebruik maken van P2P protocollen, deze zijn per definitie gedecentraliseerd. Er mag aldus geen centrale component gebruikt worden.\\
+ 		De applicatie mag enkel gebruik maken van P2P protocollen. Deze zijn per definitie gedecentraliseerd. Er mag dus geen centrale component gebruikt worden.\\
  		\hline 
- 		Men moet instaat zijn om bestanden te gaan opslaan binnen de applicatie op een gedecentraliseerde manier.\\
+ 		Men moet in staat zijn om bestanden op te slaan binnen de applicatie op een gedecentraliseerde manier.\\
  		\hline
  		De opgeslagen bestanden moeten opnieuw gedownload kunnen worden.\\
  		\hline
@@ -121,7 +120,7 @@ Al deze vereisten kunnen worden samengevat in onderstaande tabel:
  		\hline
  		Er moeten wijzigingen kunnen worden aangebracht binnen deze bestanden. Deze moeten kunnen worden opgeslagen door het systeem.\\
  		\hline
- 		Andere die dit bestand lokaal hebben gedownload moeten instaat zijn om deze wijzigingen binnen te halen en hun eigen wijzigingen aanbrengen.\\
+ 		Anderen die dit bestand lokaal hebben gedownload moeten in staat zijn om deze wijzigingen binnen te halen en hun eigen wijzigingen aan te brengen.\\
  		\hline
  		Er moet een manier voorzien worden waarop men terug kan grijpen naar een eerder versie van het bestand.\\
  		\hline
