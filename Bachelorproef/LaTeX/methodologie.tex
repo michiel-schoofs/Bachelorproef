@@ -60,6 +60,7 @@ Bovenstaande deelvragen bieden een goed overzicht van wat er exact nodig is om e
 \end{enumerate}
 
 \section{Tools}
+\label{Tools}
 Het delen van bestanden wordt mogelijk gemaakt door middel van IPFS. Dit protocol stelt de POC in staat om bestanden te verspreiden op een gedistribueerde manier en deze vervolgens opnieuw op te vragen. Hiervoor gebruikt IPFS het principe van een CID. Dit is in essentie een zelfbeschrijvende hash code die vervolgens kan worden gebruikt om bestanden op te halen -zie \ref{ipfs_decent}-. IPFS stelt ons ook in staat om meerdere versies van dezelfde bestand(en) op te slaan en ter beschikking te stellen. neem bijvoorbeeld onderstaand scenario:\\
 
 Bob en Alice willen een website ontwikkelen. Bob plaatst de homepagina op het IPFS netwerk en krijgt een CID om dit bestand opnieuw op te vragen. Hij deelt deze CID met Alice die vervolgens het bestand lokaal binnenhaalt. Alice brengt enkele wijzigingen aan en zet het bestand opnieuw op het netwerk. Alice zal een nieuwe CID worden toegewezen. Er zijn nu in feite twee verschillende versies van dit bestand op het netwerk, een versie van Bob die kan worden opgehaald met de CID die Bob heeft en een versie van Alice met haar eigen CID.\\
@@ -125,13 +126,35 @@ Al deze vereisten kunnen worden samengevat in onderstaande tabel:
  		Er moet een manier voorzien worden waarop men terug kan grijpen naar een eerder versie van het bestand.\\
  		\hline
  	\end{tabular}
-	\label{tbl_concepts}
+	\label{suc_crit}
 	\caption{Succescriteria van de POC.}
 \end{table}
 \newpage
 \section{Werkwijze}
+\subsection{Opzet}
+Om gebruik te kunnen maken van IPFS en de Ethereum blockchain moet men eerst een aantal stappen doorlopen.\\
+
+Voor men IPFS kan gebruiken moet men de IPFS CLI downloaden. Dit programma is beschikbaar via volgende url: $https://github.com/ipfs/go-ipfs/releases/$. Dit programma bevat de zogenaamde \textbf{IPFS daemon}. Dit is een onderdeel van IPFS dat toegang verleent tot het netwerk. De eerste stap die de Console Applicatie aldus onderneemt is om deze daemon te gaan opstarten.\\
+
+Zoals ook vermeld in \ref{Tools} wordt er gebruik gemaakt van het Ganache netwerk. Dit is een lokale ethereum blockchain die men instaat stelt om transacties te verrichten zonder daarbij echte transactie kosten te hoeven betalen. Dit netwerk bevat een aantal gesimuleerde test accounts met in elk test account 100 ether. Deze ether wordt gebruikt om transactiekosten te gaan simuleren. Elk van deze accounts heeft een privé sleutel en een adres. Het zijn deze twee waarden die noodzakelijk zijn voor de interactie met het ethereum netwerk. De console applicatie zal kijken of deze twee waarden aanwezig zijn binnen het systeem en anders worden deze waarden opgevraagd aan de gebruiker.\\
+
+Deze opzet fase kan men voorstellen door onderstaand sequentie diagram:
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.4]{POC-1.png}
+\caption[POC opstart]{Een sequentie diagram die de noodzakelijke opstart stappen overloopt. }
+\end{figure}
+
+\subsection{Het opslaan en opvragen van bestanden.}
+Voor het opslaan en bijhouden van de bestanden wordt gebruik gemaakt van het concept van een Repository. Een repository zoals gedefineerd in deze bachelorproef is vergelijkbaar met het concept van een archief -zie \ref{}-. Het bevat een unieke naam, alle versies van bestanden 
+
+\subsection{Het delen van bestanden met anderen}
+
+\subsection{Het aanbrengen en binnenhalen van wijzigingen}
+
+\subsection{Het teruggaan naar eerder versies}
+
 Om de verschillende smartcontracts te ontwikkelen is er gekozen om gebruik te maken van een klasse diagram. Dit diagram biedt een schematisch overzicht van de verschillende contracten die ontwikkeld zijn alsook de verschillende functies en attributen
 
 \textbf{TODO: Hier komt nog een klasse diagram alsook een kort overzicht van de oplossing}
-
-\section{Bedenkingen}
