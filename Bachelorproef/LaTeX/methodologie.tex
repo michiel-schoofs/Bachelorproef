@@ -25,7 +25,8 @@ Deze bachelorproef wil deze technologie verkennen en gebruiken in één van de m
 Uiteraard is deze bachelorproef niet het enige onderzoek over het decentraliseren van versiebeheer. In hun onderzoek decentraliseren \textcite{Nizamuddin2019} versiebeheer aan de hand van de Ethereum blockchain en IPFS. Dit is een zeer interessante benadering geweest maar bleef echter beperkt. Veel van de achterliggende concepten werden niet uitgelegd en hun oplossing was eerder beperkt in grote in en complexiteit. Deze bachelorproef wilt hierop een aanvulling bieden en uitleggen wat blockchain, versiebeheer en IPFS exact zijn en hoe deze kunnen worden gecombineerd.
 
 \section{Het ontleden van de onderzoeksvraag.}
-Zoals besproken in \ref{POC_introduction} is de uiteindelijke onderzoeksvraag waarop een antwoord wordt gezocht: \textbf{Op welke wijze kunnen we IPFS en blockchain principes combineren tot een werkzaam versiebeheer systeem?} Deze wordt onderverdeeld in verschillende deelvragen die sequentieel zijn beantwoord in de literatuurstudie. Hieronder volgt een kort overzicht en antwoord op de verschillende deelvragen. Voor meer informatie zie \ref{ch:stand-van-zaken}.
+\label{ontleden van de onderzoeksvraag}
+Zoals besproken in \ref{POC_introduction} is de uiteindelijke onderzoeksvraag waarop een antwoord wordt gezocht: \textbf{Hoe kan men door middel van Blockchain principes en IPFS een werkbaar gedecentraliseerd versiebeheersysteem ontwikkelen} Deze wordt onderverdeeld in verschillende deelvragen die sequentieel zijn beantwoord in de literatuurstudie. Hieronder volgt een kort overzicht en antwoord op de verschillende deelvragen. Voor meer informatie zie \ref{ch:stand-van-zaken}.
  
 \begin{table}[h!]
 \begin{tabularx}{\linewidth}{ |X|X| }
@@ -71,7 +72,66 @@ Het ontwikkelen en testen van smartcontracts is ook niet evident. Om dit te verg
 
 Tot slot wordt er gebruik gemaakt van een console applicatie geschreven in Dotnet-core 3.1 om de verschillende elementen samen te brengen. Deze console applicatie zal onder andere de verschillende bestanden op het IPFS netwerk plaatsen en de smartcontracts op de blockchain aanspreken. Om smartcontracts te kunnen aanspreken vanuit onze console applicatie zal gebruik gemaakt worden van \textcite{Nethereum}. Om IPFS te kunnen gebruiken wordt gebruik gemaakt van \textcite{IPFSClient}.\\
 
+\section{Meetbare criteria}
+Zoals hierboven vermeldt wordt -zie \ref{ontleden van de onderzoeksvraag} zijn er drie eigenschappen waaraan het ontwikkelde prototype moet voldoen:
+
+\begin{enumerate}
+	\item De oplossing die wordt ontwikkeld mag geen centrale component hebben en moet op een volledig gedistribueerde manier in staat zijn om te functioneren.
+	\item De oplossing moet een gebruiker instaat stellen om documenten met anderen te kunnen delen.
+	\item De oplossing moet een manier aanbieden om wijzigingen aan deze documenten op te slaan onder de vorm van verschillende versies. Deze verschillende versies moeten kunnen geraadpleegd worden.
+\end{enumerate}
+
+Hoe kunnen we deze drie eigenschappen nu concreet af toetsen aan de ontwikkelde oplossing?\\
+
+De oplossing voldoet aan de eerste vereiste als er strikt gebruik maakt van gedecentraliseerde P2P protocollen. Deze protocollen werken namelijk per definitie zonder centraal element. Doorheen de POC wordt gebruik gemaakt van IPFS en de Ethereum blockchain. Beide P2P protocollen. Zolang de console applicatie die deze twee protocollen gaat combineren geen gebruik maakt van een centrale server wordt aldus aan deze vereiste voldaan.\\
+
+Om een functioneel versiebeheersysteem te zijn moet er een manier zijn om documenten te gaan opslaan en opvragen. Het moet ook mogelijk zijn om deze documenten met andere te gaan delen. Concreet is er dus aan de vereiste gedaan als volgende drie functionaliteiten zijn geïmplementeerd:
+
+\begin{enumerate}
+\item Een manier om bestanden te gaan opslaan binnen de oplossing.
+\item Een manier om opgeslagen bestanden opnieuw te gaan downloaden.
+\item Een manier om deze opgeslagen bestanden te gaan delen met iemand anders.
+\end{enumerate}
+
+De laatste vereiste stelt dat er een manier moet zijn om wijzigingen aan te brengen aan de bestanden. Deze wijzigingen worden opgeslagen onder de vorm van verschillende versies. Het moet tevens mogelijk zijn om terug te gaan naar een eerdere versie van een bestand. Dat wilt concreet zeggen dat het mogelijk moet zijn om terug te grijpen naar een eerdere versie van het bestand voor een bepaalde wijziging is aangebracht. Er wordt dus aan de vereiste voldaan indien volgende functionaliteit aanwezig is:
+
+\begin{enumerate}
+\item Er kunnen wijzigingen worden aangebracht aan de bestanden binnen de oplossing.
+\item Deze wijzigingen moeten publiekelijk toegankelijk zijn. Dat wilt concreet zeggen dat andere deze wijzigingen moeten kunnen raadplegen.
+\item Er moet een mogelijkheid voorzien worden om terug te grijpen naar een eerdere versie van de bestanden. 
+\end{enumerate}
+
+\textbf{Indien aan al deze vereiste wordt voldaan kan men spreken van een werkbaar gedecentraliseerd versiebeheersysteem.}\\
+
+Al deze vereisten kunnen worden samengevat in onderstaande tabel:
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{14cm}|}
+ 		\hline
+ 		\large \textbf{Succescriteria van de POC} \\
+ 		\hline
+ 		De applicatie mag enkel gebruik maken van P2P protocollen, deze zijn per definitie gedecentraliseerd. Er mag aldus geen centrale component gebruikt worden.\\
+ 		\hline 
+ 		Men moet instaat zijn om bestanden te gaan opslaan binnen de applicatie op een gedecentraliseerde manier.\\
+ 		\hline
+ 		De opgeslagen bestanden moeten opnieuw gedownload kunnen worden.\\
+ 		\hline
+		Deze bestanden moeten eveneens kunnen worden gedeeld met anderen.\\
+ 		\hline
+ 		Er moeten wijzigingen kunnen worden aangebracht binnen deze bestanden. Deze moeten kunnen worden opgeslagen door het systeem.\\
+ 		\hline
+ 		Andere die dit bestand lokaal hebben gedownload moeten instaat zijn om deze wijzigingen binnen te halen en hun eigen wijzigingen aanbrengen.\\
+ 		\hline
+ 		Er moet een manier voorzien worden waarop men terug kan grijpen naar een eerder versie van het bestand.\\
+ 		\hline
+ 	\end{tabular}
+	\label{tbl_concepts}
+	\caption{Succescriteria van de POC.}
+\end{table}
+\newpage
 \section{Werkwijze}
 Om de verschillende smartcontracts te ontwikkelen is er gekozen om gebruik te maken van een klasse diagram. Dit diagram biedt een schematisch overzicht van de verschillende contracten die ontwikkeld zijn alsook de verschillende functies en attributen
 
 \textbf{TODO: Hier komt nog een klasse diagram alsook een kort overzicht van de oplossing}
+
+\section{Bedenkingen}
