@@ -482,5 +482,21 @@ Om deel te nemen aan een blockchain netwerk moet men ten alle tijden een recente
 \end{figure}
 \newpage
 
+Zoals hierboven vermeld is het verifiëren van blokken niet verplicht om deel te nemen aan het netwerk. waarom zouden miners hun tijd en energie in dit proces steken? Ze worden beloond voor het verifiëren aan de hand van een \textbf{block reward}. Wanneer ze een transactielijst gaan samenstellen voegt het bitcoin protocol een speciale transactie eraan toe. Deze transactie wijst een aantal bitcoin toe aan de miner van dit blok. Slaagt de miner er aldus in om dit blok te verifiëren krijgt hij het aantal bitcoin van deze transactie.\\
+
+Zoals hierboven vermeld worden er dus nieuwe munten in circulatie gebracht door het PoW algoritme. Dit is zeker belangrijk als men realiseert dat er geen centrale autoriteit is die deze munt circulatie brengt. In België bijvoorbeeld wordt het aantal geld in circulatie beheerd door de Nationale Bank. Hierdoor is er echter een probleem. Mocht het verificatie proces te snel gaan worden er teveel munten in omloop gebracht wat leidt tot het principe van inflatie. Hoe wordt dit tegen gegaan?\\
+
+Er zijn drie manieren waarop bitcoin en andere varianten hun geldstroom beheren:
+
+\begin{enumerate}
+
+\item Zoals eerder vermeld is de moeilijkheidsgraad en tijd die het duurt voor het verifiëren rechtstreeks afhankelijk van het aantal 0-bits vereist in het PoW algoritme. Het bitcoin algoritme past dit aantal 0-bits automatisch aan zodat er gemiddeld één blok wordt aangemaakt elke tien minuten. Hierdoor wordt er niet teveel nieuwe munten in omloop gebracht.\\
+
+\item De grote van een blok is beperkt tot 1 megabyte. De reden hier achter is dat iedere peer een kopie moet bijhouden van de ledger. Opslagruimte is namelijk beperkt. Daarom kan een blok enkel om en bij de 2400 transacties bevatten. Als men weet dat er één blok elke 10 minuten wordt aangemaakt is het aantal transacties aldus min of meer constant. Het bitcoin netwerk is instaat om ongeveer 14.400 transacties te verwerken per uur.\\
+
+\item Het aantal munten dat een miner krijgt voor het verifiëren van een transactie wordt ook wel de \textbf{block reward} genoemd. Deze block reward wordt automatisch gehalveerd elke 210.000 blokken (ongeveer 4 jaar). Hierdoor wordt het aantal nieuwe munten in circulatie verminderd.\\
+\end{enumerate}
+
+Zoals hierboven vermeld is het aantal transactie gelimiteerd tot ongeveer 14.400 transactie per uur. Hierdoor is het dus niet duidelijk wanneer een participant een transactie verstuurd deze ook effectief snel zal verwerkt worden. Om miners aan te sporen hun transacties te versnellen kunnen participanten ook een \textbf{transactie kost} aan hun transactie toevoegen.  Dit is een kleine optionele kost die participanten toevoegen en rechtstreeks naar de miner gaat indien deze transactie verwerkt wordt.
 
 \subsection{Smartcontracts en ethereum}
