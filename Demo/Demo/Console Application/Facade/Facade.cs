@@ -25,10 +25,11 @@ namespace Console_Application.Facade {
             switch (choice) {
                 case 1:
                     menu = "1. View own repositories\n" +
-                        "2. View public repositories\n" +
-                        "3. View repositories by user\n" +
+                        "2. Push Changes\n" +
+                        "3. Pull Changes\n" +
                         "4. Add Repository\n" +
-                        "5. Clone Repository";
+                        "5. Clone Repository\n"+
+                        "6. Revert to earlier version";
                     Console.WriteLine(menu);
                     int c = ReadOption(5);
                     RepositoryHandler(c);
@@ -60,6 +61,9 @@ namespace Console_Application.Facade {
             switch (choice){
                 case 1:
                     repositoryService.GetRepositoriesByCurrentUser().Wait();
+                    break;
+                case 2:
+                    repositoryService.AddChangesAsync().Wait();
                     break;
                 case 4:
                     string repoName = AskForString("Enter a name for the repository: ");

@@ -8,4 +8,10 @@ namespace Console_Application.Contracts.Contract {
    public class GetIdOfRepo : FunctionMessage { }
    [Function("getCid","string")]
    public class GetCidOfRepo : FunctionMessage { }
+
+   [Function("setCid", "bool")]
+    public class SetCidFunction : FunctionMessage{
+        [Parameter("string", "_cid", 1)]
+        public string Cid { get; set; }
+    }
 }

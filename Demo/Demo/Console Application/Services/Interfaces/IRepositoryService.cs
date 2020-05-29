@@ -5,12 +5,13 @@ namespace Console_Application.Services.Interfaces {
     public interface IRepositoryService {
         public Task GetRepositoriesByUser(string username);
         public Task GetRepositoriesByCurrentUser();
-        public Task<string[]> GetRepositories();
         public Task AddRepository(string name);
         public bool LocalRepositoryExist(string name);
         public void SetRepositoryFile(string path);
         public void WriteToRepositoryFile(RepositorySerialized repoSer);
+        public RepositorySerialized GetLocalRepository(string name);
         public Task CloneRepository();
         public void CleanRepositoryFile();
+        public Task AddChangesAsync();
     }
 }

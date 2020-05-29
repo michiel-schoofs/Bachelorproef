@@ -80,10 +80,6 @@ namespace Console_Application.Services.RepositoryService {
             }
         }
 
-        public async Task<string[]> GetRepositories() {
-            throw new System.NotImplementedException();
-        }
-
         public async Task GetRepositoriesByCurrentUser() {
             try {
                 string username = await _userService.GetUsername();
@@ -166,27 +162,7 @@ namespace Console_Application.Services.RepositoryService {
         }
 
         public bool LocalRepositoryExist(string name) {
-            try {
-                if (!File.Exists(repoFile))
-                    throw new Exception("Repository file not found");
-
-                FileStream stream = File.OpenRead(repoFile);
-
-                using (StreamReader reader = new StreamReader(stream)) {
-                    string json = reader.ReadToEnd();
-                    List<RepositorySerialized> repos = new List<RepositorySerialized>();
-
-                    if (json.Replace("{", "").Replace("}", "").Trim().Length != 0)
-                        repos = JsonConvert.DeserializeObject<List<RepositorySerialized>>(json);
-
-                    return repos.Any(n => n.Name.Equals(name));
-                }
-            } catch (Exception e) {
-                _logger.LogError("Something went wrong with the GetLocalRepository {0}", e.Message);
-                Console.WriteLine("Something went wrong with the execution of this function");
-                Console.Beep();
-                return false;
-            }
+            return GetLocalRepository(name) != null;
         }
 
         public void SetRepositoryFile(string path) {
@@ -206,6 +182,30 @@ namespace Console_Application.Services.RepositoryService {
                     repos = JsonConvert.DeserializeObject<List<RepositorySerialized>>(json);
 
                     repos.Add(repoSer);
+                }
+
+                File.Delete(repoFile);
+                File.WriteAllText(repoFile, JsonConvert.SerializeObject(repos));
+            } catch (Exception e) {
+                _logger.LogError("Something went wrong with the GetLocalRepository {0}", e.Message);
+                Console.WriteLine("Something went wrong with the execution of this function");
+                Console.Beep();
+            }
+        }
+
+        private void ChangeCid(RepositorySerialized repo,string cid) {
+            try {
+                if (!File.Exists(repoFile))
+                    throw new Exception("Repository file not found");
+
+                FileStream readstream = File.OpenRead(repoFile);
+                var repos = new List<RepositorySerialized>();
+
+                using (StreamReader reader = new StreamReader(readstream)) {
+                    string json = reader.ReadToEnd();
+                    repos = JsonConvert.DeserializeObject<List<RepositorySerialized>>(json);
+
+                    repos.FirstOrDefault(r => r.Name.Equals(repo.Name)).CID = cid;
                 }
 
                 File.Delete(repoFile);
@@ -263,15 +263,15 @@ namespace Console_Application.Services.RepositoryService {
 
                 string ad = _contractService.GetAddressDeployedContract("RepositoryService");
 
-                Web3 user =_userService.GetUser();
+                Web3 user = _userService.GetUser();
                 var handler = user.Eth.GetContractQueryHandler<CheckIfRepoExistsFunction>();
-                
+
                 bool exists = await handler.QueryAsync<bool>(ad, checkIfRepoExistsFunction);
 
                 if (!exists)
                     throw new Exception("The specified repository doesn't exist");
 
-                GetRepositoryFunction getRepoFunction = new GetRepositoryFunction() { 
+                GetRepositoryFunction getRepoFunction = new GetRepositoryFunction() {
                     Name = name
                 };
                 var getRepoHandler = user.Eth.GetContractQueryHandler<GetRepositoryFunction>();
@@ -301,6 +301,90 @@ namespace Console_Application.Services.RepositoryService {
             } catch (Exception e) {
                 _logger.LogError("Something went wrong with the GetLocalRepository {0}", e.Message);
                 Console.WriteLine(e.Message);
+                Console.Beep();
+            }
+        }
+
+        public RepositorySerialized GetLocalRepository(string name) {
+            try {
+                if (!File.Exists(repoFile))
+                    throw new Exception("Repository file not found");
+
+                FileStream stream = File.OpenRead(repoFile);
+
+                using (StreamReader reader = new StreamReader(stream)) {
+                    string json = reader.ReadToEnd();
+                    List<RepositorySerialized> repos = new List<RepositorySerialized>();
+
+                    if (json.Replace("{", "").Replace("}", "").Trim().Length != 0)
+                        repos = JsonConvert.DeserializeObject<List<RepositorySerialized>>(json);
+
+                    return repos.FirstOrDefault(n => n.Name.Equals(name));
+                }
+            } catch (Exception e) {
+                _logger.LogError("Something went wrong {0}", e.Message);
+                Console.WriteLine("Something went wrong with the execution of this function");
+                Console.Beep();
+                return null;
+            }
+        }
+
+        public async Task AddChangesAsync() {
+            try {
+                string name = "";
+
+                do {
+                    Console.Write("Please provide the name of the repo you want to push:");
+                    name = Console.ReadLine();
+                } while (string.IsNullOrEmpty(name));
+
+                RepositorySerialized repos = GetLocalRepository(name);
+
+                if (repos == null)
+                    throw new Exception("Reposiory doesn't exist locally");
+
+                if (!Directory.Exists(repos.Path))
+                    throw new Exception("There is no path associated with this repo");
+
+                if (!_contractService.ContractDeployed("RepositoryService"))
+                    throw new Exception("Repository not deployed");
+
+                string ad = _contractService.GetAddressDeployedContract("RepositoryService");
+
+                Web3 user = _userService.GetUser();
+                var handler = user.Eth.GetContractQueryHandler<CheckIfRepoExistsFunction>();
+
+                bool exists = await handler.QueryAsync<bool>(ad, new CheckIfRepoExistsFunction() { 
+                     Name = name
+                });
+
+                if (!exists)
+                    throw new Exception("The specified repository doesn't exist");
+
+                GetRepositoryFunction getRepoFunction = new GetRepositoryFunction() {
+                    Name = name
+                };
+
+                var getRepoHandler = user.Eth.GetContractQueryHandler<GetRepositoryFunction>();
+
+                string contractAd = await getRepoHandler.QueryAsync<string>(ad, getRepoFunction);
+
+                if (string.IsNullOrEmpty(contractAd))
+                    throw new Exception("Something went wrong with the execution of this function");
+
+                string cid = await _ipfsService.AddDirectoryOnIPFS(repos.Path);
+                //Set the cid
+                ChangeCid(repos, cid);
+                
+                var setCidHand = user.Eth.GetContractTransactionHandler<SetCidFunction>();
+                await setCidHand.SendRequestAsync(contractAd, new SetCidFunction() { 
+                    Cid = cid
+                });
+
+                Console.WriteLine("Changes succesfully synchronized");
+            } catch (Exception e) {
+                _logger.LogError("Something went wrong {0}", e.Message);
+                Console.WriteLine("Something went wrong with the execution of this function");
                 Console.Beep();
             }
         }

@@ -19,6 +19,14 @@ contract Repository is OwnableOtherContract {
         return name;
     }
 
+    function getVersion(uint256 indx) public view returns (string memory){
+        return history[indx];
+    }
+
+    function getVersionCount() public view returns(uint256){
+        return version;
+    }
+
     function setCid(string memory _cid) public{
         require(bytes(_cid).length != 0,"Please provide a cid for this repository");
         history[version] = _cid;
