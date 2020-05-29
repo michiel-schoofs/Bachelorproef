@@ -2,20 +2,7 @@
 %% Samenvatting
 %%=============================================================================
 
-% TODO: De "abstract" of samenvatting is een kernachtige (~ 1 blz. voor een
-% thesis) synthese van het document.
-%
-% Deze aspecten moeten zeker aan bod komen:
-% - Context: waarom is dit werk belangrijk?
-% - Nood: waarom moest dit onderzocht worden?
-% - Taak: wat heb je precies gedaan?
-% - Object: wat staat in dit document geschreven?
-% - Resultaat: wat was het resultaat?
-% - Conclusie: wat is/zijn de belangrijkste conclusie(s)?
-% - Perspectief: blijven er nog vragen open die in de toekomst nog kunnen
-%    onderzocht worden? Wat is een mogelijk vervolg voor jouw onderzoek?
-%
-% LET OP! Een samenvatting is GEEN voorwoord!
+
 
 %%---------- Nederlandse samenvatting -----------------------------------------
 %
@@ -25,7 +12,7 @@
 % Wie zijn bachelorproef in het Nederlands schrijft, kan dit negeren, de inhoud
 % wordt niet in het document ingevoegd.
 
-\IfLanguageName{english}{%
+\IfLanguageName{english}{
 \selectlanguage{dutch}
 \chapter*{Samenvatting}
 
@@ -36,3 +23,24 @@
 % De samenvatting in de hoofdtaal van het document
 
 \chapter*{\IfLanguageName{dutch}{Samenvatting}{Abstract}}
+% TODO: De "abstract" of samenvatting is een kernachtige (~ 1 blz. voor een
+% thesis) synthese van het document.
+%
+% Deze aspecten moeten zeker aan bod komen:
+% - Context: waarom is dit werk belangrijk? OK
+% - Nood: waarom moest dit onderzocht worden? OK
+% - Taak: wat heb je precies gedaan? OK
+% - Object: wat staat in dit document geschreven? OK
+% - Resultaat: wat was het resultaat? OK
+% - Conclusie: wat is/zijn de belangrijkste conclusie(s)? OK
+% - Perspectief: blijven er nog vragen open die in de toekomst nog kunnen
+%    onderzocht worden? Wat is een mogelijk vervolg voor jouw onderzoek?
+%
+% LET OP! Een samenvatting is GEEN voorwoord!
+Software is onderworpen aan constante veranderingen. Zo moeten er nieuwe functies voorzien worden en fouten opgelost. Dit is zeker moeilijk als er verschillende ontwikkelaars moeten samenwerken aan één project. Om dit te vergemakkelijken steunen software ontwikkelaars op versiebeheersystemen. Deze systemen hebben echter één groot nadeel. Ze vereisen een centrale server om bestanden en versies op te slaan.  Dit is problematisch doordat een server offline of beschadigd kan worden. Hierdoor kunnen hele projecten verloren gaan. Deze bachelorproef stelt een werkwijze voor om versiebeheer te decentraliseren. Dit houdt in dat er geen centrale server meer is om de bestanden en versies op te slaan. In plaats van een centrale server wordt er geopteerd voor een netwerk van computers. Daardoor staan de verschillende versies verspreid over heel het netwerk en is er geen centrale plaats waar het fout kan gaan.\\
+
+Om deze oplossing mogelijk te maken wordt er gebruik gemaakt van blockchain technologie en IPFS -, een gedecentraliseerd file-sharing protocol-. Deze begrippen worden eerst gekaderd in een literatuurstudie. Vervolgens wordt aan de hand van een prototype een werkbaar gedecentraliseerd versiebeheersysteem geïmplementeerd. Dit prototype houdt daarbij rekening met enkele succescriteria\\
+
+De oplossing die ontwikkeld werd in deze bachelorproef voldoet aan alle functionele vereisten van een versiebeheersysteem. Deze bachelorproef is aldus geslaagd in haar opzet. Toch is het geen gangbaar alternatief voor populaire versiebeheersystemen zoals GitHub. Dit komt doordat de gebruikte oplossing gebouwd is bovenop het Ethereum netwerk. Dit netwerk vereist transactiekosten voor elke handeling die data wegschrijft op de blockchain. Het prototype dat ontwikkeld werd is dus niet kostenefficiënt. Zeker als men in beschouwing neemt dat meeste versiebeheersystemen gratis zijn, lijkt het niet plausibel dat mensen zouden overstappen op deze oplossing.\\
+
+Voordat dit systeem succesvol kan zijn moet men een manier vinden om deze transactiekosten te vermijden. Dit is zeker mogelijk aangezien er al netwerken zijn die geen transactiekosten vereisen. Een voorbeeld van zo een netwerk is het Loom netwerk. Een vervolgstudie zou dus kunnen zijn om het prototype dat beschreven staat in de POC na te bouwen op één van deze netwerken.

@@ -4,47 +4,82 @@
 
 \chapter{\IfLanguageName{dutch}{Inleiding}{Introduction}}
 \label{ch:inleiding}
+\section{Introductie versiebeheersystemen}
+Elke software ontwikkelaar kan beamen dat software fel onderhevig is aan veranderingen. Constant moeten er nieuwe functies worden geïmplementeerd en fouten worden rechtgezet. Dit probleem wordt enkel verergerd indien er tientallen mensen samen aan projecten werken. Versiebeheersystemen bieden een oplossing voor deze problemen. Tegenwoordig zijn ze een onmisbaar deel geworden van de manier waarop software wordt ontwikkeld.\\
 
-De inleiding moet de lezer net genoeg informatie verschaffen om het onderwerp te begrijpen en in te zien waarom de onderzoeksvraag de moeite waard is om te onderzoeken. In de inleiding ga je literatuurverwijzingen beperken, zodat de tekst vlot leesbaar blijft. Je kan de inleiding verder onderverdelen in secties als dit de tekst verduidelijkt. Zaken die aan bod kunnen komen in de inleiding~\autocite{Pollefliet2011}:
+Deze systemen delen software op in een aaneenschakeling van veranderingen. Deze veranderingen worden ook wel versies genoemd. Deze systemen maken het mogelijk om nieuwe wijzigingen aan te brengen en toegang te krijgen tot oudere versies. Moderne versiebeheersystemen bieden daarbovenop ook de mogelijkheid om twee conflicterende wijzigingen samen te voegen. Hierdoor wordt samenwerken aan grote projecten vergemakkelijkt.\\
 
-\begin{itemize}
-  \item context, achtergrond
-  \item afbakenen van het onderwerp
-  \item verantwoording van het onderwerp, methodologie
-  \item probleemstelling
-  \item onderzoeksdoelstelling
-  \item onderzoeksvraag
-  \item \ldots
-\end{itemize}
+Kort samengevat bestaat een versiebeheersysteem uit twee verschillende functies:
 
-\section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}
-\label{sec:probleemstelling}
+\begin{enumerate}
+\item Een plaats waar bestanden kunnen worden opgeslagen en opgevraagd worden.
+\item Een manier om wijzigingen aan te brengen en toegang te krijgen tot eerdere versies van deze bestanden.
+\end{enumerate}
 
-Uit je probleemstelling moet duidelijk zijn dat je onderzoek een meerwaarde heeft voor een concrete doelgroep. De doelgroep moet goed gedefinieerd en afgelijnd zijn. Doelgroepen als ``bedrijven,'' ``KMO's,'' systeembeheerders, enz.~zijn nog te vaag. Als je een lijstje kan maken van de personen/organisaties die een meerwaarde zullen vinden in deze bachelorproef (dit is eigenlijk je steekproefkader), dan is dat een indicatie dat de doelgroep goed gedefinieerd is. Dit kan een enkel bedrijf zijn of zelfs één persoon (je co-promotor/opdrachtgever).
+Versiebeheersystemen stellen software ontwikkelaars in staat om code publiek toegankelijk te maken. Hierdoor kan elke software ontwikkelaar de broncode raadplegen en aanpassen: een principe dat mooi kadert binnen de zogenaamde Open-Source filosofie. Deze filosofie streeft naar een open en democratische ontwikkeling van software. Hierbij staat samenwerken aan verbeteringen centraal. Software projecten worden aldus aanzien als een gezamenlijk project.
+
+\section{Probleemstelling}
+Toch is er een probleem met de manier waarop deze systemen functioneren. Deze systemen gebruiken een centrale server om bestanden en wijzigingen op te slaan. Dit is een probleem aangezien deze servers eventueel beschadigd of onbereikbaar kunnen zijn. Hierdoor kunnen projecten onbeschikbaar zijn of in het ergste geval zelfs verloren gaan. Dit probleem staat ook wel bekend onder de naam \textbf{Single point of failure}.\\
+
+Een ander probleem is dat deze servers in de handen kunnen komen van grote tech-giganten. Zo heeft Microsoft in 2018 GitHub -een populair versiebeheer platform- overgekocht. Dit druist in tegen de eerder vermelde Open-Source filosofie, want deze systemen zijn niet gevrijwaard van commerciële invloeden.\\
+
+Binnen deze bachelorproef wordt een systeem ontwikkeld dat geen centrale server vereist. Op die manier wordt het Single point of failure probleem vermeden en is de oplossing vrij van commerciële invloeden. Dit maakt de oplossing interessant voor Open-Source software bedrijven.
+\section{Introductie decentralisatie}
+Een alternatief voor deze centrale server bestaat onder de vorm van zogenaamde P2P protocollen. Deze protocollen hebben als doelstelling om de rol van centrale server op zich te nemen en de taak te verspreiden over een netwerk van computers. Het afstappen van een centrale server naar een netwerk van verschillende computers wordt ook wel decentralisatie genoemd.\\
+
+De doelstelling van deze bachelorproef is om versiebeheersystemen te  decentraliseren. De oplossing die hierbij wordt voorgesteld moet aldus voldoen aan de volgende drie criteria:
+
+\begin{enumerate}
+ \item De oplossing moet volledig gedecentraliseerd zijn. Dit wilt zeggen dat er geen centrale server of andere component aanwezig mag zijn. Dit komt dus in essentie neer op het gebruik maken van P2P protocollen.\\
+ \item Er moet een manier zijn om bestanden te delen en op te vragen.\\
+ \item Er moet een mogelijkheid zijn tot het aanbrengen van wijzigingen en het bijhouden van versies.
+\end{enumerate}
+
+Voor het bijhouden en opvragen van bestanden kan gebruik worden gemaakt van \textbf{IPFS}. Dit is een P2P file-sharing protocol. De wijzigingen en versies moeten worden bijgehouden in een dataopslagsysteem. Een gekend gedecentraliseerd opslagsysteem is blockchain.
+
 
 \section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}
 \label{sec:onderzoeksvraag}
+De onderzoeksvraag luidt dus als volgt: \textbf{hoe kan men door middel van Blockchain principes en IPFS een werkbaar gedecentraliseerd versiebeheersysteem ontwikkelen?}\\
 
-Wees zo concreet mogelijk bij het formuleren van je onderzoeksvraag. Een onderzoeksvraag is trouwens iets waar nog niemand op dit moment een antwoord heeft (voor zover je kan nagaan). Het opzoeken van bestaande informatie (bv. ``welke tools bestaan er voor deze toepassing?'') is dus geen onderzoeksvraag. Je kan de onderzoeksvraag verder specifiëren in deelvragen. Bv.~als je onderzoek gaat over performantiemetingen, dan 
+Om deze onderzoeksvraag correct en volledig te beantwoorden wordt er ook met een aantal deelvragen gewerkt. Deze deelvragen worden sequentieel behandeld in de literatuurstudie:
+
+\begin{enumerate}
+\item Wat zijn de problemen die versiebeheersystemen oplossen? \\
+\item Waaruit bestaat een versiebeheersysteem? \\
+\item Waarom zouden we van gecentraliseerde (server-client architectuur) versiebeheersystemen overstappen naar een gedecentraliseerde variant?         \\
+\item Wat zijn de eigenschappen en valkuilen van gedecentraliseerde netwerken?\\
+\item Wat is IPFS en hoe kadert het binnen versiebeheer?\\
+\item Wat zijn smartcontracts en hoe bieden ze een meerwaarde aan Blockchain applicaties?\\
+\end{enumerate}
+
 
 \section{\IfLanguageName{dutch}{Onderzoeksdoelstelling}{Research objective}}
 \label{sec:onderzoeksdoelstelling}
 
-Wat is het beoogde resultaat van je bachelorproef? Wat zijn de criteria voor succes? Beschrijf die zo concreet mogelijk. Gaat het bv. om een proof-of-concept, een prototype, een verslag met aanbevelingen, een vergelijkende studie, enz.
+Zoals in de onderzoeksvraag wordt vermeld is de doelstelling om een gedecentraliseerd versiebeheer systeem te ontwikkelen. Er zijn dus drie criteria waar deze oplossing aan moet voldoen:
+
+\begin{enumerate}
+ \item De oplossing moet volledig gedecentraliseerd zijn. Dit wilt zeggen dat er geen centrale server of andere component aanwezig mag zijn.\\
+ \item Er moet een manier zijn om bestanden te delen en op te vragen.\\
+ \item Er moet een mogelijkheid zijn tot het aanbrengen van wijzigingen en het bijhouden van versies.
+\end{enumerate}
+
+Op het einde van deze bachelorproef is de doelstelling dus om een werkend prototype te hebben. Dit prototype zal gebruik maken van IPFS en blockchain technologie om deze doelstelling te bereiken.
 
 \section{\IfLanguageName{dutch}{Opzet van deze bachelorproef}{Structure of this bachelor thesis}}
 \label{sec:opzet-bachelorproef}
 
-% Het is gebruikelijk aan het einde van de inleiding een overzicht te
-% geven van de opbouw van de rest van de tekst. Deze sectie bevat al een aanzet
-% die je kan aanvullen/aanpassen in functie van je eigen tekst.
-
 De rest van deze bachelorproef is als volgt opgebouwd:
 
-In Hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand van zaken binnen het onderzoeksdomein, op basis van een literatuurstudie.
+In hoofdstuk~\ref{ch:stand-van-zaken} wordt een overzicht gegeven van de stand van zaken binnen het onderzoeksdomein, op basis van een literatuurstudie. Dit is onderverdeeld in drie verschillende delen:
 
-In Hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen.
+\begin{enumerate}
+\item Een literatuurstudie over versiebeheersystemen. In dit deel worden de  concepten binnen versiebeheer gekaderd en verduidelijkt. Zo krijgt men een beeld van wat er reeds beschikbaar is, alsook aan welke vereisten het ontwikkelde prototype moet voldoen.\\
+\item Een studie over file-sharing protocollen. IPFS is een complex file-sharing protocol. Hier worden de concepten uitgelegd om voldoende achtergrondinformatie te verschaffen om de achterliggende principes van het ontwikkelde prototype te begrijpen.\\
+\item Een studie over de achterliggende principes van blockchain protocollen. Hierbij wordt uitgelegd wat blockchain is en hoe het zal verwerkt worden binnen het ontwikkelde proto-type.
+\end{enumerate}
 
-% TODO: Vul hier aan voor je eigen hoofstukken, één of twee zinnen per hoofdstuk
+In hoofdstuk~\ref{ch:methodologie} wordt de methodologie toegelicht en worden de gebruikte onderzoekstechnieken besproken om een antwoord te kunnen formuleren op de onderzoeksvragen.
 
-In Hoofdstuk~\ref{ch:conclusie}, tenslotte, wordt de conclusie gegeven en een antwoord geformuleerd op de onderzoeksvragen. Daarbij wordt ook een aanzet gegeven voor toekomstig onderzoek binnen dit domein.
+In hoofdstuk~\ref{ch:conclusie}, tenslotte, wordt de conclusie gegeven en een antwoord geformuleerd op de onderzoeksvragen. Daarbij wordt ook een aanzet gegeven voor toekomstig onderzoek binnen dit domein.

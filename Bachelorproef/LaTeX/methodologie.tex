@@ -10,5 +10,217 @@
 %% op deze manier te werk gegaan bent. Je moet kunnen aantonen dat je de best
 %% mogelijke manier toegepast hebt om een antwoord te vinden op de
 %% onderzoeksvraag.
+\section{Hoe de onderzoeksvraag tot stand is gekomen.}
+\label{POC_introduction}
+Dit onderzoek ontstond uit een persoonlijke interesse. Internet is een zeer veranderlijk geheel met tal van nieuwe technologieën die vervolgens ingeburgerd raken. Software ontwikkeling is dan ook geen vast gegeven. Toch zijn er een aantal basisfundamenten waarop software ontwikkeling gebaseerd is. Een van deze fundamenten is het klassieke server-client model. In dit model voorziet één centrale computer bestanden of diensten voor tal van andere computers. Een gekend voorbeeld hiervan is de manier waarop het internet werkt ook wel bekend onder het HTTP protocol.\\
+
+Bestaat er dan geen alternatief voor het Client-Server model? Distributed Computing tracht deze vraag te beantwoorden. Eén van de oplossingen is een zogenaamd P2P netwerk. Binnen dit type netwerk voorzien computers onderling bestanden en diensten aan elkaar. Dit type netwerk werd vooral populair onder de vorm van File-Sharing Protocollen. Gekende voorbeelden zijn hierbij Pirate Bay en Napster. Hoewel deze protocollen een eenvoudig en elegant alternatief boden, stonden ze nog niet op punt. Zo was er geen manier om op een veilig wijze aan dataopslag te doen.\\
+
+Blockchain bracht een oplossing voor het probleem van dataopslag. Blockchain technologie is vooral bekend van Bitcoin en de financiële impact die deze met zich mee bracht. Toch zijn de implicaties veel diepgaander. Blockchain biedt een manier om op een veilige wijze aan dataopslag te doen in een gedistribueerd netwerk. Doordat data integriteit kan gewaarborgd worden kunnen ontwikkelaars veiligere en robuustere oplossingen ontwikkelen voor een P2P netwerk.\\
+
+Toch bleef de blockchain technologie niet beperkt tot Bitcoin en P2P netwerken en werd ze veel verder ontwikkeld. Zo kwam Ethereum met het idee van smart contracts die software ontwikkelaars in staat stellen om transacties op Blockchain netwerken verder te controleren. Hierdoor kunnen applicaties worden ontwikkeld die op een volledig gedistribueerde manier werken. Het is een zeer fascinerende en revolutionaire manier van denken die grote implicaties met zich mee kan bregen.\\
+
+Deze bachelorproef wil deze technologie verkennen en gebruiken in één van de meest fundamentele stappen van moderne software ontwikkeling: versiebeheer.\\
+
+Uiteraard is deze bachelorproef niet het enige onderzoek over het decentraliseren van versiebeheer. In hun onderzoek decentraliseren \textcite{Nizamuddin2019} versiebeheer aan de hand van de Ethereum blockchain en IPFS. Dit is een zeer interessante benadering geweest maar te beperkt. Veel van de achterliggende concepten werden niet uitgelegd en hun oplossing was eerder beperkt in grootte en complexiteit. Deze bachelorproef wilt hierop een aanvulling bieden en uitleggen wat blockchain, versiebeheer en IPFS exact zijn en hoe deze kunnen worden gecombineerd.
+
+\section{Het ontleden van de onderzoeksvraag.}
+\label{ontleden van de onderzoeksvraag}
+Zoals besproken in \ref{POC_introduction} is de uiteindelijke onderzoeksvraag waarop een antwoord wordt gezocht: \textbf{Hoe kan men door middel van Blockchain principes en IPFS een werkbaar gedecentraliseerd versiebeheersysteem ontwikkelen?} Deze vraag wordt onderverdeeld in verschillende deelvragen die sequentieel zijn beantwoord in de literatuurstudie. Hieronder volgt een kort overzicht en antwoord op de verschillende deelvragen. Voor meer informatie zie \ref{ch:stand-van-zaken}.
+ 
+\begin{table}[h!]
+\begin{tabularx}{\linewidth}{ |X|X| }
+\hline
+Deelvraag & Antwoord \\ \hline
+Wat zijn de problemen die versiebeheersystemen oplossen? & 
+Versiebeheersystemen bieden een manier om verschillende softwareversies aan te maken. Hierdoor kunnen softwareontwikkelaars ten allen tijden toegang krijgen tot verschillende versies van hun software. Versiebeheersystemen stellen ontwikkelaars in staat om hun code op een eenvoudige manier onderling met elkaar te delen en samen te werken.\\ \hline
+Waaruit bestaat een versiebeheersysteem? & Een versiebeheersysteem bestaat uit twee delen: een manier om bestanden op te slaan en te delen met elkaar. Ten tweede een wijze om bestanden te archiveren. Dit wilt zeggen dat ze verschillende versies van de bestanden kunnen opslaan en ook toegang bieden tot deze versies.\\ \hline
+Waarom zouden we van gecentraliseerde (server-client architectuur) versiebeheersystemen overstappen naar een gedecentraliseerde variant?         & Moderne versiebeheersystemen zijn vaak het eigendom van grote tech-giganten. Binnen software ontwikkeling streven open-source developers en bedrijven naar democratische softwareontwikkeling. Gedecentraliseerde systemen kaderen goed binnen deze ideologie. Gedecentraliseerde systemen hebben ook het voordeel dat ze geen centrale server architectuur vereisen. Servers zijn immers duur en mocht de server kapot gaan is men alle gegevens kwijt (\textit{het zogenaamde SPOF probleem}).\\ \hline
+Wat zijn de eigenschappen en valkuilen van gedecentraliseerde(P2P) netwerken? & P2P netwerken bieden een manier om op een gedecentraliseerde wijze diensten en software aan te bieden. Elke peer zal hierbij de rol van zowel server als client op zich nemen om dit te bereiken. Het grootste nadeel is echter dat deze netwerken een groot aantal deelnemers vereisen om functioneel werkbaar te zijn.\\ \hline
+\end{tabularx}
+\end{table} 
+\newpage
+\begin{table}[t!]
+\begin{tabularx}{\linewidth}{ |X|X| }
+\hline
+Deelvraag & Antwoord \\ \hline
+Wat is IPFS en hoe kadert het binnen versiebeheer? & IPFS is een P2P file-sharing protocol. Door IPFS kan men op een gedecentraliseerde wijze bestanden opslaan en opvragen. Aangezien versiebeheersystemen toegang willen bieden tot het delen van software versies zijn daar uiteraard ook bestanden bij betrokken. Een softwareproject is immers niets meer of minder dan verschillende bestanden. Hiervoor is IPFS dus een geschikte kanidaat.\\ \hline
+Wat zijn smartcontracts en hoe bieden ze een meerwaarde aan Blockchain applicaties? & Smartcontracts zijn een manier om op een gedecentraliseerde wijze code uit te voeren en de data in de blockchain aan te passen. Zo kan men voorwaarden opleggen aan wijzigingen in de data. Door smartcontracts kan men bijvoorbeeld enkel de eigenaar van bepaalde data toestaan om deze data te wijzigen.\\ \hline
+\end{tabularx}
+\end{table} 
+\newpage
+\newpage
+Bovenstaande deelvragen bieden een goed overzicht van wat er exact nodig is om een Proof Of Concept op te stellen. De eigenlijke doelstelling van de onderzoeksvraag is het bekomen van een gedecentraliseerd versiebeheer systeem. Welke eigenschappen moet de POC voorzien om te voldoen aan deze vereisten?:
+
+\begin{enumerate}
+	\item De oplossing die wordt ontwikkeld mag geen centrale component hebben en moet op een volledig gedistribueerde manier in staat zijn om te functioneren.
+	\item De oplossing moet een gebruiker in staat stellen om documenten met anderen te kunnen delen.
+	\item De oplossing moet een manier aanbieden om wijzigingen aan deze documenten op te slaan onder de vorm van verschillende versies. Deze verschillende versies moeten kunnen geraadpleegd worden.
+\end{enumerate}
+
+\section{Tools}
+\label{Tools}
+Het delen van bestanden wordt mogelijk gemaakt door middel van IPFS. Dit protocol stelt de POC in staat om bestanden te verspreiden op een gedistribueerde manier en deze vervolgens opnieuw op te vragen. Hiervoor gebruikt IPFS het principe van een CID. Dit is in essentie een zelfbeschrijvende hash code die vervolgens kan worden gebruikt om bestanden op te halen -zie \ref{ipfs_decent}-. IPFS stelt ons ook in staat om meerdere versies van dezelfde bestand(en) op te slaan en ter beschikking te stellen. Neem bijvoorbeeld onderstaand scenario:\\
+
+Bob en Alice willen een website ontwikkelen. Bob plaatst de homepagina op het IPFS netwerk en krijgt een CID om dit bestand opnieuw op te vragen. Hij deelt deze CID met Alice die vervolgens het bestand lokaal binnenhaalt. Alice brengt enkele wijzigingen aan en zet het bestand opnieuw op het netwerk. Alice zal een nieuwe CID worden toegewezen. Er zijn nu in feite twee verschillende versies van dit bestand op het netwerk, een versie van Bob die kan worden opgehaald met de CID die Bob heeft en een versie van Alice met haar eigen CID.\\
+
+Toch is IPFS op zich niet voldoende. Er is immers geen eenvoudige manier voorzien om deze CIDS met elkaar te delen. Hier biedt blockchain een oplossing. Blockchain functioneert immers als een databank. De CIDS kunnen daar dus worden bewaard en opgevraagd. Om dit proces van opslaan en opvragen te vereenvoudigen wordt gebruik gemaakt van smart contracts. Niet iedere blockchain ondersteunt deze smartcontracs. Ethereum is een gekend voorbeeld van een netwerk dat dit wel ondersteunt.\\
+
+Deze smartcontracts worden geschreven in de programmeertaal Solidity. Veel netwerken vragen transactiekosten voor het werken met smartcontracts . Om deze transactiekosten te vermijden kan er gebruik gemaakt worden van een lokaal Ethereum netwerk. Dit lokaal netwerk voorziet dezelfde functies maar heeft geen transactiekosten. De software die hiervoor gebruik wordt is \textcite{Ganache}.\\
+
+Het ontwikkelen en testen van smartcontracts is ook niet evident. Om dit te vergemakkelijken wordt gebruik gemaakt van de \textcite{Truffle}. Deze suite biedt de mogelijkheid om smartcontracts te testen. Hiervoor wordt gebruik gemaakt van het javascript framework Mocha.js. Truffle wordt ook gebruikt om de smartcontracts die worden ontwikkeld op de lokale blockchain uit te rollen.\\
+
+Tot slot wordt er gebruik gemaakt van een console applicatie geschreven in Dotnet-core 3.1 om de verschillende elementen samen te brengen. Deze console applicatie zal onder andere de verschillende bestanden op het IPFS netwerk plaatsen en de smartcontracts op de blockchain aanspreken. Om smartcontracts te kunnen aanspreken vanuit onze console applicatie zal gebruik gemaakt worden van \textcite{Nethereum}. Om IPFS aan te wenden wordt gebruik gemaakt van \textcite{IPFSClient}.\\
+
+\section{Meetbare criteria}
+Zoals hierboven vermeld wordt -zie \ref{ontleden van de onderzoeksvraag}- zijn er drie eigenschappen waaraan het ontwikkelde prototype moet voldoen:
+
+\begin{enumerate}
+	\item De oplossing die wordt ontwikkeld mag geen centrale component hebben en moet op een volledig gedistribueerde manier in staat zijn om te functioneren.
+	\item De oplossing moet een gebruiker in staat stellen om documenten met anderen te kunnen delen.
+	\item De oplossing moet een manier aanbieden om wijzigingen aan deze documenten op te slaan onder de vorm van verschillende versies. Deze verschillende versies moeten kunnen geraadpleegd worden.
+\end{enumerate}
+
+Hoe kunnen we deze drie eigenschappen nu concreet aftoetsen aan de ontwikkelde oplossing?\\
+
+De oplossing voldoet aan de eerste vereiste als er strikt gebruik wordt gemaakt van gedecentraliseerde P2P protocollen. Deze protocollen werken namelijk per definitie zonder centraal element. Doorheen de POC wordt gebruik gemaakt van IPFS en de Ethereum blockchain. Beide zijn P2P protocollen. Zolang de console applicatie die deze twee protocollen combineert geen gebruik maakt van een centrale server wordt aldus aan deze vereiste voldaan.\\
+
+Om een functioneel versiebeheersysteem te zijn moet er een manier zijn om documenten op te slaan en op te vragen. Het moet ook mogelijk zijn om deze op te vragen en de te delen met iemand anders. Kortom, er is aan deze eis voldaan als volgende drie functionaliteiten zijn geïmplementeerd:
+
+\begin{enumerate}
+\item Een manier om bestanden op te slaan binnen de oplossing.
+\item Een manier om opgeslagen bestanden opnieuw te downloaden.
+\item Een manier om deze opgeslagen bestanden te delen met iemand anders.
+\end{enumerate}
+
+De laatste vereiste stelt dat er een manier moet zijn om wijzigingen aan te brengen aan de bestanden. Deze wijzigingen worden opgeslagen onder de vorm van verschillende versies. Het moet tevens mogelijk zijn om terug te gaan naar een eerdere versie van een bestand. Dat wilt concreet zeggen dat het mogelijk moet zijn om terug te grijpen naar een eerdere versie van het bestand voor een bepaalde wijziging is aangebracht. Er wordt dus aan de vereiste voldaan indien volgende functionaliteit aanwezig is:
+
+\begin{enumerate}
+\item Er kunnen wijzigingen worden aangebracht aan de bestanden binnen de oplossing.
+\item Deze wijzigingen moeten publiekelijk toegankelijk zijn. Dat wilt concreet zeggen dat andere deze wijzigingen moeten kunnen raadplegen.
+\item Er moet een mogelijkheid voorzien worden om terug te grijpen naar een eerdere versie van de bestanden. 
+\end{enumerate}
+
+\textbf{Indien aan al deze vereisten wordt voldaan kan men spreken van een werkbaar gedecentraliseerd versiebeheersysteem.}\\
+
+Al deze vereisten kunnen worden samengevat in onderstaande tabel:
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{ |p{14cm}|}
+ 		\hline
+ 		\large \textbf{Succescriteria van de POC} \\
+ 		\hline
+ 		De applicatie mag enkel gebruik maken van P2P protocollen. Deze zijn per definitie gedecentraliseerd. Er mag dus geen centrale component gebruikt worden.\\
+ 		\hline 
+ 		Men moet in staat zijn om bestanden op te slaan binnen de applicatie op een gedecentraliseerde manier.\\
+ 		\hline
+ 		De opgeslagen bestanden moeten opnieuw gedownload kunnen worden.\\
+ 		\hline
+		Deze bestanden moeten eveneens kunnen worden gedeeld met anderen.\\
+ 		\hline
+ 		Er moeten wijzigingen kunnen worden aangebracht binnen deze bestanden. Deze moeten kunnen worden opgeslagen door het systeem.\\
+ 		\hline
+ 		Anderen die dit bestand lokaal hebben gedownload moeten in staat zijn om deze wijzigingen binnen te halen en hun eigen wijzigingen aan te brengen.\\
+ 		\hline
+ 		Er moet een manier voorzien worden waarop men terug kan grijpen naar een eerder versie van het bestand.\\
+ 		\hline
+ 	\end{tabular}
+	\label{suc_crit}
+	\caption{Succescriteria van de POC.}
+\end{table}
+\newpage
+\section{Werkwijze}
+Dit gedeelte beschrijft het proces in grote lijnen. Om de implementatie van de verschillende werkwijzes te zien die hier worden beschreven kan men het project bekijken via volgende url: $https://github.com/michiel-schoofs/Bachelorproef/$.
+\subsection{Opzet}
+Om gebruik te kunnen maken van IPFS en de Ethereum blockchain moet men eerst een aantal stappen doorlopen.\\
+
+Voor men IPFS kan gebruiken moet men de IPFS CLI downloaden. Dit programma is beschikbaar via volgende url: $https://github.com/ipfs/go-ipfs/releases/$. Dit programma bevat de zogenaamde \textbf{IPFS daemon}. Dit is een onderdeel van IPFS dat toegang verleent tot het netwerk. De eerste stap die de Console Applicatie aldus onderneemt is om deze daemon op te starten.\\
+
+Zoals ook vermeld in \ref{Tools} wordt er gebruik gemaakt van het Ganache netwerk. Dit is een lokale Ethereum blockchain die de gebruiker in staat stelt om transacties te verrichten zonder daarbij echte transactie kosten te hoeven betalen. Dit netwerk bevat een aantal gesimuleerde test accounts met in elk test account 100 ether. Deze ether wordt gebruikt om transactiekosten te simuleren. Elk van deze accounts heeft een privé sleutel en een adres. Het zijn deze twee waarden die noodzakelijk zijn voor de interactie met het Ethereum netwerk. De console applicatie zal kijken of deze twee waarden aanwezig zijn binnen het systeem zo niet worden deze waarden opgevraagd bij de gebruiker.\\
+
+Deze opzet fase kan men voorstellen door onderstaand sequentie diagram:
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.2]{POC-1.png}
+\caption[POC opstart]{Een sequentie diagram die de noodzakelijke opstartstappen overloopt. }
+\end{figure}
+
+\subsection{Repositories}
+Binnen deze proof of concept wordt gewerkt met het concept van een Repository. Dit concept is analoog aan Repositories binnen Git. Een Repository bevat volgende elementen:
+
+\begin{enumerate}
+\item Een unieke naam. Deze naam wordt gebruikt om de repository opnieuw te kunnen opvragen en te identificeren.
+\item De meest recente CID van de bestanden. Deze CID wordt gebruikt om de bestanden te identificeren op het IPFS netwerk. Het is dus in feite een verwijzing naar de meest recente versie van onze bestanden.
+\item Een lijst van alle voorgaande CIDS. Dit is in feite een lijst van alle voorgaande versies van bestanden. Als een nieuwe versie wordt toegevoegd dan zal de vorige meest recente CID worden toegevoegd aan de lijst.
+\item Een functie om nieuwe versies toe te voegen.
+\item Een functie om een specifieke versie op te vragen.
+\item Een functie om de meest recente versie op te vragen.
+\end{enumerate}
+
+Om dit concept van repositories nog eens te verduidelijken kan gebruik worden gemaakt van volgende klassediagram:
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=.2]{POC-2.png}
+\caption[POC Repository]{Een grafische voorstelling van een repository.}
+\end{figure}
 
 
+\subsection{Het opslaan van de bestanden op een gedecentraliseerde manier}
+Bestanden binnen dit prototype worden opgeslagen op de volgende manier:
+
+\begin{enumerate}
+\item De gebruiker maakt een nieuwe repository met een opgegeven naam.
+\item De gebruiker selecteert een map van bestanden.
+\item Deze bestanden worden op het IPFS netwerk geplaatst. Hierdoor krijgen deze bestanden een unieke CID\footnote{Het concept van een CID wordt besproken in \ref{IPFS}}. Deze CID kan gebruikt worden om later deze bestanden terug op te vragen aan het IPFS netwerk.
+\item Deze CID zal vervolgens op het blockchain netwerk worden geplaatst.
+\item De CID wordt vervolgens toegevoegd als meest recente versie aan de repository.
+\end{enumerate}
+
+\subsection{Het opvragen van bestanden op een gedecentraliseerde manier}
+Om bestanden op te halen wordt de volgende procedure gebruikt:
+
+\begin{enumerate}
+\item De gebruiker geeft de naam van het repository op.\\
+\item Er wordt gecontroleerd of deze repository wel effectief bestaat.\\
+\item Er wordt een referentie naar de repository opgehaald.\\
+\item Gebruikmakend van deze referentie wordt de meest recente CID opgehaald.\\
+\item De gebruiker geeft aan waar hij/zij wilt dat de bestanden worden gedownload.
+\item De bestanden worden van het IPFS netwerk gehaald. Hiervoor wordt gebruik gemaakt van de CID. Deze bestanden worden op de aangegeven locatie gedownload.
+\end{enumerate}
+
+Het delen van deze bestanden met andere gebruikers is gemakkelijk. Het volstaat immers om de naam van de Repository mee te delen aan iemand anders die de bestanden dan kan downloaden.
+\subsection{Het aanbrengen van wijzigingen}
+Het aanbrengen van wijzigingen verloopt op volgende manier:
+
+\begin{enumerate}
+\item De gebruiker brengt de wijzigingen aan binnen het pad dat hij/zij heeft aangegeven bij het opvragen.
+\item De gebruiker geeft aan dat er wijzigingen zijn gebeurd.
+\item De nieuwe bestanden worden op het IPFS netwerk geplaatst. Hierdoor wordt een nieuwe CID berekend.
+\item De repository waarbinnen deze bestanden zijn gewijzigd wordt op de hoogte gesteld van deze nieuwe CID. Deze zal de nieuwe CID als meest recente versie beschouwen. Hierbij wordt de vorige CID geplaatst op de lijst van voorgaande versies.
+\end{enumerate}
+\subsection{Het binnenhalen van wijzigingen}
+Het binnenhalen van wijzigingen kan dus via het volgend principe:
+
+\begin{enumerate}
+\item De gebruiker geeft aan welke repository hij/zij de wijzigingen van wilt binnen halen. Dit doet hij/zij door een naam op te geven.
+\item Er wordt gecontroleerd dat deze repository al lokaal bestaat.
+\item Er wordt een verwijzing opgehaald naar de repository.
+\item De meest recente CID wordt opgehaald, gebruikmakende van deze verwijzing.
+\item De lokale bestanden wordt verwijderd.
+\item De meest recente bestanden worden opgehaald op het IPFS netwerk en gedownload op dezelfde locatie waar bestanden verwijderd zijn.
+\end{enumerate}
+\subsection{Het teruggaan naar een eerdere versie}
+Het teruggaan naar een eerdere versie gebeurt volgens onderstaande werkwijze:
+
+\begin{enumerate}
+\item De gebruiker geeft aan welke repository hij/zij wilt terugzetten naar een eerder versie. Dit doet hij/zij door een naam op te geven.
+\item Er wordt gecontroleerd dat deze repository al lokaal bestaat.
+\item Er wordt een referentie opgehaald naar deze repository.
+\item Er wordt een lijst gegeven van alle eerdere versies.
+\item De gebruiker selecteert de versie naar waar men wilt terugkeren.
+\item Op basis van de opgehaalde referentie wordt de corresponderende CID opgehaald.
+\item De lokale bestanden worden verwijderd.
+\item De bestanden van de bovenstaande CID worden opgehaald en gedownload op dezelfde locatie waar bestanden verwijderd zijn.
+\end{enumerate}

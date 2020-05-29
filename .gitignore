@@ -23,3 +23,21 @@
 ##Temp bib files
 *.bib.bak
 *.bib.sav
+
+##lock files of visual studio
+Demo/ipfs/IPFS test/.vs/*
+Demo/ipfs/IPFS test/bin/*
+Demo/ipfs/IPFS test/obj/*
+
+##IPFS example project, ignore node-modules
+Demo/Example app with ipfs/Image-of-the-day/node_modules
+Demo/Example app with ipfs/Image-of-the-day/package-lock.json
+Demo/Example app with ipfs/Image-of-the-day/src/abis/*
+/Demo/Demo/Console Application/.vs/Console Application/v16
+/Demo/Demo/Console Application/bin/Debug/netcoreapp3.1
+/Demo/Demo/Console Application/obj
+/Demo/Demo/GenerateContractsJsonFile/obj
+/Demo/Demo/GenerateContractsJsonFile/bin/Debug/netcoreapp3.1
+/Demo/Demo/Deployment/obj
+/.vs
+/Demo/Demo/Console Application/.vs/Console Application/DesignTimeBuild

@@ -631,5 +631,8 @@ extendedchars=\true
 \RequirePackage{subcaption}
 %Voor figuren waar text rond wrapt.
 \RequirePackage{wrapfig}
-
+%Voor tabellen met een eenvoudige tekst wrapping
+\RequirePackage{tabularx}
+%Zorg ervoor dat we gebruik kunnen maken van solidity syntax highlighting
+\input{../../Templates/solidity-highlighting.tex}
 \endinput

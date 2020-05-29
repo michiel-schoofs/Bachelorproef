@@ -1,0 +1,116 @@
+{
+  "contractName": "SimpleContract",
+  "abi": [],
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a72305820805588225dd9aadba74aba51eccff40e7957a12e01ec8afc84c918a6ce85252c0029",
+  "deployedBytecode": "0x6080604052600080fdfea165627a7a72305820805588225dd9aadba74aba51eccff40e7957a12e01ec8afc84c918a6ce85252c0029",
+  "sourceMap": "36:26:1:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;36:26:1;;;;;;;",
+  "deployedSourceMap": "36:26:1:-;;;;;",
+  "source": "pragma solidity >=0.4.21 <0.7.0;\r\n\r\ncontract SimpleContract {}",
+  "sourcePath": "C:/Users/gebruiker/Desktop/Studies/Bachelor proef/Bachelorproef/Demo/Testing Demo/contracts/SimpleContract.sol",
+  "ast": {
+    "absolutePath": "/C/Users/gebruiker/Desktop/Studies/Bachelor proef/Bachelorproef/Demo/Testing Demo/contracts/SimpleContract.sol",
+    "exportedSymbols": {
+      "SimpleContract": [
+        39
+      ]
+    },
+    "id": 40,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 38,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:1"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 39,
+        "linearizedBaseContracts": [
+          39
+        ],
+        "name": "SimpleContract",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 40,
+        "src": "36:26:1"
+      }
+    ],
+    "src": "0:62:1"
+  },
+  "legacyAST": {
+    "absolutePath": "/C/Users/gebruiker/Desktop/Studies/Bachelor proef/Bachelorproef/Demo/Testing Demo/contracts/SimpleContract.sol",
+    "exportedSymbols": {
+      "SimpleContract": [
+        39
+      ]
+    },
+    "id": 40,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 38,
+        "literals": [
+          "solidity",
+          ">=",
+          "0.4",
+          ".21",
+          "<",
+          "0.7",
+          ".0"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:32:1"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 39,
+        "linearizedBaseContracts": [
+          39
+        ],
+        "name": "SimpleContract",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 40,
+        "src": "36:26:1"
+      }
+    ],
+    "src": "0:62:1"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.0+commit.1d4f565a.Emscripten.clang"
+  },
+  "networks": {
+    "5777": {
+      "events": {},
+      "links": {},
+      "address": "0xB93595A7F84440C7a3Fc9F281C3bA220179006eF",
+      "transactionHash": "0xdec512fa52b345b8d05719638f6cfbad8b6229ce9b44c10b6d872347cb99c06f"
+    }
+  },
+  "schemaVersion": "3.0.2",
+  "updatedAt": "2020-05-21T15:59:23.502Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
