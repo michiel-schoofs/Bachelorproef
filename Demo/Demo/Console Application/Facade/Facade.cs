@@ -31,7 +31,7 @@ namespace Console_Application.Facade {
                         "5. Clone Repository\n"+
                         "6. Revert to earlier version";
                     Console.WriteLine(menu);
-                    int c = ReadOption(5);
+                    int c = ReadOption(6);
                     RepositoryHandler(c);
                     break;
                 case 2:
@@ -65,12 +65,18 @@ namespace Console_Application.Facade {
                 case 2:
                     repositoryService.AddChangesAsync().Wait();
                     break;
+                case 3:
+                    repositoryService.GetChanges().Wait();
+                    break;
                 case 4:
                     string repoName = AskForString("Enter a name for the repository: ");
                     repositoryService.AddRepository(repoName).Wait();
                     break;
                 case 5:
                     repositoryService.CloneRepository().Wait();
+                    break;
+                case 6:
+                    repositoryService.GetEarlierVersion().Wait();
                     break;
             }
         }

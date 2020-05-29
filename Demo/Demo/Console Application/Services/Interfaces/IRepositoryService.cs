@@ -13,5 +13,7 @@ namespace Console_Application.Services.Interfaces {
         public Task CloneRepository();
         public void CleanRepositoryFile();
         public Task AddChangesAsync();
+        public Task GetChanges();
+        public Task GetEarlierVersion();
     }
 }

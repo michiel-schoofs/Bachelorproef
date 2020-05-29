@@ -116,7 +116,7 @@ contract('RepositoryService',(accounts)=>{
         const result = await contract.CreateRepository(repoName,cid,{from: account});
         const address = await contract.methods['getRepository(string)'](repoName,{from: account});
         const repository = await Repository.at(address);
-
+        
         const owner = await repository.owner();
         assert.strictEqual(owner, account);
     })

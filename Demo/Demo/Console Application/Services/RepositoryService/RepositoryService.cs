@@ -143,7 +143,7 @@ namespace Console_Application.Services.RepositoryService {
                                 string notUpToDate = localCid.Equals(cid) ? "up-to-date" : "please pull new changes";
 
                                 Console.WriteLine(string.Format("id:{0} - name:{1} - cid:{2} - status:{3} - clean? {4}"
-                                    , id, name, cid, status,notUpToDate));
+                                    , id, name, cid, status, notUpToDate));
                             }
 
                         } else {
@@ -193,7 +193,7 @@ namespace Console_Application.Services.RepositoryService {
             }
         }
 
-        private void ChangeCid(RepositorySerialized repo,string cid) {
+        private void ChangeCid(RepositorySerialized repo, string cid) {
             try {
                 if (!File.Exists(repoFile))
                     throw new Exception("Repository file not found");
@@ -289,7 +289,7 @@ namespace Console_Application.Services.RepositoryService {
 
                 string path = $"C:\\" + name;
                 await _ipfsService.GetDirectoryFromIPFS(path, cid);
-                Console.WriteLine(string.Format("repository {0} succefully cloned to {1}", name,path));
+                Console.WriteLine(string.Format("repository {0} succefully cloned to {1}", name, path));
 
                 RepositorySerialized repos = new RepositorySerialized() {
                     Name = name,
@@ -354,8 +354,8 @@ namespace Console_Application.Services.RepositoryService {
                 Web3 user = _userService.GetUser();
                 var handler = user.Eth.GetContractQueryHandler<CheckIfRepoExistsFunction>();
 
-                bool exists = await handler.QueryAsync<bool>(ad, new CheckIfRepoExistsFunction() { 
-                     Name = name
+                bool exists = await handler.QueryAsync<bool>(ad, new CheckIfRepoExistsFunction() {
+                    Name = name
                 });
 
                 if (!exists)
@@ -375,9 +375,9 @@ namespace Console_Application.Services.RepositoryService {
                 string cid = await _ipfsService.AddDirectoryOnIPFS(repos.Path);
                 //Set the cid
                 ChangeCid(repos, cid);
-                
+
                 var setCidHand = user.Eth.GetContractTransactionHandler<SetCidFunction>();
-                await setCidHand.SendRequestAsync(contractAd, new SetCidFunction() { 
+                await setCidHand.SendRequestAsync(contractAd, new SetCidFunction() {
                     Cid = cid
                 });
 
@@ -388,5 +388,138 @@ namespace Console_Application.Services.RepositoryService {
                 Console.Beep();
             }
         }
+
+        public async Task GetChanges() {
+            try {
+                string name = "";
+
+                do {
+                    Console.Write("Please provide the name of the repo you want to pull:");
+                    name = Console.ReadLine();
+                } while (string.IsNullOrEmpty(name));
+
+                RepositorySerialized repos = GetLocalRepository(name);
+
+                if (repos == null)
+                    throw new Exception("Reposiory doesn't exist locally");
+
+                if (!Directory.Exists(repos.Path))
+                    throw new Exception("There is no path associated with this repo");
+
+                if (!_contractService.ContractDeployed("RepositoryService"))
+                    throw new Exception("Repository not deployed");
+
+                string ad = _contractService.GetAddressDeployedContract("RepositoryService");
+
+                Web3 user = _userService.GetUser();
+                var handler = user.Eth.GetContractQueryHandler<CheckIfRepoExistsFunction>();
+
+                bool exists = await handler.QueryAsync<bool>(ad, new CheckIfRepoExistsFunction() {
+                    Name = name
+                });
+
+                if (!exists)
+                    throw new Exception("The specified repository doesn't exist");
+
+                GetRepositoryFunction getRepoFunction = new GetRepositoryFunction() {
+                    Name = name
+                };
+
+                var getRepoHandler = user.Eth.GetContractQueryHandler<GetRepositoryFunction>();
+
+                string contractAd = await getRepoHandler.QueryAsync<string>(ad, getRepoFunction);
+
+                if (string.IsNullOrEmpty(contractAd))
+                    throw new Exception("Something went wrong with the execution of this function");
+
+                GetCidOfRepo repoFunction = new GetCidOfRepo();
+                var getCidHandler = user.Eth.GetContractQueryHandler<GetCidOfRepo>();
+                string cid = await getCidHandler.QueryAsync<string>(contractAd, repoFunction);
+                Directory.Delete(repos.Path,true);
+                await _ipfsService.GetDirectoryFromIPFS(repos.Path, cid);
+                ChangeCid(repos, cid);
+                Console.WriteLine("Succesfully got new version of repository: " + repos.Name);
+            } catch (Exception e) {
+                _logger.LogError("Something went wrong {0}", e.Message);
+                Console.WriteLine("Something went wrong with the execution of this function");
+                Console.Beep();
+            }
+        }
+
+        public async Task GetEarlierVersion() {
+            try {
+                string name = "";
+
+                do {
+                    Console.Write("Please provide the name of the repo you want to revert to an earlier version:");
+                    name = Console.ReadLine();
+                } while (string.IsNullOrEmpty(name));
+
+                RepositorySerialized repos = GetLocalRepository(name);
+
+                if (repos == null)
+                    throw new Exception("Reposiory doesn't exist locally");
+
+                if (!Directory.Exists(repos.Path))
+                    throw new Exception("There is no path associated with this repo");
+
+                if (!_contractService.ContractDeployed("RepositoryService"))
+                    throw new Exception("Repository not deployed");
+
+                string ad = _contractService.GetAddressDeployedContract("RepositoryService");
+
+                Web3 user = _userService.GetUser();
+                var handler = user.Eth.GetContractQueryHandler<CheckIfRepoExistsFunction>();
+
+                bool exists = await handler.QueryAsync<bool>(ad, new CheckIfRepoExistsFunction() {
+                    Name = name
+                });
+
+                if (!exists)
+                    throw new Exception("The specified repository doesn't exist");
+
+                GetRepositoryFunction getRepoFunction = new GetRepositoryFunction() {
+                    Name = name
+                };
+
+                var getRepoHandler = user.Eth.GetContractQueryHandler<GetRepositoryFunction>();
+
+                string contractAd = await getRepoHandler.QueryAsync<string>(ad, getRepoFunction);
+
+                if (string.IsNullOrEmpty(contractAd))
+                    throw new Exception("Something went wrong with the execution of this function");
+
+                GetAllVersionCount countFunction = new GetAllVersionCount();
+                var getAmountOfVersionHandler = user.Eth.GetContractQueryHandler<GetAllVersionCount>();
+                int allVersions = await getAmountOfVersionHandler.QueryAsync<int>(contractAd, countFunction) - 1;
+
+                if (allVersions == 1) {
+                    Console.WriteLine("there is no earlier version");
+                    return;
+                }
+
+                Console.WriteLine("There are " + allVersions + " versions available");
+
+                int versionToRevertTo = 0;
+                do {
+                    Console.Write("Please enter the number of the version you want to revert to: ");
+                    versionToRevertTo = int.Parse(Console.ReadLine());
+                } while (versionToRevertTo < 1 || versionToRevertTo > allVersions);
+
+
+                GetVersionFunction getVersionFunction = new GetVersionFunction() { Indx = versionToRevertTo};
+                var getVersionFunctionHandler = user.Eth.GetContractQueryHandler<GetVersionFunction>();
+                string cid = await getVersionFunctionHandler.QueryAsync<string>(contractAd, getVersionFunction);
+
+                Directory.Delete(repos.Path, true);
+                await _ipfsService.GetDirectoryFromIPFS(repos.Path, cid);
+                ChangeCid(repos, cid);
+                Console.WriteLine("Succesfully got old version of repository: " + repos.Name);
+            } catch (Exception e) {
+                _logger.LogError("Something went wrong {0}", e.Message);
+                Console.WriteLine("Something went wrong with the execution of this function");
+                Console.Beep();
+            }
+}
     }
 }
